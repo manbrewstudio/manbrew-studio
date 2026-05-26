@@ -1,0 +1,40 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Node
+node_modules/
+npm-debug.log*
+
+# Build scripts (not needed for website)
+*.py
+*.js
+build_*.js
+generate_*.py
+shalom_strategy*.py
+
+# Word/Excel docs (keep in local only)
+*.docx
+*.xlsx
+
+# Old/draft files
+shopline-manbrew-embed.html
+shopline-page.html
+manbrew_skill_review.html
+Manbrew_BDLS_視覺索引.html
+proposal.md
+shalom_strategy*.md
+feedback.json
+
+# Skills draft
+manbrew-design-skill/
+manbrew-marketing-strategy-skill-draft/
+manbrew-shopline.skill
+
+# Font files (loaded from Google Fonts)
+font/
+
+# Temp
+*.tmp

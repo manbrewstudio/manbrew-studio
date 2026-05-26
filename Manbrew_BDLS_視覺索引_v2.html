@@ -1,0 +1,1445 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Manbrew. Studio · BDLS v2 · Traveler</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@900&family=Frank+Ruhl+Libre:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0A0A0A;
+    --cream: #F5F1EB;
+    --paper: #FAF7F1;
+    --teal: #2A3D3A;
+    --teal-deep: #1B2826;
+    --mint: #B5C9B0;
+    --brick: #B7705A;
+    --camel: #8E7456;
+    --hay: #C9B68C;
+    --slate: #5F574E;
+    --mist: #D8D2C8;
+    --dusk: #3F4D43;
+    --display: "Inter", "Helvetica Neue", system-ui, sans-serif;
+    --sans: "Inter", "Noto Sans TC", "Helvetica Neue", system-ui, sans-serif;
+    --serif: "Noto Serif TC", "Songti TC", serif;
+    --hebrew: "Frank Ruhl Libre", "SBL Hebrew", serif;
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* GRAIN OVERLAY — global film grain texture */
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.18;
+    background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.6'/></svg>");
+    mix-blend-mode: multiply;
+  }
+
+  a { color: var(--ink); text-decoration: underline; text-decoration-color: var(--brick); text-underline-offset: 6px; text-decoration-thickness: 1px; }
+  .container { max-width: 1180px; margin: 0 auto; padding: 0 32px; }
+  .label { font-family: var(--sans); font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; font-weight: 600; }
+
+  /* HERO */
+  header.hero {
+    padding: 88px 32px 72px;
+    text-align: center;
+    border-bottom: 1px solid var(--ink);
+    background: var(--cream);
+    position: relative;
+  }
+  .hero .top {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--camel);
+    margin: 0 0 80px;
+    font-weight: 600;
+  }
+  .wordmark {
+    font-family: var(--display);
+    font-weight: 900;
+    font-size: clamp(72px, 12vw, 156px);
+    letter-spacing: 0.06em;
+    line-height: 0.9;
+    color: var(--ink);
+    margin: 0 0 28px;
+  }
+  .wordmark .dot { color: var(--brick); }
+  .tagline {
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: clamp(13px, 1.5vw, 17px);
+    letter-spacing: 0.36em;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin: 0 0 80px;
+  }
+  .meta-row {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--camel);
+    letter-spacing: 0.1em;
+  }
+  .meta-row span { display: inline-block; }
+
+  /* TOC */
+  nav.toc {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 22px 0;
+  }
+  nav.toc ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 8px 32px;
+  }
+  nav.toc a {
+    font-family: var(--sans);
+    font-size: 12px;
+    text-decoration: none;
+    color: var(--cream);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: 600;
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+  nav.toc a:hover { color: var(--mint); }
+  nav.toc .num {
+    color: var(--camel);
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 400;
+  }
+
+  /* SECTION */
+  section { padding: 96px 0; border-bottom: 1px solid var(--ink); position: relative; }
+  section.dark { background: var(--ink); color: var(--cream); border-bottom-color: var(--cream); }
+  section.dark h2 { color: var(--cream); }
+  section.dark .lead { color: rgba(245,241,235,0.75); }
+  section.teal { background: var(--teal-deep); color: var(--cream); border-bottom-color: var(--mist); }
+  section.teal h2, section.teal h3 { color: var(--cream); }
+  section.teal .lead { color: rgba(245,241,235,0.75); }
+
+  section .label.section-tag {
+    color: var(--brick);
+    margin-bottom: 24px;
+    display: block;
+  }
+  section.dark .label.section-tag, section.teal .label.section-tag { color: var(--mint); }
+  section h2 {
+    font-family: var(--display);
+    font-weight: 900;
+    font-size: clamp(36px, 5vw, 64px);
+    margin: 0 0 18px;
+    letter-spacing: -0.01em;
+    line-height: 1.05;
+    text-transform: uppercase;
+  }
+  section h2.title-mix .zh {
+    font-family: var(--serif);
+    font-weight: 900;
+    font-size: 0.85em;
+    margin-left: 0.4em;
+    color: var(--mint);
+  }
+  section .lead {
+    font-family: var(--sans);
+    font-size: 17px;
+    color: var(--slate);
+    max-width: 760px;
+    margin: 0 0 64px;
+    line-height: 1.65;
+  }
+  h3 {
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: 20px;
+    margin: 64px 0 18px;
+    color: var(--ink);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  section.dark h3, section.teal h3 { color: var(--cream); }
+
+  /* MANIFESTO BLOCK */
+  .manifest {
+    text-align: center;
+    padding: 80px 0;
+  }
+  .manifest .big {
+    font-family: var(--display);
+    font-weight: 900;
+    font-size: clamp(36px, 6vw, 88px);
+    letter-spacing: 0.04em;
+    line-height: 1.05;
+    color: var(--cream);
+    margin: 0 0 40px;
+  }
+  .manifest .big em { font-style: normal; color: var(--mint); }
+  .manifest .sub {
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.8;
+    color: rgba(245,241,235,0.7);
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  /* PRINCIPLES */
+  .princ {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 0;
+    border-top: 1px solid var(--mist);
+    border-left: 1px solid var(--mist);
+  }
+  section.dark .princ, section.teal .princ {
+    border-color: rgba(245,241,235,0.18);
+  }
+  .princ .card {
+    padding: 36px 32px;
+    border-right: 1px solid var(--mist);
+    border-bottom: 1px solid var(--mist);
+  }
+  section.dark .princ .card, section.teal .princ .card {
+    border-color: rgba(245,241,235,0.18);
+  }
+  .princ .card .num {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--brick);
+    letter-spacing: 0.18em;
+    margin: 0 0 20px;
+    display: block;
+  }
+  .princ .card h4 {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: 22px;
+    margin: 0 0 14px;
+    letter-spacing: 0.02em;
+  }
+  .princ .card p {
+    font-family: var(--sans);
+    font-size: 14px;
+    line-height: 1.7;
+    margin: 0;
+    color: var(--slate);
+  }
+  section.dark .princ .card p, section.teal .princ .card p {
+    color: rgba(245,241,235,0.7);
+  }
+
+  /* DOS / DONTS */
+  .dos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 1px solid var(--ink);
+  }
+  section.dark .dos { border-color: var(--cream); }
+  .dos > div { padding: 36px 36px; }
+  .dos .yes { border-right: 1px solid var(--ink); }
+  section.dark .dos .yes { border-color: var(--cream); }
+  .dos h4 {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    margin: 0 0 24px;
+    font-weight: 700;
+  }
+  .dos .yes h4 { color: var(--mint); }
+  .dos .no h4 { color: var(--brick); }
+  .dos ul { margin: 0; padding-left: 0; list-style: none; }
+  .dos li {
+    font-family: var(--sans);
+    font-size: 14px;
+    line-height: 1.9;
+    margin: 0;
+    padding: 4px 0;
+    border-bottom: 1px dashed rgba(0,0,0,0.08);
+  }
+  section.dark .dos li { color: var(--cream); border-bottom-color: rgba(245,241,235,0.1); }
+  .dos li:last-child { border-bottom: 0; }
+
+  /* LOGO BOARD */
+  .logo-board {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 0;
+    border: 1px solid var(--ink);
+  }
+  .logo-board .left {
+    background: var(--cream);
+    color: var(--ink);
+    padding: 100px 60px;
+    text-align: center;
+    border-right: 1px solid var(--ink);
+  }
+  .logo-board .right {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 60px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .logo-board .big-logo {
+    font-family: var(--display);
+    font-weight: 900;
+    font-size: clamp(48px, 8vw, 96px);
+    letter-spacing: 0.06em;
+    margin: 0;
+    line-height: 1;
+  }
+  .logo-board .lockup {
+    font-family: var(--display);
+    font-weight: 900;
+    font-size: 24px;
+    letter-spacing: 0.16em;
+    margin: 0;
+  }
+  .logo-board .lockup .dot { color: var(--brick); }
+  .logo-board .stamp {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    border: 2px solid var(--brick);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--display);
+    font-weight: 900;
+    font-size: 28px;
+    color: var(--brick);
+    background: rgba(183,112,90,0.08);
+    margin: 24px auto 0;
+  }
+  .logo-board .label-text {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--camel);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-top: 28px;
+  }
+
+  /* COLOR */
+  .color-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 0;
+    border-top: 1px solid var(--ink);
+    border-left: 1px solid var(--ink);
+  }
+  section.dark .color-grid, section.teal .color-grid { border-color: var(--cream); }
+  .swatch {
+    border-right: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    background: var(--cream);
+    display: flex;
+    flex-direction: column;
+  }
+  section.dark .swatch, section.teal .swatch {
+    border-color: var(--cream);
+    background: var(--ink);
+    color: var(--cream);
+  }
+  .swatch .chip { height: 160px; }
+  .swatch .meta { padding: 18px 20px; }
+  .swatch .name {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: 15px;
+    margin: 0 0 6px;
+    letter-spacing: 0.02em;
+  }
+  .swatch .hex {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--camel);
+    margin: 0 0 10px;
+    letter-spacing: 0.05em;
+  }
+  .swatch .use {
+    font-family: var(--sans);
+    font-size: 12px;
+    line-height: 1.5;
+    margin: 0;
+    color: var(--slate);
+  }
+  section.dark .swatch .use, section.teal .swatch .use { color: rgba(245,241,235,0.65); }
+
+  /* TYPE SPECIMEN */
+  .type-block {
+    border-top: 1px solid var(--ink);
+    padding: 44px 0;
+  }
+  section.dark .type-block, section.teal .type-block { border-top-color: var(--cream); }
+  .type-block:last-child { border-bottom: 1px solid var(--ink); }
+  section.dark .type-block:last-child, section.teal .type-block:last-child { border-bottom-color: var(--cream); }
+  .type-meta {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--camel);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+  }
+  .type-display { font-family: var(--display); font-weight: 900; font-size: clamp(48px, 7vw, 96px); line-height: 1.05; letter-spacing: 0.04em; color: inherit; margin: 0; text-transform: uppercase; }
+  .type-h1 { font-family: var(--display); font-weight: 800; font-size: clamp(28px, 3.6vw, 44px); line-height: 1.15; margin: 0; letter-spacing: 0.02em; }
+  .type-body { font-family: var(--sans); font-size: 17px; line-height: 1.7; margin: 0; max-width: 720px; }
+  .type-mono { font-family: var(--mono); font-size: 13px; color: var(--camel); margin: 0; letter-spacing: 0.05em; }
+  .type-hebrew { font-family: var(--hebrew); font-size: clamp(48px, 6vw, 96px); direction: rtl; line-height: 1.1; margin: 0; }
+
+  /* PAIR (ZH × HE) */
+  .pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    border: 1px solid var(--ink);
+    background: var(--ink);
+    color: var(--cream);
+  }
+  .pair > div {
+    padding: 60px 32px;
+    text-align: center;
+    border-right: 1px solid rgba(245,241,235,0.18);
+  }
+  .pair > div:last-child { border-right: 0; }
+  .pair .big-zh { font-family: var(--serif); font-weight: 900; font-size: clamp(72px, 10vw, 132px); margin: 0; line-height: 1; color: var(--mint); }
+  .pair .big-he { font-family: var(--hebrew); font-weight: 700; font-size: clamp(72px, 10vw, 132px); margin: 0; line-height: 1; direction: rtl; color: var(--cream); }
+  .pair .big-en { font-family: var(--display); font-weight: 900; font-size: clamp(40px, 6vw, 80px); margin: 0; line-height: 1; letter-spacing: 0.04em; color: var(--brick); text-transform: uppercase; }
+  .pair .label-text { font-family: var(--mono); font-size: 10px; color: var(--camel); letter-spacing: 0.2em; text-transform: uppercase; margin-top: 24px; }
+
+  /* WORD CARD MOCK (single trilingual card) */
+  .wordcard {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 100px 40px;
+    text-align: center;
+    border: 1px solid var(--ink);
+    margin: 24px 0;
+  }
+  .wordcard .zh {
+    font-family: var(--serif);
+    font-weight: 900;
+    font-size: clamp(80px, 12vw, 160px);
+    line-height: 1;
+    color: var(--mint);
+    margin: 0 0 32px;
+  }
+  .wordcard .he-line {
+    font-family: var(--hebrew);
+    font-size: clamp(20px, 2vw, 28px);
+    margin: 0 0 6px;
+    color: rgba(245,241,235,0.85);
+    letter-spacing: 0.05em;
+  }
+  .wordcard .en {
+    font-family: var(--sans);
+    font-size: 11px;
+    color: var(--camel);
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    margin: 24px 0 0;
+  }
+
+  /* SPACING */
+  .spacing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 0;
+    border-top: 1px solid var(--ink);
+    border-left: 1px solid var(--ink);
+  }
+  .spacer-card {
+    background: var(--cream);
+    border-right: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    padding: 32px 24px;
+    text-align: center;
+  }
+  .spacer-card .box { background: var(--ink); margin: 14px auto 22px; }
+  .spacer-card .name { font-family: var(--display); font-weight: 800; font-size: 14px; letter-spacing: 0.04em; }
+  .spacer-card .px { font-family: var(--mono); font-size: 11px; color: var(--camel); letter-spacing: 0.06em; margin-top: 4px; }
+
+  /* PHOTO STYLE — cinematic mock */
+  .photo-bar {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px;
+    margin-top: 32px;
+  }
+  .photo-mock {
+    aspect-ratio: 4/5;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #1F2D2A, #3D2B1F);
+  }
+  .photo-mock::before {
+    content: "";
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 30% 30%, rgba(255,200,150,0.14), transparent 50%),
+                radial-gradient(ellipse at 70% 70%, rgba(180,200,180,0.12), transparent 60%);
+  }
+  .photo-mock::after {
+    content: "";
+    position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.05 0 0 0 0 0.06 0 0 0 0 0.04 0 0 0 1 0'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.45'/></svg>");
+    mix-blend-mode: overlay;
+    opacity: 0.7;
+  }
+  .photo-mock .label-overlay {
+    position: absolute;
+    bottom: 18px; left: 18px;
+    color: var(--cream);
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    z-index: 2;
+    opacity: 0.85;
+  }
+  .photo-mock .center-text {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    color: var(--cream);
+    text-align: center;
+    padding: 24px;
+  }
+  .photo-mock .center-text .word-zh {
+    font-family: var(--serif);
+    font-weight: 900;
+    font-size: 64px;
+    color: var(--mint);
+    margin: 0;
+    line-height: 1;
+  }
+  .photo-mock .center-text .tag {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    margin-top: 20px;
+    color: var(--cream);
+  }
+  .photo-mock.brand-tagline { background: linear-gradient(135deg, #2A3D3A, #1B2826); }
+  .photo-mock.market { background: linear-gradient(135deg, #5A3A2A, #3D2826); }
+  .photo-mock.candle { background: linear-gradient(180deg, #0A0A0A 30%, #2A1810 100%); }
+
+  /* LUT preset table */
+  .lut {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 32px;
+    background: var(--cream);
+    border: 1px solid var(--ink);
+    padding: 32px 36px;
+    margin-top: 24px;
+  }
+  .lut .row {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px dashed rgba(0,0,0,0.12);
+    padding: 8px 0;
+    font-family: var(--mono);
+    font-size: 13px;
+  }
+  .lut .row .k { color: var(--slate); }
+  .lut .row .v { color: var(--ink); font-weight: 600; }
+
+  /* VOICE */
+  .voice-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 1px solid var(--ink);
+  }
+  .voice-grid > div { padding: 36px 36px; }
+  .voice-grid .yes { border-right: 1px solid var(--ink); background: var(--cream); }
+  .voice-grid .no { background: var(--ink); color: var(--cream); }
+  .voice-grid h4 {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    margin: 0 0 24px;
+    font-weight: 700;
+  }
+  .voice-grid .yes h4 { color: var(--brick); }
+  .voice-grid .no h4 { color: var(--mint); }
+  .voice-grid .tag {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 13px;
+    padding: 5px 12px;
+    margin: 4px 4px 4px 0;
+    letter-spacing: 0.04em;
+  }
+  .voice-grid .yes .tag {
+    background: var(--ink);
+    color: var(--cream);
+    font-weight: 500;
+  }
+  .voice-grid .no .tag {
+    background: transparent;
+    border: 1px solid rgba(245,241,235,0.4);
+    color: rgba(245,241,235,0.6);
+    text-decoration: line-through;
+  }
+
+  /* TAGLINE LIBRARY */
+  .taglines {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    border-top: 1px solid var(--cream);
+  }
+  .tg-item {
+    padding: 32px 0;
+    border-bottom: 1px solid rgba(245,241,235,0.18);
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 32px;
+    align-items: baseline;
+  }
+  .tg-item .en {
+    font-family: var(--display);
+    font-weight: 900;
+    font-size: clamp(20px, 2.4vw, 32px);
+    letter-spacing: 0.04em;
+    margin: 0;
+    color: var(--cream);
+    text-transform: uppercase;
+  }
+  .tg-item .zh {
+    font-family: var(--sans);
+    font-size: 16px;
+    color: rgba(245,241,235,0.7);
+    margin: 0;
+  }
+  .tg-item .ctx {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--mint);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  /* IG GRID */
+  .ig-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px;
+    max-width: 720px;
+    margin-top: 32px;
+  }
+  .ig-tile {
+    aspect-ratio: 1;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--cream);
+  }
+  .ig-tile.cinematic { background: linear-gradient(135deg, #2A3D3A 0%, #1B2826 100%); }
+  .ig-tile.cinematic-warm { background: linear-gradient(135deg, #5A3A2A, #3D2826); }
+  .ig-tile.cream { background: var(--cream); color: var(--ink); }
+  .ig-tile.ink { background: var(--ink); }
+  .ig-tile.cinematic::after, .ig-tile.cinematic-warm::after {
+    content: "";
+    position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.05 0 0 0 0 0.06 0 0 0 0 0.04 0 0 0 1 0'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.5'/></svg>");
+    mix-blend-mode: overlay;
+    opacity: 0.6;
+    pointer-events: none;
+  }
+  .ig-tile .inner { position: relative; z-index: 2; padding: 16px; }
+  .ig-tile .word-zh {
+    font-family: var(--serif);
+    font-weight: 900;
+    font-size: clamp(32px, 5vw, 64px);
+    line-height: 1;
+    margin: 0;
+  }
+  .ig-tile .he {
+    font-family: var(--hebrew);
+    font-size: clamp(28px, 3.5vw, 48px);
+    direction: rtl;
+    line-height: 1;
+    margin: 0 0 6px;
+  }
+  .ig-tile .lab {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    opacity: 0.75;
+    margin-top: 16px;
+  }
+  .ig-tile.tagline-tile .tag {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: clamp(13px, 1.5vw, 18px);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    line-height: 1.3;
+  }
+  .ig-tile.tagline-tile .small {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--camel);
+    margin-top: 14px;
+    letter-spacing: 0.16em;
+  }
+  .ig-tile.travel-tile { background: linear-gradient(135deg, #3D2826, #1B2826); }
+  .ig-tile.cream .word-zh { color: var(--ink); }
+
+  /* GANTT */
+  .gantt {
+    display: grid;
+    grid-template-columns: 160px repeat(12, 1fr);
+    border: 1px solid var(--cream);
+    background: var(--ink);
+    overflow: hidden;
+    font-size: 11px;
+    margin-top: 32px;
+  }
+  .gantt .cell, .gantt .lbl, .gantt .month {
+    padding: 12px 8px;
+    border-right: 1px solid rgba(245,241,235,0.18);
+    border-bottom: 1px solid rgba(245,241,235,0.18);
+    font-family: var(--sans);
+    color: var(--cream);
+  }
+  .gantt .month {
+    background: var(--ink);
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--camel);
+    letter-spacing: 0.05em;
+  }
+  .gantt .lbl-h {
+    background: var(--ink);
+    color: var(--mint);
+    font-weight: 700;
+    font-family: var(--sans);
+    padding: 12px 12px;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    border-right: 1px solid rgba(245,241,235,0.18);
+    border-bottom: 1px solid rgba(245,241,235,0.18);
+  }
+  .gantt .lbl {
+    background: var(--teal-deep);
+    font-weight: 600;
+    font-size: 12px;
+    color: var(--cream);
+    letter-spacing: 0.04em;
+  }
+  .gantt .cell { background: transparent; }
+  .gantt .cell.fill-1 { background: var(--mint); color: var(--ink); text-align: center; font-weight: 700; }
+  .gantt .cell.fill-2 { background: var(--brick); color: var(--cream); text-align: center; font-weight: 700; }
+  .gantt .cell.fill-3 { background: var(--camel); color: var(--cream); text-align: center; font-weight: 600; }
+  .gantt .cell.fill-4 { background: var(--dusk); color: var(--cream); text-align: center; }
+  .gantt .cell.star::after { content: " ★"; color: var(--brick); }
+
+  /* MATRIX */
+  .matrix {
+    position: relative;
+    background: var(--cream);
+    border: 1px solid var(--ink);
+    aspect-ratio: 1.45;
+    margin-top: 32px;
+  }
+  .matrix .axis-x, .matrix .axis-y { position: absolute; background: var(--ink); }
+  .matrix .axis-x { left: 8%; right: 8%; top: 50%; height: 1px; opacity: 0.3; }
+  .matrix .axis-y { top: 8%; bottom: 8%; left: 50%; width: 1px; opacity: 0.3; }
+  .matrix .label-axis {
+    position: absolute;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--brick);
+    text-transform: uppercase;
+  }
+  .matrix .label-axis.l { left: 14px; top: 50%; transform: translateY(-50%); }
+  .matrix .label-axis.r { right: 14px; top: 50%; transform: translateY(-50%); }
+  .matrix .label-axis.t { left: 50%; top: 14px; transform: translateX(-50%); }
+  .matrix .label-axis.b { left: 50%; bottom: 14px; transform: translateX(-50%); }
+  .matrix .axes-meta {
+    position: absolute;
+    bottom: 32px;
+    right: 24px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink);
+    text-align: right;
+    line-height: 1.6;
+    max-width: 220px;
+  }
+  .matrix .dot { position: absolute; transform: translate(-50%, -50%); text-align: center; }
+  .matrix .dot .pin { width: 8px; height: 8px; background: var(--ink); border-radius: 50%; margin: 0 auto 6px; }
+  .matrix .dot.us .pin { background: var(--brick); width: 14px; height: 14px; box-shadow: 0 0 0 4px rgba(183,112,90,0.18); }
+  .matrix .dot .name { font-family: var(--sans); font-size: 12px; color: var(--ink); white-space: nowrap; }
+  .matrix .dot.us .name { font-weight: 800; color: var(--brick); }
+
+  /* QUOTE */
+  blockquote {
+    margin: 36px 0;
+    padding: 24px 32px;
+    border-left: 4px solid var(--mint);
+    background: var(--paper);
+    font-family: var(--sans);
+    font-size: 18px;
+    color: var(--slate);
+    font-style: italic;
+    line-height: 1.7;
+  }
+  section.dark blockquote, section.teal blockquote {
+    background: rgba(181,201,176,0.08);
+    border-left-color: var(--mint);
+    color: rgba(245,241,235,0.85);
+  }
+
+  /* DELTA TABLE */
+  .delta {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 24px;
+    font-size: 14px;
+  }
+  .delta th, .delta td {
+    text-align: left;
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--ink);
+    font-family: var(--sans);
+    vertical-align: top;
+  }
+  .delta th {
+    background: var(--ink);
+    color: var(--cream);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+  .delta td.before { color: var(--slate); text-decoration: line-through; }
+  .delta td.after { color: var(--ink); font-weight: 600; }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 80px 32px;
+    color: var(--cream);
+    background: var(--ink);
+    font-size: 13px;
+    font-family: var(--sans);
+  }
+  footer .br { color: var(--brick); letter-spacing: 0.4em; margin: 0 0 24px; }
+  footer .name {
+    font-family: var(--display);
+    font-weight: 900;
+    font-size: 32px;
+    letter-spacing: 0.06em;
+    margin: 0 0 8px;
+  }
+  footer .sub {
+    color: var(--camel);
+    letter-spacing: 0.2em;
+    font-size: 11px;
+    text-transform: uppercase;
+    margin: 0 0 32px;
+  }
+
+  @media (max-width: 720px) {
+    .pair { grid-template-columns: 1fr; }
+    .pair > div { border-right: 0; border-bottom: 1px solid rgba(245,241,235,0.18); }
+    .pair > div:last-child { border-bottom: 0; }
+    .dos, .voice-grid, .logo-board { grid-template-columns: 1fr; }
+    .dos .yes, .voice-grid .yes, .logo-board .left { border-right: 0; border-bottom: 1px solid var(--ink); }
+    .tg-item { grid-template-columns: 1fr; gap: 8px; }
+    .gantt { font-size: 9px; }
+    .gantt .lbl, .gantt .lbl-h, .gantt .cell, .gantt .month { padding: 6px 4px; }
+    .photo-bar { grid-template-columns: 1fr; }
+    .ig-grid { max-width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <p class="top">— ／ MANBREW. STUDIO ／ BDLS v2.0 ／ 2026 ／ —</p>
+  <h1 class="wordmark">MANBREW<span class="dot">.</span></h1>
+  <p class="tagline">WHERE LETTERS BECOME STORIES.</p>
+  <div class="meta-row">
+    <span>VOLUME 02</span>
+    <span>EST. 2024</span>
+    <span>TPE × TLV × LON</span>
+    <span>v2.0</span>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="container">
+    <ol>
+      <li><a href="#etymology"><span class="num">—</span>ETYMOLOGY</a></li>
+      <li><a href="#manifesto"><span class="num">00</span>MANIFESTO</a></li>
+      <li><a href="#identity"><span class="num">01</span>IDENTITY</a></li>
+      <li><a href="#type"><span class="num">02</span>TYPE</a></li>
+      <li><a href="#color"><span class="num">03</span>COLOR</a></li>
+      <li><a href="#photo"><span class="num">04</span>CINEMA</a></li>
+      <li><a href="#voice"><span class="num">05</span>VOICE</a></li>
+      <li><a href="#components"><span class="num">06</span>COMPONENTS</a></li>
+      <li><a href="#strategy"><span class="num">07</span>STRATEGY</a></li>
+    </ol>
+  </div>
+</nav>
+
+<!-- ETYMOLOGY -->
+<section id="etymology" class="teal" style="padding: 120px 0;">
+  <div class="container">
+    <span class="label section-tag">— ／ The Name</span>
+    <h2 style="margin-bottom: 56px;">TWO WORDS,<br/>TWO MEANINGS,<br/>ONE NAME.</h2>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--cream); margin-top: 32px;">
+      <div style="padding: 64px 48px; border-right: 1px solid var(--cream);">
+        <p style="font-family: var(--mono); font-size: 11px; color: var(--mint); letter-spacing: 0.32em; text-transform: uppercase; margin: 0 0 32px; font-weight: 600;">Layer 01 ／ Culture</p>
+        <p style="font-family: var(--display); font-weight: 900; font-size: clamp(28px, 3.5vw, 48px); letter-spacing: 0.04em; color: var(--cream); margin: 0 0 24px; line-height: 1.1;">( Mandarin<br/>+ Hebrew )</p>
+        <p style="font-family: var(--sans); font-size: 17px; line-height: 1.7; color: rgba(245,241,235,0.85); margin: 0 0 16px;">漢字遇見希伯來文。</p>
+        <p style="font-family: var(--sans); font-size: 15px; line-height: 1.75; color: rgba(245,241,235,0.65); margin: 0;">在同一個字形裡，承載人類共同的情感。東方與西方最古老的兩種文字系統，在同一塊棉布上對話——這不是翻譯，是讓兩種文化共享一個身體。</p>
+      </div>
+      <div style="padding: 64px 48px;">
+        <p style="font-family: var(--mono); font-size: 11px; color: var(--brick); letter-spacing: 0.32em; text-transform: uppercase; margin: 0 0 32px; font-weight: 600;">Layer 02 ／ Craft</p>
+        <p style="font-family: var(--display); font-weight: 900; font-size: clamp(28px, 3.5vw, 48px); letter-spacing: 0.04em; color: var(--cream); margin: 0 0 24px; line-height: 1.1;">( Man<br/>+ Brew )</p>
+        <p style="font-family: var(--sans); font-size: 17px; line-height: 1.7; color: rgba(245,241,235,0.85); margin: 0 0 16px;">醞釀。</p>
+        <p style="font-family: var(--sans); font-size: 15px; line-height: 1.75; color: rgba(245,241,235,0.65); margin: 0;">時間與工藝的緩慢積累。「Brew」是釀造、是泡茶、是讓時間參與的動作——Manbrew 不做快時尚，做的是值得被泡開、被等待、被穿很久的東西。</p>
+      </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 64px;">
+      <p style="font-family: var(--display); font-weight: 900; font-size: clamp(48px, 8vw, 96px); letter-spacing: 0.08em; color: var(--mint); margin: 0; line-height: 1;">MAN<span style="color: var(--brick);">BREW</span><span style="color: var(--cream);">.</span></p>
+      <p style="font-family: var(--mono); font-size: 12px; color: var(--camel); letter-spacing: 0.24em; text-transform: uppercase; margin: 24px 0 0;">Mandarin · Hebrew · Man · Brew  ／  Culture × Craft</p>
+    </div>
+  </div>
+</section>
+
+<!-- 00 MANIFESTO -->
+<section id="manifesto" class="dark">
+  <div class="container">
+    <span class="label section-tag">00 — Manifesto</span>
+    <div class="manifest">
+      <h2 class="big">A LANGUAGE<br/>YOU CAN <em>WEAR.</em></h2>
+      <p class="sub">Manbrew 是為在世界之間移動的人而設計的雙語衣著。我們把中文與希伯來文並置在重磅棉布上——不是裝飾，是讓兩種文化在同一個身體上對話的方式。</p>
+    </div>
+
+    <div class="princ">
+      <div class="card">
+        <span class="num">01 ／ MOVEMENT OVER STILLNESS</span>
+        <h4>移動感優於靜態</h4>
+        <p>設計要禁得起在街頭、機場、咖啡店、市集被看見，不只是放在書店的書架上。Manbrew 是穿在路上的東西。</p>
+      </div>
+      <div class="card">
+        <span class="num">02 ／ WEIGHT OVER STYLE</span>
+        <h4>文化重量優於風格</h4>
+        <p>每一個字、每一塊布、每一張照片背後都要有理由。沒有理由就不做。流行可以走，重量會留下。</p>
+      </div>
+      <div class="card">
+        <span class="num">03 ／ LESS, BUT ENOUGH</span>
+        <h4>克制優於裝飾</h4>
+        <p>「Simple, and enough.」是這個品牌的內在尺度。當猶豫要不要再加，答案永遠是拿掉。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 01 IDENTITY -->
+<section id="identity">
+  <div class="container">
+    <span class="label section-tag">01 — Identity</span>
+    <h2>The Wordmark.</h2>
+    <p class="lead">Manbrew 沒有圖形 logo。我們的標誌是字本身——重磅幾何無襯線（geometric grotesque heavy），均勻拉開的字距，永遠是純色。一個句點作為節奏的標記。</p>
+
+    <div class="logo-board">
+      <div class="left">
+        <p class="big-logo">MANBREW<span style="color:var(--brick);">.</span></p>
+        <p class="label-text">Primary Wordmark · Heavy Geometric Sans · #0A0A0A on #F5F1EB</p>
+      </div>
+      <div class="right">
+        <div>
+          <p class="lockup">MANBREW<span class="dot">.</span> STUDIO</p>
+          <p class="label-text" style="color:rgba(245,241,235,0.5); margin-top:14px;">Lockup · Cards · Footers · Formal docs</p>
+        </div>
+        <div>
+          <div class="stamp">MB</div>
+          <p class="label-text" style="color:rgba(245,241,235,0.5);">Seal · Hangtags · Limited drops</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>The Bilingual Lockup</h3>
+    <div class="pair">
+      <div>
+        <p class="big-zh">愛</p>
+        <p class="label-text">Mandarin · Songti Bold</p>
+      </div>
+      <div>
+        <p class="big-he">אהבה</p>
+        <p class="label-text">Hebrew · Frank Ruhl Libre Bold</p>
+      </div>
+      <div>
+        <p class="big-en">AHAVA</p>
+        <p class="label-text">Romanized · Inter Heavy</p>
+      </div>
+    </div>
+
+    <h3>不可做 / Don'ts</h3>
+    <div class="dos">
+      <div class="yes">
+        <h4>Always</h4>
+        <ul>
+          <li>純色：墨黑 #0A0A0A 或 米白 #F5F1EB</li>
+          <li>周圍至少留 = M 字母高度 × 1 倍空白</li>
+          <li>Heavy / Black weight，不是 Bold</li>
+          <li>名片 / 正式文件用 MANBREW. STUDIO 完整版</li>
+        </ul>
+      </div>
+      <div class="no">
+        <h4>Never</h4>
+        <ul>
+          <li>拉伸變形、加陰影、外光暈、立體化</li>
+          <li>把 logo 疊在飽和度高的彩色照片上</li>
+          <li>改變字距、加裝飾線、加底色色塊</li>
+          <li>用其他顏色版本（粉紅、藍、紫等）</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 TYPE -->
+<section id="type" class="teal">
+  <div class="container">
+    <span class="label section-tag">02 — Typography</span>
+    <h2>SANS WALKS.<br/>SERIF SITS.</h2>
+    <p class="lead">字體系統由兩條軸組成：「幾何無襯線（geometric sans）」承擔所有現代、街頭、cinematic 的場景；「書法／宋體」只用在單字主視覺（愛、光、和）這類有書寫感、文化重量的位置。</p>
+
+    <div class="type-block">
+      <p class="type-meta">Display XL · 96 pt · Heavy · Letter-spacing +30</p>
+      <p class="type-display">A LANGUAGE<br/>YOU CAN WEAR.</p>
+    </div>
+    <div class="type-block">
+      <p class="type-meta">H1 · 40 pt · Bold · Sans</p>
+      <p class="type-h1">Shalom Series｜2026.08｜TLV</p>
+    </div>
+    <div class="type-block">
+      <p class="type-meta">Body L · 17 pt · Regular · Inter</p>
+      <p class="type-body" style="color:var(--cream);">Manbrew is a wearable cross-cultural archive — Mandarin characters and Hebrew letters, side by side on heavy cotton, designed for people who live between cities. שלום is not the absence of war. It's the wholeness of all the parts that should be there.</p>
+    </div>
+    <div class="type-block">
+      <p class="type-meta">Caption · 13 pt · Mono · Letter-spacing +10</p>
+      <p class="type-mono" style="color:var(--cream);opacity:0.85;">240 GSM · 100% COTTON · TAIWAN PRINTED · LIMITED 60 · #024 / 060 · 32.0853°N 34.7818°E</p>
+    </div>
+    <div class="type-block">
+      <p class="type-meta">Calligraphic Word Mark · Songti TC Bold</p>
+      <p style="font-family:var(--serif); font-weight:900; font-size:clamp(72px, 10vw, 128px); margin:0; line-height:1; color:var(--mint);">光</p>
+    </div>
+  </div>
+</section>
+
+<!-- 03 COLOR -->
+<section id="color">
+  <div class="container">
+    <span class="label section-tag">03 — Color System</span>
+    <h2>FROM FILM,<br/>NOT FROM RGB.</h2>
+    <p class="lead">每一個色票要想像它在底片上的樣子，不是螢幕上的飽和值。Cinematic LUT 後製出的 teal-orange 平衡、底片顆粒裡浮現的暖光、街頭與燭火的對比——這就是 Manbrew 的色彩源頭。</p>
+
+    <h3>Core — 永遠在場</h3>
+    <div class="color-grid">
+      <div class="swatch"><div class="chip" style="background:#0A0A0A"></div><div class="meta"><p class="name">Ink 墨黑</p><p class="hex">#0A0A0A</p><p class="use">Logo · Display 字 · 深色 T · IG 暗底</p></div></div>
+      <div class="swatch"><div class="chip" style="background:#F5F1EB"></div><div class="meta"><p class="name">Cream 米白</p><p class="hex">#F5F1EB</p><p class="use">主底色 · 淺色 T · 紙張 · 留白</p></div></div>
+      <div class="swatch"><div class="chip" style="background:#FAF7F1"></div><div class="meta"><p class="name">Off-white 紙白</p><p class="hex">#FAF7F1</p><p class="use">文件背景 · 商品頁底</p></div></div>
+    </div>
+
+    <h3>Cinematic — 影像與重點視覺</h3>
+    <div class="color-grid">
+      <div class="swatch"><div class="chip" style="background:#2A3D3A"></div><div class="meta"><p class="name">Cypress Teal 影調綠</p><p class="hex">#2A3D3A</p><p class="use">影像陰影 grade · 暗色版型底</p></div></div>
+      <div class="swatch"><div class="chip" style="background:#B5C9B0"></div><div class="meta"><p class="name">Sage Mint 薄荷霧</p><p class="hex">#B5C9B0</p><p class="use">強調字（光）· 印刷 spot</p></div></div>
+      <div class="swatch"><div class="chip" style="background:#B7705A"></div><div class="meta"><p class="name">Brick Sun 暖磚陽</p><p class="hex">#B7705A</p><p class="use">印章 · 限量徽記 · CTA</p></div></div>
+      <div class="swatch"><div class="chip" style="background:#3F4D43"></div><div class="meta"><p class="name">Dusk Steel 暮鋼</p><p class="hex">#3F4D43</p><p class="use">中性次要文字 · icon</p></div></div>
+    </div>
+
+    <h3>Earth — 紙質、印刷、tag</h3>
+    <div class="color-grid">
+      <div class="swatch"><div class="chip" style="background:#8E7456"></div><div class="meta"><p class="name">Camel Tan 駝色</p><p class="hex">#8E7456</p><p class="use">tag · caption · 副資訊</p></div></div>
+      <div class="swatch"><div class="chip" style="background:#C9B68C"></div><div class="meta"><p class="name">Hay Beige 乾草</p><p class="hex">#C9B68C</p><p class="use">輔助 · 提示 · 卡片邊</p></div></div>
+      <div class="swatch"><div class="chip" style="background:#D8D2C8"></div><div class="meta"><p class="name">Mist 薄霧</p><p class="hex">#D8D2C8</p><p class="use">分隔線 · 邊框</p></div></div>
+      <div class="swatch"><div class="chip" style="background:#5F574E"></div><div class="meta"><p class="name">Slate 灰墨</p><p class="hex">#5F574E</p><p class="use">次要文字 · 長文段落色</p></div></div>
+    </div>
+
+    <h3>Ratio — 80 / 15 / 5</h3>
+    <p style="font-family:var(--mono);font-size:13px;color:var(--slate);max-width:760px;line-height:1.8;">80% Ink + Cream + Off-white（核心三色，永遠是大面積）<br/>15% 一個 Cinematic 色（依系列挑一個，不混用）<br/>5%  Earth 色作為 tag、邊線等微小元素</p>
+  </div>
+</section>
+
+<!-- 04 PHOTO / CINEMATIC -->
+<section id="photo" class="dark">
+  <div class="container">
+    <span class="label section-tag">04 — Cinematic Photography</span>
+    <h2>SHOT LIKE A FILM,<br/>NOT LIKE A LOOKBOOK.</h2>
+    <p class="lead">每一張照片都應該感覺像從一段更長的旅程中切出來的一格。Kodak Portra 800 ／ CineStill 800T 為基準的 cinematic LUT——shadows tinted teal, mids warm, highlights cream, grain visible but not noisy.</p>
+
+    <div class="photo-bar">
+      <div class="photo-mock brand-tagline">
+        <div class="center-text"><div><p class="word-zh">愛</p><p class="tag">MANBREW · TLV</p></div></div>
+        <p class="label-overlay">WORN · TLV · 2026.07</p>
+      </div>
+      <div class="photo-mock market">
+        <div class="center-text"><p class="tag" style="font-size:14px; line-height:1.5;">SIMPLE,<br/>AND ENOUGH.</p></div>
+        <p class="label-overlay">ATMOSPHERE · 2026.10</p>
+      </div>
+      <div class="photo-mock candle">
+        <div class="center-text"><div><p class="word-zh">光</p><p class="tag">אור · OR</p></div></div>
+        <p class="label-overlay">ATMOSPHERE · CANDLE</p>
+      </div>
+    </div>
+
+    <h3>Lightroom Cinematic Preset · 起始參數</h3>
+    <div class="lut">
+      <div class="row"><span class="k">Temp / Tint</span><span class="v">+200 / -5</span></div>
+      <div class="row"><span class="k">Exposure</span><span class="v">-0.20</span></div>
+      <div class="row"><span class="k">Contrast</span><span class="v">+12</span></div>
+      <div class="row"><span class="k">Highlights</span><span class="v">-25</span></div>
+      <div class="row"><span class="k">Shadows</span><span class="v">+20</span></div>
+      <div class="row"><span class="k">Vibrance / Saturation</span><span class="v">-10 / -18</span></div>
+      <div class="row"><span class="k">Orange Sat</span><span class="v">-10</span></div>
+      <div class="row"><span class="k">Green Hue</span><span class="v">+8 → teal</span></div>
+      <div class="row"><span class="k">Split Hi (H/S)</span><span class="v">35 / 15</span></div>
+      <div class="row"><span class="k">Split Sh (H/S)</span><span class="v">195 / 25</span></div>
+      <div class="row"><span class="k">Grain Amount</span><span class="v">35</span></div>
+      <div class="row"><span class="k">Grain Size / Roughness</span><span class="v">28 / 50</span></div>
+    </div>
+
+    <blockquote style="margin-top:48px;">不要用攝影棚漸變紙、不要 KOL 開箱式構圖、不要直視鏡頭微笑。讓相機剛好遇到一個正在思考的人。</blockquote>
+  </div>
+</section>
+
+<!-- 05 VOICE -->
+<section id="voice" class="teal">
+  <div class="container">
+    <span class="label section-tag">05 — Voice & Tone</span>
+    <h2>ENGLISH LEADS.<br/>MANDARIN ECHOES.</h2>
+    <p class="lead">Manbrew 是雙語品牌——英文先行，中文延伸，希伯來文點綴。每一句 tagline、IG caption、商品文案都應該先用英文寫出短而準的版本，再寫中文延伸版（不是翻譯）。</p>
+
+    <h3>Tagline Library</h3>
+    <div class="taglines">
+      <div class="tg-item">
+        <p class="en">WHERE LETTERS BECOME STORIES.</p>
+        <p class="zh">字成為故事的地方。</p>
+        <p class="ctx">Brand · Bio · Cover</p>
+      </div>
+      <div class="tg-item">
+        <p class="en">A LANGUAGE YOU CAN WEAR.</p>
+        <p class="zh">一種可以被穿上的語言。</p>
+        <p class="ctx">Posters · Lookbook</p>
+      </div>
+      <div class="tg-item">
+        <p class="en">SIMPLE, AND ENOUGH.</p>
+        <p class="zh">簡單，剛剛好。</p>
+        <p class="ctx">Story · Atmosphere</p>
+      </div>
+      <div class="tg-item">
+        <p class="en">WORDS THAT TRAVEL WITH YOU.</p>
+        <p class="zh">與你一起旅行的字。</p>
+        <p class="ctx">Travel Series · City</p>
+      </div>
+      <div class="tg-item">
+        <p class="en">READ ME WHEN YOU GET LOST.</p>
+        <p class="zh">迷路時讀我。</p>
+        <p class="ctx">Limited drop · Card</p>
+      </div>
+      <div class="tg-item">
+        <p class="en">TWO LANGUAGES, ONE BODY.</p>
+        <p class="zh">兩種語言，一個身體。</p>
+        <p class="ctx">Bilingual hero visual</p>
+      </div>
+    </div>
+
+    <h3 style="margin-top:80px;">Vocabulary</h3>
+    <div class="voice-grid">
+      <div class="yes">
+        <h4>USE — 可以用</h4>
+        <span class="tag">wearable language</span>
+        <span class="tag">cross-cultural</span>
+        <span class="tag">bilingual</span>
+        <span class="tag">cinematic</span>
+        <span class="tag">heavy cotton</span>
+        <span class="tag">city to city</span>
+        <span class="tag">between places</span>
+        <span class="tag">archive</span>
+        <span class="tag">letter</span>
+        <span class="tag">story</span>
+        <span class="tag">travel</span>
+        <span class="tag">quiet</span>
+        <span class="tag">research</span>
+        <span class="tag">跨文化</span>
+        <span class="tag">雙語並置</span>
+        <span class="tag">移動中</span>
+        <span class="tag">在城市之間</span>
+        <span class="tag">重磅</span>
+      </div>
+      <div class="no">
+        <h4>NEVER — 禁用</h4>
+        <span class="tag">fashion</span>
+        <span class="tag">trendy</span>
+        <span class="tag">drop hype</span>
+        <span class="tag">vibe</span>
+        <span class="tag">aesthetic（hashtag 化）</span>
+        <span class="tag">時尚</span>
+        <span class="tag">爆款</span>
+        <span class="tag">必買</span>
+        <span class="tag">CP 值</span>
+        <span class="tag">流量</span>
+        <span class="tag">轉換</span>
+        <span class="tag">引爆</span>
+        <span class="tag">賦能</span>
+        <span class="tag">沉浸式</span>
+        <span class="tag">無縫</span>
+        <span class="tag">解鎖</span>
+        <span class="tag">開箱</span>
+        <span class="tag">限時搶購</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 COMPONENTS -->
+<section id="components">
+  <div class="container">
+    <span class="label section-tag">06 — Components</span>
+    <h2>NINE TILES,<br/>ONE STORY.</h2>
+    <p class="lead">把連續 9 張 IG 貼文當一頁版面想。Worn × Word × Atmosphere × Tagline 之間建立節奏，每一張的存在都要對整個 grid 有意義。</p>
+
+    <div class="ig-grid">
+      <div class="ig-tile cinematic">
+        <div class="inner">
+          <p class="word-zh" style="color:var(--mint);">愛</p>
+          <p class="lab">WORN · TLV</p>
+        </div>
+      </div>
+      <div class="ig-tile cinematic-warm">
+        <div class="inner">
+          <p style="font-family:var(--display); font-weight:800; font-size:14px; letter-spacing:0.18em; line-height:1.4; margin:0;">A LANGUAGE<br/>YOU CAN WEAR.</p>
+          <p class="lab">TAGLINE</p>
+        </div>
+      </div>
+      <div class="ig-tile cream">
+        <div class="inner">
+          <p class="he" style="color:var(--ink);">אהבה</p>
+          <p style="font-family:var(--mono); font-size:11px; color:var(--brick); letter-spacing:0.18em; margin:8px 0 0;">AHAVA · LOVE</p>
+          <p class="lab" style="color:var(--camel);">WORD CARD</p>
+        </div>
+      </div>
+      <div class="ig-tile cinematic">
+        <div class="inner">
+          <p style="font-family:var(--display); font-weight:900; font-size:32px; margin:0;">TLV.</p>
+          <p style="font-family:var(--mono); font-size:11px; color:var(--mint); margin:10px 0 0; letter-spacing:0.16em;">32.0853°N · 34.7818°E</p>
+          <p class="lab">FIELD NOTE</p>
+        </div>
+      </div>
+      <div class="ig-tile travel-tile">
+        <div class="inner">
+          <p class="word-zh" style="color:var(--cream);">光</p>
+          <p class="he" style="margin-top:14px;">אור</p>
+          <p class="lab">ATMOSPHERE</p>
+        </div>
+      </div>
+      <div class="ig-tile cinematic-warm">
+        <div class="inner">
+          <p style="font-family:var(--display); font-weight:800; font-size:14px; letter-spacing:0.18em; line-height:1.4; margin:0;">SIMPLE,<br/>AND ENOUGH.</p>
+          <p class="lab">TAGLINE</p>
+        </div>
+      </div>
+      <div class="ig-tile ink">
+        <div class="inner">
+          <p class="word-zh" style="color:var(--brick); font-family:var(--display); font-weight:900;">限</p>
+          <p class="lab">DROP MARK · 60</p>
+        </div>
+      </div>
+      <div class="ig-tile cream">
+        <div class="inner">
+          <p style="font-family:var(--mono); font-size:14px; color:var(--ink); line-height:1.6; margin:0;">08 · 30<br/>2026<br/>TPE</p>
+          <p class="lab" style="color:var(--camel);">EVENT</p>
+        </div>
+      </div>
+      <div class="ig-tile cinematic">
+        <div class="inner">
+          <p class="he">תקוה</p>
+          <p style="font-family:var(--mono); font-size:11px; color:var(--mint); letter-spacing:0.18em; margin:14px 0 0;">TIKVA · 2027.02</p>
+          <p class="lab">NEXT DROP</p>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="margin-top:88px;">Single Word Card · 三語單字</h3>
+    <div class="wordcard">
+      <p class="zh">光</p>
+      <p class="he-line"><span style="font-family:var(--hebrew);">אור</span>　｜　or</p>
+      <p class="en">MANBREW · OR · LIGHT IS NOT OPTIMISM, IT'S WHAT MAKES THE DARK VISIBLE.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 07 STRATEGY -->
+<section id="strategy" class="dark">
+  <div class="container">
+    <span class="label section-tag">07 — Annual Strategy</span>
+    <h2>FOUR CITIES.<br/>TWO LANGUAGES.<br/>ONE YEAR.</h2>
+    <p class="lead">2026.05 — 2027.04. 兩個系列（Shalom · 八月／Tikva · 次年二月）+ 一個小型實驗系列（Or · 棒球帽 + Tote）。每個系列搭配一座城市做 City Series 拍攝：TLV · TPE · LON · TYO。</p>
+
+    <h3>Positioning</h3>
+    <div class="matrix">
+      <div class="axis-x"></div>
+      <div class="axis-y"></div>
+      <div class="label-axis l">VISUAL ↓</div>
+      <div class="label-axis r">VISUAL ↑</div>
+      <div class="label-axis t">CULTURE ↑</div>
+      <div class="label-axis b">CULTURE ↓</div>
+
+      <div class="dot us" style="left:82%; top:16%;"><div class="pin"></div><div class="name">MANBREW.</div></div>
+      <div class="dot" style="left:78%; top:28%;"><div class="pin"></div><div class="name">Comme il faut</div></div>
+      <div class="dot" style="left:74%; top:34%;"><div class="pin"></div><div class="name">Story mfg</div></div>
+      <div class="dot" style="left:72%; top:42%;"><div class="pin"></div><div class="name">mina perhonen</div></div>
+      <div class="dot" style="left:65%; top:48%;"><div class="pin"></div><div class="name">Bode</div></div>
+      <div class="dot" style="left:62%; top:58%;"><div class="pin"></div><div class="name">Sundae School</div></div>
+      <div class="dot" style="left:55%; top:68%;"><div class="pin"></div><div class="name">Filter017</div></div>
+      <div class="dot" style="left:48%; top:75%;"><div class="pin"></div><div class="name">plain-me</div></div>
+      <div class="dot" style="left:25%; top:62%;"><div class="pin"></div><div class="name">教會 T 周邊</div></div>
+
+      <div class="axes-meta">
+        TOP-RIGHT QUADRANT<br/>= MANBREW. ZONE<br/>cinematic + 雙語深度
+      </div>
+    </div>
+
+    <h3 style="margin-top:64px;">Annual Gantt</h3>
+    <div class="gantt">
+      <div class="lbl-h">PHASE / MONTH</div>
+      <div class="month">5</div><div class="month">6</div><div class="month">7</div><div class="month">8</div>
+      <div class="month">9</div><div class="month">10</div><div class="month">11</div><div class="month">12</div>
+      <div class="month">1</div><div class="month">2</div><div class="month">3</div><div class="month">4</div>
+
+      <div class="lbl">SHALOM · TLV</div>
+      <div class="cell"></div><div class="cell fill-1">字</div><div class="cell fill-1">設計</div><div class="cell fill-2 star">上市</div>
+      <div class="cell fill-3">穿</div><div class="cell fill-3">展</div><div class="cell"></div><div class="cell"></div>
+      <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+
+      <div class="lbl">OR · TPE (mini)</div>
+      <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+      <div class="cell"></div><div class="cell fill-1">字+拍</div><div class="cell fill-2 star">上市</div><div class="cell"></div>
+      <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+
+      <div class="lbl">TIKVA · LON</div>
+      <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+      <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+      <div class="cell fill-1">字+拍</div><div class="cell fill-2 star">上市</div><div class="cell fill-3">穿</div><div class="cell fill-3">TYO</div>
+
+      <div class="lbl">CONTENT MAIN</div>
+      <div class="cell fill-4">籌備</div><div class="cell fill-4">字</div><div class="cell fill-4">譯</div><div class="cell fill-4">設計</div>
+      <div class="cell fill-4">UGC</div><div class="cell fill-4">展</div><div class="cell fill-4">讀者</div><div class="cell fill-4">別冊</div>
+      <div class="cell fill-4">字</div><div class="cell fill-4">譯</div><div class="cell fill-4">UGC</div><div class="cell fill-4">檢討</div>
+
+      <div class="lbl">EVENTS</div>
+      <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell fill-2">launch 1</div>
+      <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+      <div class="cell"></div><div class="cell fill-2">launch 2</div><div class="cell"></div><div class="cell"></div>
+    </div>
+
+    <h3 style="margin-top:88px;">Four Personas · Four Lives</h3>
+    <div class="princ">
+      <div class="card">
+        <span class="num">P1 · BRAND VOICE</span>
+        <h4>以樂 Yileh</h4>
+        <p>34 · 台北 · 神學院編輯。週六去希伯來文讀書會。把 Manbrew 當「可以被穿出去的研究筆記」。觸達：紙本字義小冊、譯者 podcast、神學院擺攤。</p>
+      </div>
+      <div class="card">
+        <span class="num">P2 · NEW HORIZON</span>
+        <h4>Maya（柏林 / 台北混血）</h4>
+        <p>29 · 柏林。台北 + 以色列混血。自由設計師。第一次認識 Manbrew 是朋友穿 Ahavah 在 TLV 拍照的 Story。觸達：英文 IG / Newsletter、City Series、柏林選品店。</p>
+      </div>
+      <div class="card">
+        <span class="num">P3 · DESIGN PEER</span>
+        <h4>葳真 Wei-Zhen</h4>
+        <p>28 · 台北 · 獨立設計師。在朋友選品店買到第一件，會分享 Story 但不 tag。觸達：發表會、聯名印刷品、字體研究內容、與獨立書店合作。</p>
+      </div>
+      <div class="card">
+        <span class="num">P4 · BRIDGE</span>
+        <h4>安睦 An-Mu</h4>
+        <p>31 · 剛從以色列回台。父親宣教士、母親台灣人。對「跨文化身份」既敏感又疲倦。觸達：跨文化 podcast、留學生／海歸社群、英 / 希文版本內容。</p>
+      </div>
+    </div>
+
+    <h3 style="margin-top:88px;">v1 → v2 Delta</h3>
+    <table class="delta">
+      <thead>
+        <tr><th style="width:20%;">Dimension</th><th style="width:35%;">v1（before）</th><th style="width:45%;">v2（now）</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Core metaphor</td><td class="before">衣著詩集出版社</td><td class="after">A wearable cross-cultural archive</td></tr>
+        <tr><td>Visual direction</td><td class="before">紙張派文青</td><td class="after">Cinematic 旅人（grain + LUT）</td></tr>
+        <tr><td>Primary type</td><td class="before">思源宋體 serif</td><td class="after">Geometric grotesque heavy（Söhne / Inter）</td></tr>
+        <tr><td>Copy language</td><td class="before">中文 lead</td><td class="after">English lead + 中文延伸</td></tr>
+        <tr><td>TA count</td><td class="before">3 personas</td><td class="after">4 personas（+ Maya · TCK）</td></tr>
+        <tr><td>Locations</td><td class="before">在地 / 室內</td><td class="after">TLV · TPE · LON · TYO（City Series）</td></tr>
+        <tr><td>Channels</td><td class="before">國內</td><td class="after">雙語電商 + 國際選品店試水</td></tr>
+        <tr><td>Annual budget</td><td class="before">NT$ 730,000</td><td class="after">NT$ 1,419,000（推薦）</td></tr>
+        <tr><td>Tagline</td><td class="before">— 衣著詩集 —</td><td class="after">WHERE LETTERS BECOME STORIES.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<footer>
+  <p class="br">— ／ —</p>
+  <p class="name">MANBREW<span style="color:var(--brick);">.</span> STUDIO</p>
+  <p class="sub">BDLS v2.0 · ANNUAL STRATEGY 2026 · TPE × TLV × LON × TYO</p>
+  <p style="color:rgba(245,241,235,0.6); margin: 0;">Ann Chen ／ Founder & Creative Director</p>
+  <p style="color:rgba(245,241,235,0.6); margin: 8px 0 0; font-family: var(--mono); font-size:12px;">hello@manbrew-studio.com  ／  ig @manbrew.studio</p>
+  <p style="color:var(--brick); margin: 32px 0 0; letter-spacing: 0.32em; font-size: 11px; font-family: var(--display); font-weight: 700;">A LANGUAGE YOU CAN WEAR.</p>
+</footer>
+
+</body>
+</html>
