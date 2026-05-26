@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Creator Guide — Manbrew Bridge</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;500&family=Frank+Ruhl+Libre:wght@400;700&display=swap" rel="stylesheet">
+
+  <script>
+    /* lang.js — inline */
+    function setLang(lang) {
+      document.documentElement.setAttribute('data-lang', lang);
+      localStorage.setItem('mb-lang', lang);
+      document.querySelectorAll('.lang-btn').forEach(function(btn) {
+        btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+      });
+    }
+    (function() {
+      var saved = localStorage.getItem('mb-lang') || 'en';
+      document.documentElement.setAttribute('data-lang', saved);
+      document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.lang-btn').forEach(function(btn) {
+          btn.classList.toggle('active', btn.getAttribute('data-lang') === saved);
+        });
+      });
+    })();
+  </script>
+  <style>
+    [data-lang="en"] .t-zh { display: none !important; }
+    [data-lang="zh"] .t-en { display: none !important; }
+    :root {
+      --ink:#0A0A0A; --cream:#FAF7F1; --brick:#B7705A; --mint:#B5C9B0;
+      --teal:#2A3D3A; --slate:#5F574E; --mist:#D8D2C8; --off:#F5F1EB;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{background:var(--cream);color:var(--ink);font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;}
+    nav{background:var(--ink);border-bottom:1px solid var(--teal);padding:1.5rem 2rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
+    .nav-wordmark{font-weight:900;font-size:0.95rem;letter-spacing:0.08em;color:var(--cream);text-decoration:none;}
+    .nav-links{display:flex;gap:2.5rem;list-style:none;}
+    .nav-links a{font-family:'JetBrains Mono',monospace;font-size:0.65rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--slate);text-decoration:none;transition:color 0.2s;}
+    .nav-links a:hover,.nav-links a.active{color:var(--mint);}
+    .lang-switch{display:flex;align-items:center;gap:0.35rem;}
+    .lang-btn{font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;background:none;border:none;color:var(--slate);cursor:pointer;padding:0.3rem 0.4rem;transition:color 0.2s;}
+    .lang-btn:hover{color:var(--cream);} .lang-btn.active{color:var(--mint);}
+    .lang-sep{color:var(--teal);font-size:0.6rem;}
+    .nav-cta{font-family:'JetBrains Mono',monospace;font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--brick);text-decoration:none;border:1px solid var(--brick);padding:0.45rem 1.1rem;transition:background 0.2s,color 0.2s;white-space:nowrap;margin-left:1.25rem;}
+    .nav-cta:hover{background:var(--brick);color:var(--ink);}
+    .container{max-width:760px;margin:0 auto;padding:0 2rem;}
+    .page-header{padding:6rem 0 4rem;border-bottom:2px solid var(--ink);margin-bottom:5rem;}
+    .page-label{font-family:'JetBrains Mono',monospace;font-size:0.68rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--slate);display:block;margin-bottom:1.25rem;}
+    .page-title{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;letter-spacing:-0.025em;line-height:1.05;margin-bottom:1rem;}
+    .page-sub{font-size:1rem;color:var(--slate);line-height:1.85;max-width:520px;}
+    .guide-section{margin-bottom:4.5rem;}
+    .section-num{font-family:'JetBrains Mono',monospace;font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--brick);display:block;margin-bottom:0.75rem;}
+    .section-title{font-size:1.4rem;font-weight:900;margin-bottom:1rem;letter-spacing:-0.015em;}
+    .section-body{font-size:0.95rem;color:var(--slate);line-height:1.9;}
+    .section-body p+p{margin-top:0.85em;}
+    .guide-rule{border:none;border-top:1px solid var(--mist);margin-bottom:4.5rem;}
+    .info-rows{border:1px solid var(--mist);margin-top:1.5rem;}
+    .info-row{display:grid;grid-template-columns:160px 1fr;border-bottom:1px solid var(--mist);}
+    .info-row:last-child{border-bottom:none;}
+    .info-label{font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--slate);padding:1rem 1.25rem;background:var(--off);border-right:1px solid var(--mist);display:flex;align-items:center;}
+    .info-value{font-size:0.88rem;color:var(--ink);padding:1rem 1.25rem;line-height:1.65;}
+    .cta-band{background:var(--teal);padding:4rem 2rem;text-align:center;margin-top:2rem;}
+    .cta-band-label{font-family:'JetBrains Mono',monospace;font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--mint);display:block;margin-bottom:1rem;}
+    .cta-band-title{font-size:clamp(1.5rem,3vw,2rem);font-weight:900;color:var(--cream);margin-bottom:0.5rem;letter-spacing:-0.02em;}
+    .cta-band-sub{font-size:0.88rem;color:var(--mint);margin-bottom:2rem;opacity:0.75;}
+    .btn-apply{display:inline-block;background:var(--brick);color:var(--cream);font-family:'JetBrains Mono',monospace;font-size:0.68rem;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;text-decoration:none;padding:1rem 2.25rem;transition:opacity 0.2s;}
+    .btn-apply:hover{opacity:0.85;}
+    footer{background:var(--ink);padding:2rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;}
+    .footer-copy{font-family:'JetBrains Mono',monospace;font-size:0.62rem;letter-spacing:0.1em;color:var(--slate);}
+    @media(max-width:640px){.info-row{grid-template-columns:1fr;}.info-label{border-right:none;border-bottom:1px solid var(--mist);}}
+
+    /* ─── PARENT BRAND BAR ──────────────────────────────── */
+    .mb-brand-bar {
+      background: #050505;
+      border-bottom: 1px solid rgba(42, 61, 58, 0.6);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .mb-brand-tabs { display: flex; align-items: stretch; }
+    .mb-brand-tab {
+      display: flex; align-items: center; gap: 7px;
+      padding: 13px 20px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9.5px; font-weight: 500;
+      letter-spacing: 0.22em; text-transform: uppercase; text-decoration: none;
+      color: rgba(245, 241, 235, 0.32);
+      border-bottom: 2px solid transparent;
+      transition: color 0.2s, border-color 0.2s; white-space: nowrap;
+    }
+    .mb-brand-tab:hover { color: rgba(245, 241, 235, 0.65); }
+    .mb-brand-tab.active { color: #F5F1EB; border-bottom-color: #B5C9B0; }
+    .mb-brand-dot { width: 4px; height: 4px; border-radius: 50%; background: #B5C9B0; flex-shrink: 0; }
+    .mb-brand-tag { font-family: 'JetBrains Mono', monospace; font-size: 8.5px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(94, 87, 78, 0.6); }
+  </style>
+</head>
+<body>
+
+<!-- ── PARENT BRAND BAR ──────────────────────────────────── -->
+<div class="mb-brand-bar">
+  <div class="mb-brand-tabs">
+    <a href="../index.html" class="mb-brand-tab">MANBREW.</a>
+    <span class="mb-brand-tab active"><span class="mb-brand-dot"></span>BRIDGE</span>
+  </div>
+  <span class="mb-brand-tag">文字之間工作室</span>
+</div>
+
+<nav>
+  <a href="index.html" class="nav-wordmark">MANBREW BRIDGE</a>
+  <ul class="nav-links">
+    <li><a href="index.html"><span class="t-en">Home</span><span class="t-zh">首頁</span></a></li>
+    <li><a href="works.html"><span class="t-en">Art Bazaar</span><span class="t-zh">藝術市集</span></a></li>
+    <li><a href="phase01-landing.html"><span class="t-en">Phase 01</span><span class="t-zh">第一階段</span></a></li>
+    <li><a href="creator-profile.html"><span class="t-en">Feature Artists</span><span class="t-zh">精選藝術家</span></a></li>
+    <li><a href="creator-guide.html" class="active"><span class="t-en">Creator Guide</span><span class="t-zh">創作者指南</span></a></li>
+  </ul>
+  <div class="lang-switch">
+    <button class="lang-btn active" data-lang="en" onclick="setLang('en')">EN</button>
+    <span class="lang-sep">·</span>
+    <button class="lang-btn" data-lang="zh" onclick="setLang('zh')">中文</button>
+  </div>
+  <a href="https://forms.gle/RkiV3JumnALHFcHL9" target="_blank" rel="noopener" class="nav-cta">
+    <span class="t-zh">申請加入</span><span class="t-en">Apply</span>
+  </a>
+</nav>
+
+<div class="container">
+  <div class="page-header">
+    <span class="page-label">
+      <span class="t-zh">創作者指南 / Creator Guide</span>
+      <span class="t-en">For Artists &amp; Creators</span>
+    </span>
+    <h1 class="page-title">
+      <span class="t-zh">如何加入藝術市集。</span>
+      <span class="t-en">How to join the Art Bazaar.</span>
+    </h1>
+    <p class="page-sub">
+      <span class="t-zh">申請流程、作品規格，以及我們對創作者的期待。三分鐘讀完。</span>
+      <span class="t-en">Application process, artwork specs, and what we look for. A three-minute read.</span>
+    </p>
+  </div>
+
+  <div class="guide-section">
+    <span class="section-num">01</span>
+    <h2 class="section-title">
+      <span class="t-zh">誰可以申請？</span>
+      <span class="t-en">Who can apply?</span>
+    </h2>
+    <div class="section-body">
+      <p>
+        <span class="t-zh">歡迎有猶太文化或華人文化背景的創作者——攝影師、畫家、插畫家、字體設計師或音樂人皆可。你不需要是專業藝術家，但你的作品必須真實反映你的文化身份與創作觀點。</span>
+        <span class="t-en">Open to creators with a Jewish or Chinese cultural background — photographers, painters, illustrators, type designers, or musicians. You don't need to be a full-time artist, but your work must genuinely reflect your cultural identity.</span>
+      </p>
+      <p>
+        <span class="t-zh">目前開放四個類別：視覺藝術、字體與書法、音樂與聲音、攝影。</span>
+        <span class="t-en">Currently open in four categories: Visual Art, Typography &amp; Calligraphy, Music &amp; Sound, and Photography.</span>
+      </p>
+    </div>
+  </div>
+
+  <hr class="guide-rule">
+
+  <div class="guide-section">
+    <span class="section-num">02</span>
+    <h2 class="section-title">
+      <span class="t-zh">需要準備什麼？</span>
+      <span class="t-en">What to prepare.</span>
+    </h2>
+    <div class="section-body">
+      <p>
+        <span class="t-zh">申請時請準備以下資訊：</span>
+        <span class="t-en">Please have the following ready when you apply:</span>
+      </p>
+    </div>
+    <div class="info-rows">
+      <div class="info-row">
+        <span class="info-label"><span class="t-zh">你的名字</span><span class="t-en">Your name</span></span>
+        <span class="info-value"><span class="t-zh">中文或英文皆可</span><span class="t-en">Chinese or English</span></span>
+      </div>
+      <div class="info-row">
+        <span class="info-label"><span class="t-zh">文化背景</span><span class="t-en">Cultural background</span></span>
+        <span class="info-value"><span class="t-zh">猶太文化、華人文化，或兩者兼有</span><span class="t-en">Jewish, Chinese, or both</span></span>
+      </div>
+      <div class="info-row">
+        <span class="info-label"><span class="t-zh">創作類別</span><span class="t-en">Category</span></span>
+        <span class="info-value"><span class="t-zh">視覺藝術 / 字體與書法 / 音樂與聲音 / 攝影</span><span class="t-en">Visual Art / Typography &amp; Calligraphy / Music &amp; Sound / Photography</span></span>
+      </div>
+      <div class="info-row">
+        <span class="info-label"><span class="t-zh">作品連結或檔案</span><span class="t-en">Portfolio or file</span></span>
+        <span class="info-value"><span class="t-zh">1–3 件代表作品，連結或圖檔皆可</span><span class="t-en">1–3 representative works — link or image file</span></span>
+      </div>
+      <div class="info-row">
+        <span class="info-label"><span class="t-zh">簡短自介</span><span class="t-en">Short bio</span></span>
+        <span class="info-value"><span class="t-zh">100–200 字，說明你是誰、為什麼想加入</span><span class="t-en">100–200 words — who you are and why you want to join</span></span>
+      </div>
+    </div>
+  </div>
+
+  <hr class="guide-rule">
+
+  <div class="guide-section">
+    <span class="section-num">03</span>
+    <h2 class="section-title">
+      <span class="t-zh">作品規格</span>
+      <span class="t-en">Artwork specs.</span>
+    </h2>
+    <div class="section-body">
+      <p>
+        <span class="t-zh">通過審核後，請提交正式作品檔案上架至藝術市集：</span>
+        <span class="t-en">Once approved, submit final files for the Art Bazaar:</span>
+      </p>
+    </div>
+    <div class="info-rows">
+      <div class="info-row">
+        <span class="info-label"><span class="t-zh">格式</span><span class="t-en">Format</span></span>
+        <span class="info-value">JPG / PNG / TIFF &nbsp;·&nbsp; <span class="t-zh">音樂請提供 MP3 或 WAV</span><span class="t-en">MP3 or WAV for music</span></span>
+      </div>
+      <div class="info-row">
+        <span class="info-label"><span class="t-zh">解析度</span><span class="t-en">Resolution</span></span>
+        <span class="info-value"><span class="t-zh">最低 3000px 長邊，300dpi</span><span class="t-en">Min. 3000px long edge, 300dpi</span></span>
+      </div>
+      <div class="info-row">
+        <span class="info-label"><span class="t-zh">作品標題</span><span class="t-en">Title</span></span>
+        <span class="info-value"><span class="t-zh">中文、英文或兩者皆有</span><span class="t-en">Chinese, English, or both</span></span>
+      </div>
+      <div class="info-row">
+        <span class="info-label"><span class="t-zh">作品說明</span><span class="t-en">Description</span></span>
+        <span class="info-value"><span class="t-zh">50–150 字，說明創作背景與文化連結</span><span class="t-en">50–150 words about the work and its cultural context</span></span>
+      </div>
+      <div class="info-row">
+        <span class="info-label"><span class="t-zh">授權選項</span><span class="t-en">License type</span></span>
+        <span class="info-value"><span class="t-zh">個人授權 / 商業授權（可同時開放）</span><span class="t-en">Personal license / Commercial license (both can be offered)</span></span>
+      </div>
+    </div>
+  </div>
+
+  <hr class="guide-rule">
+
+  <div class="guide-section">
+    <span class="section-num">04</span>
+    <h2 class="section-title">
+      <span class="t-zh">申請之後</span>
+      <span class="t-en">After you apply.</span>
+    </h2>
+    <div class="section-body">
+      <p>
+        <span class="t-zh">我們會在 7 個工作天內閱讀每一份申請並回覆。通過初選後，我們會安排一次短暫的對話——不是面試，只是讓彼此認識。</span>
+        <span class="t-en">We read every application and respond within 7 business days. If selected, we'll arrange a short conversation — not an interview, just a chance to meet.</span>
+      </p>
+      <p>
+        <span class="t-zh">成為創始成員後，你的作品將出現在藝術市集，你也會加入第一個 20 人核心圈，共同定義這個平台的未來。</span>
+        <span class="t-en">As a founding member, your work will appear in the Art Bazaar, and you'll join the first circle of 20 — shaping what this platform becomes.</span>
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="cta-band">
+  <span class="cta-band-label">Phase 01 — <span class="t-zh">名額有限，20 席</span><span class="t-en">20 Founding Seats</span></span>
+  <h2 class="cta-band-title">
+    <span class="t-zh">準備好了嗎？</span>
+    <span class="t-en">Ready to apply?</span>
+  </h2>
+  <p class="cta-band-sub">
+    <span class="t-zh">填寫申請表，我們會親自閱讀每一份。</span>
+    <span class="t-en">Fill out the form — we read every submission personally.</span>
+  </p>
+  <a href="https://forms.gle/RkiV3JumnALHFcHL9" target="_blank" rel="noopener" class="btn-apply">
+    <span class="t-zh">申請成為創始成員 →</span>
+    <span class="t-en">Apply as a Founding Member →</span>
+  </a>
+</div>
+
+<footer>
+  <p class="footer-copy">© 2026 Manbrew Bridge</p>
+  <p class="footer-copy">WHERE JEWISH &amp; CHINESE WORLDS MEET</p>
+</footer>
+
+</body>
+</html>

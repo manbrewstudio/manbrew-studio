@@ -1,0 +1,1218 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+<title>MANBREW. — 文字之間工作室</title>
+<meta name="description" content="Manbrew 是一個把語言穿在身上的品牌。我們將中文與希伯來文並置、重組——不是翻譯，是重新排列兩種文化的關係。" />
+<meta property="og:title" content="MANBREW. — 文字之間工作室" />
+<meta property="og:description" content="WHERE LETTERS BECOME STORIES / 在文字之間，讓我們相遇" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://manbrew-studio.com" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@900&family=Frank+Ruhl+Libre:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0A0A0A;
+    --ink-2: #141414;
+    --cream: #F5F1EB;
+    --paper: #FAF7F1;
+    --teal: #2A3D3A;
+    --teal-deep: #1B2826;
+    --mint: #B5C9B0;
+    --mint-deep: #8FA48A;
+    --brick: #B7705A;
+    --camel: #8E7456;
+    --hay: #C9B68C;
+    --slate: #5F574E;
+    --mist: #D8D2C8;
+    --dusk: #3F4D43;
+    --display: "Inter", "Helvetica Neue", system-ui, sans-serif;
+    --sans: "Inter", "Noto Sans TC", "Helvetica Neue", system-ui, sans-serif;
+    --serif: "Noto Serif TC", "Songti TC", serif;
+    --hebrew: "Frank Ruhl Libre", "SBL Hebrew", serif;
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* Global film grain */
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.16;
+    background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.92' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.7'/></svg>");
+    mix-blend-mode: multiply;
+  }
+
+  ::selection { background: var(--mint); color: var(--ink); }
+
+  a { color: inherit; text-decoration: none; }
+  button { border: 0; background: transparent; cursor: pointer; font: inherit; color: inherit; }
+
+  .container { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+  .container-tight { max-width: 920px; margin: 0 auto; padding: 0 32px; }
+
+  .label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; font-weight: 500; color: var(--brick); }
+  .label-mint { color: var(--mint); }
+  .label-cream { color: var(--cream); }
+  .label-camel { color: var(--camel); }
+
+  /* ───────────────── NAV ───────────────── */
+  nav.top {
+    position: sticky;
+    top: 0; left: 0; right: 0;
+    z-index: 200;
+    background: var(--ink);
+    border-bottom: 1px solid rgba(245,241,235,0.08);
+    padding: 0 clamp(24px, 6vw, 80px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  nav.top .nav-left {
+    display: flex;
+    align-items: center;
+  }
+  nav.top .brand {
+    font-family: var(--display);
+    font-weight: 900;
+    font-size: 15px;
+    letter-spacing: 0.12em;
+    color: var(--cream);
+    padding: 18px 24px 18px 0;
+    margin-right: 20px;
+    border-right: 1px solid rgba(245,241,235,0.1);
+    white-space: nowrap;
+  }
+  nav.top .brand .dot { color: var(--brick); }
+  nav.top ul {
+    display: flex;
+    gap: 0;
+    margin: 0; padding: 0;
+    list-style: none;
+    align-items: stretch;
+  }
+  nav.top ul li a {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 18px 20px;
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: rgba(245,241,235,0.38);
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+    white-space: nowrap;
+  }
+  nav.top ul li a:hover { color: rgba(245,241,235,0.72); }
+  nav.top ul li a.active {
+    color: var(--cream);
+    border-bottom-color: var(--brick);
+  }
+  nav.top .bridge-dot {
+    display: inline-block;
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--mint);
+    flex-shrink: 0;
+  }
+  nav.top .nav-tag {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--camel);
+  }
+  @media (max-width: 600px) {
+    nav.top ul li a { padding: 16px 14px; font-size: 9px; letter-spacing: 0.18em; }
+    nav.top .brand { padding-right: 14px; margin-right: 10px; font-size: 13px; }
+    nav.top .nav-tag { display: none; }
+  }
+
+  /* ───────────────── HERO ───────────────── */
+  .hero {
+    min-height: 100vh;
+    background: var(--ink);
+    color: var(--cream);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 120px 0 48px;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 30%, rgba(181,201,176,0.08), transparent 50%),
+      radial-gradient(ellipse at 80% 70%, rgba(183,112,90,0.10), transparent 60%);
+    pointer-events: none;
+  }
+  .hero .top-meta {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--camel);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: auto;
+    padding-top: 32px;
+  }
+  .hero .top-meta span { display: inline-block; }
+  .hero .center {
+    text-align: center;
+    padding: 64px 0;
+    position: relative;
+    z-index: 2;
+  }
+  .hero .pre-title {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--mint);
+    margin: 0 0 32px;
+    font-weight: 500;
+  }
+  .hero .wordmark {
+    font-family: var(--display);
+    font-weight: 900;
+    font-size: clamp(72px, 14vw, 220px);
+    letter-spacing: 0.06em;
+    line-height: 0.9;
+    margin: 0 0 28px;
+    color: var(--cream);
+  }
+  .hero .wordmark .dot { color: var(--brick); }
+  .hero .tagline-en {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: clamp(13px, 1.6vw, 17px);
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--cream);
+    margin: 0 0 16px;
+  }
+  .hero .tagline-zh {
+    font-family: var(--sans);
+    font-size: 15px;
+    color: rgba(245,241,235,0.6);
+    margin: 0 0 56px;
+    letter-spacing: 0.2em;
+  }
+  .hero .cta-row {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .hero .btn {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding: 16px 28px;
+    border: 1.5px solid var(--cream);
+    color: var(--cream);
+    transition: all 0.2s;
+  }
+  .hero .btn:hover { background: var(--cream); color: var(--ink); }
+  .hero .btn.primary { background: var(--cream); color: var(--ink); }
+  .hero .btn.primary:hover { background: var(--mint); border-color: var(--mint); color: var(--ink); }
+
+  .hero .bottom-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-top: auto;
+    padding-top: 32px;
+    border-top: 1px solid rgba(245,241,235,0.12);
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--camel);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .hero .scroll-hint {
+    color: var(--mint);
+    text-align: center;
+    flex: 1;
+  }
+  .hero .scroll-hint .arrow { display: block; margin-top: 8px; font-size: 18px; }
+
+  @media (max-width: 720px) {
+    /* Hero mobile overhaul */
+    .hero { min-height: 100svh; }
+    .hero .top-meta { display: none; }
+    .hero .center { padding: 48px 0 40px; }
+    .hero .pre-title {
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      margin: 0 0 20px;
+    }
+    .hero .wordmark {
+      font-size: clamp(44px, 13vw, 64px);
+      letter-spacing: 0.05em;
+      margin: 0 0 20px;
+    }
+    .hero .tagline-en {
+      font-size: 11px;
+      letter-spacing: 0.28em;
+      margin: 0 0 10px;
+    }
+    .hero .tagline-zh {
+      font-size: 13px;
+      margin: 0 0 40px;
+    }
+    .hero .cta-row {
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+    .hero .btn {
+      width: 100%;
+      max-width: 280px;
+      text-align: center;
+      padding: 14px 20px;
+    }
+    .hero .bottom-meta { display: none; }
+    .hero .scroll-hint { display: none; }
+  }
+
+  /* ───────────────── SECTIONS ───────────────── */
+  section.block { padding: 120px 0; position: relative; }
+  section.block.dark { background: var(--ink); color: var(--cream); }
+  section.block.teal { background: var(--teal-deep); color: var(--cream); }
+  section.block.cream { background: var(--cream); color: var(--ink); }
+  section.block.paper { background: var(--paper); color: var(--ink); }
+
+  .section-tag {
+    display: block;
+    margin-bottom: 28px;
+  }
+
+  h2.section-title {
+    font-family: var(--display);
+    font-weight: 900;
+    font-size: clamp(36px, 5.5vw, 72px);
+    line-height: 1.02;
+    letter-spacing: -0.01em;
+    margin: 0 0 32px;
+    text-transform: uppercase;
+  }
+
+  .lead {
+    font-family: var(--sans);
+    font-size: clamp(16px, 1.4vw, 19px);
+    line-height: 1.7;
+    max-width: 720px;
+    margin: 0 0 64px;
+    color: inherit;
+    opacity: 0.85;
+  }
+
+  .eyebrow-text {
+    font-family: var(--sans);
+    font-size: 13px;
+    line-height: 1.85;
+    color: rgba(255,255,255,0.7);
+    max-width: 580px;
+    margin: 0;
+  }
+  section.cream .eyebrow-text, section.paper .eyebrow-text { color: var(--slate); }
+
+  /* ───────────────── ETYMOLOGY ───────────────── */
+  .etym-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 1px solid rgba(245,241,235,0.18);
+    margin-top: 48px;
+  }
+  .etym-grid > div {
+    padding: 64px 48px;
+    border-right: 1px solid rgba(245,241,235,0.18);
+  }
+  .etym-grid > div:last-child { border-right: 0; }
+  .etym-grid .layer-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    margin: 0 0 32px;
+    font-weight: 600;
+  }
+  .etym-grid .formula {
+    font-family: var(--display);
+    font-weight: 900;
+    font-size: clamp(28px, 3.6vw, 52px);
+    letter-spacing: 0.04em;
+    line-height: 1.1;
+    margin: 0 0 28px;
+    color: var(--cream);
+  }
+  .etym-grid .meaning {
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 1.7;
+    color: rgba(245,241,235,0.9);
+    margin: 0 0 16px;
+  }
+  .etym-grid .desc {
+    font-family: var(--sans);
+    font-size: 14px;
+    line-height: 1.8;
+    color: rgba(245,241,235,0.6);
+    margin: 0;
+  }
+  .etym-final {
+    text-align: center;
+    margin-top: 80px;
+  }
+  .etym-final .big {
+    font-family: var(--display);
+    font-weight: 900;
+    font-size: clamp(56px, 9vw, 128px);
+    letter-spacing: 0.06em;
+    margin: 0;
+    line-height: 1;
+  }
+  .etym-final .big .blue { color: var(--mint); }
+  .etym-final .big .red  { color: var(--brick); }
+  .etym-final .formula-line {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.24em;
+    color: var(--camel);
+    margin-top: 28px;
+    text-transform: uppercase;
+  }
+  @media (max-width: 720px) {
+    .etym-grid { grid-template-columns: 1fr; }
+    .etym-grid > div { border-right: 0; border-bottom: 1px solid rgba(245,241,235,0.18); }
+    .etym-grid > div:last-child { border-bottom: 0; }
+  }
+
+  /* ───────────────── ABOUT TWO COL ───────────────── */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .two-col .visual {
+    aspect-ratio: 4/5;
+    background: linear-gradient(135deg, #2A3D3A 0%, #1B2826 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  .two-col .visual::after {
+    content: "";
+    position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.05 0 0 0 0 0.06 0 0 0 0 0.04 0 0 0 1 0'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.5'/></svg>");
+    mix-blend-mode: overlay;
+    opacity: 0.7;
+  }
+  .two-col .visual .ovly {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--cream);
+    z-index: 2;
+    padding: 32px;
+    text-align: center;
+  }
+  .two-col .visual .ovly .zh-big {
+    font-family: var(--serif);
+    font-weight: 900;
+    font-size: clamp(96px, 14vw, 200px);
+    line-height: 1;
+    color: var(--mint);
+    margin: 0;
+  }
+  /* Brushword version for About visual — pre-colored mint PNG */
+  .two-col .visual .ovly .zh-brush-big {
+    display: block;
+    width: clamp(140px, 22vw, 260px);
+    height: auto;
+    margin: 0 auto;
+  }
+  .two-col .visual .ovly .he-big {
+    font-family: var(--hebrew);
+    font-size: clamp(28px, 3vw, 44px);
+    direction: rtl;
+    margin: 28px 0 6px;
+  }
+  .two-col .visual .ovly .romanize {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--camel);
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    margin: 0;
+  }
+  .two-col .visual .ovly .corner {
+    position: absolute;
+    bottom: 18px; left: 18px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--camel);
+    opacity: 0.85;
+  }
+  @media (max-width: 720px) {
+    .two-col { grid-template-columns: 1fr; gap: 48px; }
+  }
+
+  /* ───────────────── SERIES / LIFE GRID ───────────────── */
+  .life-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+    margin-top: 64px;
+  }
+  .life-col {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .life-photo {
+    overflow: hidden;
+    background: var(--ink-2);
+  }
+  .life-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s ease;
+    filter: brightness(0.92) saturate(1.05);
+  }
+  .life-photo:hover img { transform: scale(1.025); }
+  .life-photo.tall { aspect-ratio: 3/4; }
+  .life-photo.short { aspect-ratio: 4/5; }
+  .life-col.left .tall { order: 1; }
+  .life-col.left .short { order: 2; }
+  .life-col.right .short { order: 1; }
+  .life-col.right .tall { order: 2; }
+  .life-cta {
+    display: flex;
+    justify-content: center;
+    margin-top: 56px;
+  }
+  @media (max-width: 640px) {
+    .life-grid { grid-template-columns: 1fr; }
+    .life-photo.tall, .life-photo.short { aspect-ratio: 4/5; }
+  }
+
+  .series-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px;
+    margin-top: 64px;
+  }
+  .series-card {
+    aspect-ratio: 4/5;
+    background: var(--ink);
+    color: var(--cream);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  .series-card:hover { transform: translateY(-4px); }
+  .series-card .bg { position: absolute; inset: 0; background-size: cover; background-position: center top; }
+  .series-card.s-ahava .bg { background-image: url('./assets/photo-ahava.jpg'); }
+  .series-card.s-shalom .bg { background-image: url('./assets/photo-shalom.jpg'); }
+  .series-card.s-simcha .bg { background-image: url('./assets/photo-or.jpg'); }
+  /* Dark overlay for text legibility */
+  .series-card .bg::after {
+    content: "";
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(10,10,10,0.35) 0%, rgba(10,10,10,0.15) 40%, rgba(10,10,10,0.65) 100%);
+  }
+  .series-card .content {
+    position: relative;
+    z-index: 2;
+    padding: 36px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .series-card .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .series-card .num {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.24em;
+    color: var(--camel);
+  }
+  .series-card .status {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    padding: 4px 10px;
+    border: 1px solid var(--mint);
+    color: var(--mint);
+    text-transform: uppercase;
+  }
+  .series-card .status.coming { border-color: var(--brick); color: var(--brick); }
+  .series-card .center-word {
+    text-align: center;
+  }
+  .series-card .center-word .zh {
+    font-family: var(--serif);
+    font-weight: 900;
+    font-size: clamp(80px, 12vw, 136px);
+    line-height: 1;
+    color: var(--mint);
+    margin: 0;
+  }
+  /* Single-layer brushword (愛) — pre-colored PNG, mint on dark card */
+  .series-card .center-word .zh-brush {
+    display: block;
+    width: clamp(140px, 20vw, 220px);
+    height: auto;
+    margin: 0 auto;
+  }
+  /* Two-layer stack — Hebrew layer + Mandarin layer pre-colored in BDLS palette */
+  .series-card .center-word .zh-stack {
+    position: relative;
+    display: block;
+    width: clamp(220px, 30vw, 320px);
+    margin: 0 auto;
+  }
+  .series-card .center-word .zh-stack img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .series-card .center-word .zh-stack img.zh-overlay {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .series-card .center-word .he {
+    font-family: var(--hebrew);
+    font-size: clamp(20px, 2.4vw, 28px);
+    margin: 18px 0 4px;
+    direction: rtl;
+    color: rgba(245,241,235,0.85);
+  }
+  .series-card .center-word .romanize {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    color: var(--camel);
+    text-transform: uppercase;
+  }
+  .series-card .footer {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: rgba(245,241,235,0.6);
+    text-transform: uppercase;
+  }
+  .series-card .footer .name {
+    font-family: var(--display);
+    font-weight: 900;
+    font-size: 16px;
+    letter-spacing: 0.08em;
+    color: var(--cream);
+  }
+  @media (max-width: 720px) {
+    .series-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ───────────────── TAGLINE BAND ───────────────── */
+  .tagline-band {
+    text-align: center;
+    padding: 160px 0;
+    background: var(--ink);
+    color: var(--cream);
+    border-top: 1px solid rgba(245,241,235,0.1);
+    border-bottom: 1px solid rgba(245,241,235,0.1);
+  }
+  .tagline-band .big {
+    font-family: var(--display);
+    font-weight: 900;
+    font-size: clamp(40px, 7vw, 96px);
+    letter-spacing: 0.04em;
+    line-height: 1.05;
+    margin: 0;
+    text-transform: uppercase;
+  }
+  .tagline-band .big em {
+    font-style: normal;
+    color: var(--mint);
+  }
+  .tagline-band .sub {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.32em;
+    color: var(--camel);
+    text-transform: uppercase;
+    margin: 36px 0 0;
+  }
+
+  /* ───────────────── PRINCIPLES ───────────────── */
+  .princ {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--mist);
+    border-left: 1px solid var(--mist);
+    margin-top: 48px;
+  }
+  .princ .card {
+    padding: 40px 32px;
+    border-right: 1px solid var(--mist);
+    border-bottom: 1px solid var(--mist);
+  }
+  .princ .card .num {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--brick);
+    letter-spacing: 0.18em;
+    margin: 0 0 24px;
+    display: block;
+  }
+  .princ .card h4 {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: 22px;
+    margin: 0 0 16px;
+    letter-spacing: 0.02em;
+    line-height: 1.25;
+  }
+  .princ .card p {
+    font-family: var(--sans);
+    font-size: 14px;
+    line-height: 1.7;
+    margin: 0;
+    color: var(--slate);
+  }
+  @media (max-width: 980px) {
+    .princ { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 540px) {
+    .princ { grid-template-columns: 1fr; }
+  }
+
+  /* ───────────────── TICKER ───────────────── */
+  .ticker-wrap {
+    background: var(--ink);
+    color: var(--cream);
+    overflow: hidden;
+    border-top: 1px solid rgba(245,241,235,0.1);
+    border-bottom: 1px solid rgba(245,241,235,0.1);
+    padding: 24px 0;
+  }
+  .ticker {
+    display: flex;
+    gap: 64px;
+    animation: ticker 60s linear infinite;
+    white-space: nowrap;
+  }
+  .ticker > span {
+    font-family: var(--display);
+    font-weight: 900;
+    font-size: 20px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    flex-shrink: 0;
+  }
+  .ticker > span .accent { color: var(--mint); margin: 0 16px; }
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ───────────────── NEWSLETTER ───────────────── */
+  .nl-wrap {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .nl-form {
+    display: flex;
+    gap: 0;
+    margin: 40px auto 16px;
+    max-width: 560px;
+    border: 1.5px solid var(--cream);
+  }
+  .nl-form input {
+    flex: 1;
+    background: transparent;
+    border: 0;
+    padding: 18px 20px;
+    font-family: var(--sans);
+    font-size: 15px;
+    color: var(--cream);
+    outline: 0;
+    letter-spacing: 0.04em;
+  }
+  .nl-form input::placeholder { color: rgba(245,241,235,0.4); }
+  .nl-form button {
+    padding: 18px 28px;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    font-weight: 700;
+    background: var(--cream);
+    color: var(--ink);
+    transition: background 0.2s;
+  }
+  .nl-form button:hover { background: var(--mint); }
+  .nl-fineprint {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--camel);
+    letter-spacing: 0.16em;
+    margin: 0;
+  }
+
+  /* ───────────────── FAQ / JOURNAL ───────────────── */
+  .journal-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    margin-top: 56px;
+  }
+  .journal-card {
+    background: var(--cream);
+    border: 1px solid var(--ink);
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+  .journal-card:hover { transform: translateY(-4px); }
+  .journal-card .img {
+    aspect-ratio: 4/3;
+    background: linear-gradient(135deg, var(--teal), var(--teal-deep));
+    position: relative;
+    overflow: hidden;
+  }
+  .journal-card .img::after {
+    content: "";
+    position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.05 0 0 0 0 0.06 0 0 0 0 0.04 0 0 0 1 0'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.5'/></svg>");
+    mix-blend-mode: overlay;
+    opacity: 0.6;
+  }
+  .journal-card.j-tlv .img { background: linear-gradient(135deg, #2A3D3A, #1B2826); }
+  .journal-card.j-tpe .img { background: linear-gradient(180deg, #2A1810, #5A3A2A); }
+  .journal-card.j-craft .img { background: linear-gradient(135deg, #5F574E, #2A2422); }
+  .journal-card .img .word {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    font-family: var(--serif);
+    font-weight: 900;
+    font-size: 80px;
+    color: var(--mint);
+    line-height: 1;
+  }
+  .journal-card .body { padding: 28px 28px 32px; }
+  .journal-card .meta {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--brick);
+    text-transform: uppercase;
+    margin: 0 0 14px;
+  }
+  .journal-card h4 {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: 19px;
+    margin: 0 0 12px;
+    letter-spacing: 0.01em;
+    line-height: 1.3;
+  }
+  .journal-card p {
+    font-family: var(--sans);
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--slate);
+    margin: 0;
+  }
+  @media (max-width: 880px) {
+    .journal-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ───────────────── FOOTER ───────────────── */
+  footer.site {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 80px 0 32px;
+    border-top: 1px solid rgba(245,241,235,0.1);
+  }
+  footer.site .top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 48px;
+    padding-bottom: 64px;
+    border-bottom: 1px solid rgba(245,241,235,0.12);
+  }
+  footer.site .brand-block .name {
+    font-family: var(--display);
+    font-weight: 900;
+    font-size: 28px;
+    letter-spacing: 0.08em;
+    margin: 0 0 16px;
+  }
+  footer.site .brand-block .name .dot { color: var(--brick); }
+  footer.site .brand-block p {
+    font-family: var(--sans);
+    font-size: 14px;
+    color: rgba(245,241,235,0.6);
+    line-height: 1.7;
+    max-width: 380px;
+    margin: 0;
+  }
+  footer.site h5 {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.24em;
+    color: var(--mint);
+    text-transform: uppercase;
+    margin: 0 0 20px;
+    font-weight: 600;
+  }
+  footer.site ul { list-style: none; padding: 0; margin: 0; }
+  footer.site li { margin-bottom: 12px; }
+  footer.site li a {
+    font-family: var(--sans);
+    font-size: 13px;
+    color: rgba(245,241,235,0.75);
+    transition: color 0.2s;
+  }
+  footer.site li a:hover { color: var(--mint); }
+  footer.site .bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 40px;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--camel);
+    letter-spacing: 0.16em;
+  }
+  @media (max-width: 720px) {
+    footer.site .top { grid-template-columns: 1fr; gap: 40px; padding-bottom: 40px; }
+    footer.site .bottom { flex-direction: column; text-align: center; }
+  }
+
+  /* Hero staggered fade-up */
+  .hero-fade {
+    opacity: 0;
+    transform: translateY(16px);
+    animation: heroFadeUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: var(--d, 0s);
+  }
+  @keyframes heroFadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Animation: fade in on scroll */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.8s ease, transform 0.8s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- ──────────── NAV ──────────── -->
+<nav class="top" id="topnav">
+  <div class="nav-left">
+    <a href="index.html" class="brand">MANBREW<span class="dot">.</span></a>
+    <ul>
+      <li><a href="studio.html">STUDIO</a></li>
+      <li><a href="https://www.gamvegam.com.tw/pages/manbrew" target="_blank" rel="noopener">SHOP</a></li>
+      <li><a href="bridge/index.html">BRIDGE</a></li>
+    </ul>
+  </div>
+  <span class="nav-tag">文字之間工作室</span>
+</nav>
+
+<!-- ──────────── HERO ──────────── -->
+<section class="hero" id="top">
+  <div class="container">
+    <div class="top-meta">
+      <span>EST. 2024 ／ TPE</span>
+      <span>TLV × JLM × LON</span>
+    </div>
+    <div class="center">
+      <p class="pre-title hero-fade" style="--d:0.1s">— ／ MANDARIN × HEBREW ／ MAN × BREW ／ —</p>
+      <h1 class="wordmark hero-fade" style="--d:0.3s">MANBREW<span class="dot">.</span></h1>
+      <p class="tagline-en hero-fade" style="--d:0.55s">WHERE LETTERS BECOME STORIES</p>
+      <p class="tagline-zh hero-fade" style="--d:0.72s">在文字之間，讓我們相遇</p>
+    </div>
+    <div class="container bottom-meta hero-fade" style="--d:0.9s">
+      <span>SHALOM ／ 2026.08</span>
+      <span class="scroll-hint">SCROLL <span class="arrow">↓</span></span>
+      <span>WORDS THAT TRAVEL WITH YOU</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- ──────────── ETYMOLOGY ──────────── -->
+<section id="etymology" class="block teal">
+  <div class="container reveal">
+    <span class="label section-tag label-mint">— ／ The Name</span>
+
+    <div class="etym-grid">
+      <div>
+        <p class="layer-num label-mint">Layer 01 ／ Culture</p>
+        <p class="formula">( Mandarin<br/>+ Hebrew )</p>
+        <p class="meaning">漢字遇見希伯來文。</p>
+        <p class="desc">在同一個字形裡，承載人類共同的情感。東方與西方最古老的兩種文字系統，在同一塊棉布上對話——這不是翻譯，是讓兩種文化共享一個身體。</p>
+      </div>
+      <div>
+        <p class="layer-num" style="color: var(--brick);">Layer 02 ／ Craft</p>
+        <p class="formula">( Man<br/>+ Brew )</p>
+        <p class="meaning">醞釀。</p>
+        <p class="desc">時間與工藝的緩慢積累。「Brew」是釀造、是泡茶、是讓時間參與的動作——Manbrew 不做快時尚，做的是值得被泡開、被等待、被穿很久的東西。</p>
+      </div>
+    </div>
+
+    <div class="etym-final">
+      <p class="big">MAN<span class="red">BREW</span><span style="color:var(--cream);">.</span></p>
+      <p class="formula-line">CULTURE × CRAFT  ／  漢字 × 希伯來文 × 醞釀</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ──────────── ABOUT / HUB ──────────── -->
+<section id="about" class="block dark">
+  <div class="container">
+    <div class="hub-grid">
+      <div class="hub-text reveal">
+        <span class="label section-tag label-mint">— ／ About</span>
+        <h2 class="section-title">MORE THAN<br/>A BRAND.</h2>
+        <p class="hub-desc">
+          Manbrew 是一個以文字為核心的品牌，也是一個文化串流平台。<br/>
+          我們把文字做成商品、把藝術家做成網絡、把語言做成旅程。
+        </p>
+        <p class="hub-desc-en">
+          A word-driven brand and a cultural streaming platform — connecting creators across Mandarin and Hebrew worlds, one word at a time.
+        </p>
+      </div>
+      <div class="hub-nav reveal">
+        <a href="studio.html" class="hub-btn">
+          <span class="hub-btn-label">STUDIO</span>
+          <span class="hub-btn-sub">系列作品 / Series &amp; Works</span>
+          <span class="hub-btn-arrow">→</span>
+        </a>
+        <a href="https://www.gamvegam.com.tw/pages/manbrew" target="_blank" rel="noopener" class="hub-btn">
+          <span class="hub-btn-label">SHOP</span>
+          <span class="hub-btn-sub">選購商品 / Clothing &amp; Objects</span>
+          <span class="hub-btn-arrow">↗</span>
+        </a>
+        <a href="bridge/index.html" class="hub-btn">
+          <span class="hub-btn-label">BRIDGE</span>
+          <span class="hub-btn-sub">藝術授權 / Art Licensing Platform</span>
+          <span class="hub-btn-arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hub-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(48px, 6vw, 96px);
+    align-items: center;
+  }
+  .hub-desc {
+    font-family: var(--sans);
+    font-size: clamp(15px, 1.4vw, 17px);
+    line-height: 1.8;
+    color: rgba(245,241,235,0.7);
+    margin: 0 0 16px;
+  }
+  .hub-desc-en {
+    font-family: var(--sans);
+    font-size: 14px;
+    line-height: 1.75;
+    color: rgba(245,241,235,0.4);
+    margin: 0;
+    font-style: italic;
+  }
+  .hub-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .hub-btn {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    padding: 28px 32px;
+    border: 1px solid rgba(245,241,235,0.1);
+    transition: border-color 0.2s, background 0.2s;
+    cursor: pointer;
+  }
+  .hub-btn:hover {
+    border-color: rgba(245,241,235,0.3);
+    background: rgba(245,241,235,0.03);
+  }
+  .hub-btn-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: var(--cream);
+    min-width: 88px;
+  }
+  .hub-btn-sub {
+    font-family: var(--sans);
+    font-size: 13px;
+    color: rgba(245,241,235,0.4);
+    flex: 1;
+    letter-spacing: 0.02em;
+  }
+  .hub-btn-arrow {
+    font-family: var(--mono);
+    font-size: 16px;
+    color: rgba(245,241,235,0.25);
+    transition: color 0.2s, transform 0.2s;
+  }
+  .hub-btn:hover .hub-btn-arrow {
+    color: var(--brick);
+    transform: translateX(4px);
+  }
+  @media (max-width: 768px) {
+    .hub-grid { grid-template-columns: 1fr; }
+  }
+</style>
+
+
+<!-- ──────────── CONTACT ──────────── -->
+<section id="contact" class="block paper" style="padding: 100px 0;">
+  <div class="container">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;" class="contact-row">
+      <div>
+        <span class="label section-tag">— ／ Contact</span>
+        <h2 class="section-title">SAY<br/>HELLO.</h2>
+        <p style="font-family: var(--sans); font-size: 17px; line-height: 1.75; color: var(--slate); margin: 0 0 32px; max-width: 480px;">
+          For wholesale, collaboration, exhibition, press, or just a conversation about words and travel. We read everything.
+        </p>
+        <p style="font-family: var(--mono); font-size: 12px; color: var(--camel); letter-spacing: 0.18em; text-transform: uppercase; margin: 0;">— ／ Reply within 3 working days ／ —</p>
+      </div>
+      <div style="border-left: 1px solid var(--ink); padding-left: 64px;" class="contact-info">
+        <h5 style="font-family: var(--mono); font-size: 11px; letter-spacing: 0.24em; color: var(--brick); text-transform: uppercase; margin: 0 0 12px;">Founder</h5>
+        <p style="font-family: var(--display); font-weight: 800; font-size: 22px; margin: 0 0 4px; letter-spacing: 0.04em;">Ann Chen</p>
+        <p style="font-family: var(--sans); font-size: 13px; color: var(--slate); margin: 0 0 32px;">Founder & Creative Director</p>
+
+        <h5 style="font-family: var(--mono); font-size: 11px; letter-spacing: 0.24em; color: var(--brick); text-transform: uppercase; margin: 0 0 12px;">Email</h5>
+        <p style="margin: 0 0 32px;"><a href="mailto:hello@manbrew-studio.com" style="font-family: var(--sans); font-size: 17px; color: var(--ink); border-bottom: 1px solid var(--brick); padding-bottom: 2px;">hello@manbrew-studio.com</a></p>
+
+        <h5 style="font-family: var(--mono); font-size: 11px; letter-spacing: 0.24em; color: var(--brick); text-transform: uppercase; margin: 0 0 12px;">Instagram</h5>
+        <p style="margin: 0;"><a href="https://instagram.com/manbrew.studio" target="_blank" rel="noopener" style="font-family: var(--sans); font-size: 17px; color: var(--ink); border-bottom: 1px solid var(--brick); padding-bottom: 2px;">@manbrew.studio</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  @media (max-width: 720px) {
+    .contact-row { grid-template-columns: 1fr !important; gap: 48px !important; }
+    .contact-info { border-left: 0 !important; padding-left: 0 !important; border-top: 1px solid var(--ink); padding-top: 48px !important; }
+  }
+</style>
+
+
+<!-- ──────────── FOOTER ──────────── -->
+<footer class="site">
+  <div class="container">
+    <div class="top">
+      <div class="brand-block">
+        <p class="name">MANBREW<span class="dot">.</span> STUDIO</p>
+        <p>A wearable cross-cultural archive. Mandarin characters and Hebrew letters, side by side on heavy cotton, designed for people who live between cities.</p>
+      </div>
+      <div>
+        <h5>Navigate</h5>
+        <ul>
+          <li><a href="studio.html">Studio</a></li>
+          <li><a href="https://www.gamvegam.com.tw/pages/manbrew" target="_blank" rel="noopener">Shop ↗</a></li>
+          <li><a href="bridge/index.html">Bridge</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Contact</h5>
+        <ul>
+          <li><a href="mailto:hello@manbrew-studio.com">Email</a></li>
+          <li><a href="https://instagram.com/manbrew.studio" target="_blank" rel="noopener">Instagram</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="bottom">
+      <span>© 2026 MANBREW. STUDIO ／ ALL WORDS RESERVED.</span>
+      <span>TPE × TLV × JLM × LON</span>
+      <span>SIMPLE, AND ENOUGH.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Reveal animation
+  const reveal = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        reveal.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => reveal.observe(el));
+</script>
+
+</body>
+</html>

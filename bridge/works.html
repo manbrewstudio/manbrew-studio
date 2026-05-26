@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Art Bazaar — Manbrew Bridge</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500&family=Frank+Ruhl+Libre:wght@300;400;700&display=swap" rel="stylesheet">
+
+  <script>
+    /* lang.js — inline */
+    function setLang(lang) {
+      document.documentElement.setAttribute('data-lang', lang);
+      localStorage.setItem('mb-lang', lang);
+      document.querySelectorAll('.lang-btn').forEach(function(btn) {
+        btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+      });
+    }
+    (function() {
+      var saved = localStorage.getItem('mb-lang') || 'en';
+      document.documentElement.setAttribute('data-lang', saved);
+      document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.lang-btn').forEach(function(btn) {
+          btn.classList.toggle('active', btn.getAttribute('data-lang') === saved);
+        });
+      });
+    })();
+  </script>
+
+  <style>
+    /* ─── LANGUAGE TOGGLE ─── */
+    [data-lang="en"] .t-zh { display: none !important; }
+    [data-lang="zh"] .t-en { display: none !important; }
+    :root {
+      --ink:   #0A0A0A;
+      --cream: #FAF7F1;
+      --off:   #F5F1EB;
+      --brick: #B7705A;
+      --mint:  #B5C9B0;
+      --teal:  #2A3D3A;
+      --slate: #5F574E;
+      --mist:  #D8D2C8;
+      --camel: #8E7456;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'Inter', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      background: var(--ink);
+      border-bottom: 1px solid var(--teal);
+      padding: 1.25rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-wordmark {
+      font-weight: 900;
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      color: var(--cream);
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--slate);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover,
+    .nav-links a.active { color: var(--mint); }
+
+    .lang-switch {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      margin-left: 1.5rem;
+    }
+    .lang-btn {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      background: none;
+      border: none;
+      color: var(--slate);
+      cursor: pointer;
+      padding: 0.3rem 0.4rem;
+      transition: color 0.2s;
+      line-height: 1;
+    }
+    .lang-btn:hover { color: var(--cream); }
+    .lang-btn.active { color: var(--mint); }
+    .lang-sep { color: var(--teal); font-size: 0.6rem; line-height: 1; }
+
+    /* ─── MASTHEAD ─── */
+    .masthead {
+      padding: 4rem 3rem 0;
+      border-bottom: 2px solid var(--ink);
+    }
+    .masthead-top {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      padding-bottom: 1.5rem;
+      gap: 2rem;
+    }
+    .masthead-title {
+      font-size: clamp(3.5rem, 8vw, 7rem);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 0.9;
+      color: var(--ink);
+    }
+    .masthead-right {
+      text-align: right;
+      padding-bottom: 0.75rem;
+    }
+    .masthead-sub {
+      font-size: 0.88rem;
+      font-weight: 300;
+      color: var(--slate);
+      line-height: 1.75;
+      max-width: 280px;
+      margin-left: auto;
+      margin-bottom: 0.75rem;
+    }
+    /* masthead-he removed (no longer used) */
+
+    /* Category tabs */
+    .cat-tabs {
+      display: flex;
+      align-items: stretch;
+      overflow-x: auto;
+      gap: 0;
+      border-top: 1px solid var(--mist);
+    }
+    .cat-tab {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--mist);
+      background: none;
+      border: none;
+      border-top: 2px solid transparent;
+      margin-top: -1px;
+      padding: 1rem 1.5rem;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .cat-tab:hover { color: var(--slate); }
+    .cat-tab.active {
+      color: var(--ink);
+      border-top-color: var(--brick);
+    }
+    /* cat-tab .t-zh/.t-en rendered inline */
+
+    /* ─── MAIN ─── */
+    .main {
+      padding: 0 3rem 8rem;
+    }
+    @media (max-width: 720px) {
+      .masthead { padding: 3rem 1.5rem 0; }
+      .main { padding: 0 1.5rem 5rem; }
+      .masthead-top { flex-direction: column; align-items: flex-start; }
+      .masthead-right { text-align: left; }
+      .masthead-sub { margin-left: 0; }
+    }
+
+    /* ─── ISSUE LINE ─── */
+    .issue-line {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 0;
+      border-bottom: 1px solid var(--mist);
+      margin-bottom: 0;
+    }
+    .issue-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--slate);
+    }
+    .issue-count {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.14em;
+      color: var(--mist);
+    }
+
+    /* ─── WORKS GRID ─── */
+    .spread-hero {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      border-bottom: 1px solid var(--mist);
+    }
+    @media (max-width: 1100px) {
+      .spread-hero { grid-template-columns: repeat(4, 1fr); }
+    }
+    @media (max-width: 860px) {
+      .spread-hero { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 560px) {
+      .spread-hero { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    /* ─── CARD SHARED ─── */
+    .work-card {
+      border-right: 1px solid var(--mist);
+      border-bottom: 1px solid var(--mist);
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .work-card:hover { background: var(--off); }
+
+    /* Image */
+    .card-img {
+      width: 100%;
+      background: var(--off);
+      border-bottom: 1px solid var(--mist);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 0.4rem;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .card-img--hero  { aspect-ratio: 4 / 5; }
+    .card-img--tall  { aspect-ratio: 4 / 5; }
+    .card-img--std   { aspect-ratio: 4 / 5; }
+
+    .img-glyph {
+      font-family: 'Frank Ruhl Libre', serif;
+      font-size: clamp(4rem, 6vw, 6rem);
+      font-weight: 300;
+      color: var(--mist);
+      line-height: 1;
+      user-select: none;
+    }
+    .img-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--mist);
+    }
+
+    /* Card body */
+    .card-body {
+      padding: 1rem 1.1rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .card-body--hero { padding: 1rem 1.1rem 1.25rem; }
+
+    .card-kicker {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.52rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--brick);
+      margin-bottom: 0.45rem;
+    }
+
+    .card-title {
+      color: var(--ink);
+      line-height: 1.2;
+      margin-bottom: 0.2rem;
+    }
+    .card-title--hero,
+    .card-title--std {
+      font-size: 0.88rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .card-creator {
+      font-size: 0.72rem;
+      font-weight: 400;
+      color: var(--camel);
+      margin-bottom: 0.6rem;
+    }
+
+    .card-desc {
+      font-size: 0.72rem;
+      font-weight: 300;
+      color: var(--slate);
+      line-height: 1.7;
+      margin-bottom: 0.85rem;
+      flex: 1;
+    }
+    .card-desc--hero { font-size: 0.72rem; }
+
+    .card-tags {
+      display: flex;
+      gap: 0.35rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.85rem;
+    }
+    .tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.5rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.25em 0.6em;
+      border: 1px solid var(--mist);
+      color: var(--slate);
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 0.85rem;
+      border-top: 1px solid var(--mist);
+      gap: 0.5rem;
+    }
+    .price-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.5rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--mist);
+      display: block;
+      margin-bottom: 0.15rem;
+    }
+    .price-amount {
+      font-size: 0.95rem;
+      font-weight: 900;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      line-height: 1;
+    }
+    .price-note {
+      font-size: 0.6rem;
+      font-weight: 300;
+      color: var(--mist);
+      margin-top: 0.15rem;
+      display: block;
+    }
+    .btn-license {
+      display: inline-block;
+      background: var(--brick);
+      color: var(--cream);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.5rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 0.6rem 0.85rem;
+      border: none;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: opacity 0.2s;
+      flex-shrink: 0;
+    }
+    .btn-license:hover { opacity: 0.8; }
+
+    /* ─── DIVIDER RULE ─── */
+    .section-rule {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 2.5rem 0 1.5rem;
+      border-bottom: 1px solid var(--mist);
+      margin-bottom: 0;
+    }
+    .rule-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--mist);
+      white-space: nowrap;
+    }
+    .rule-line {
+      flex: 1;
+      height: 1px;
+      background: var(--mist);
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--ink);
+      border-top: 2px solid var(--ink);
+      padding: 2rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .footer-left {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--slate);
+    }
+    .footer-left strong { color: var(--cream); font-weight: 400; }
+    /* footer-he removed (no longer used) */
+
+    /* ─── PARENT BRAND BAR ──────────────────────────────── */
+    .mb-brand-bar {
+      background: #050505;
+      border-bottom: 1px solid rgba(42, 61, 58, 0.6);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .mb-brand-tabs { display: flex; align-items: stretch; }
+    .mb-brand-tab {
+      display: flex; align-items: center; gap: 7px;
+      padding: 13px 20px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9.5px; font-weight: 500;
+      letter-spacing: 0.22em; text-transform: uppercase; text-decoration: none;
+      color: rgba(245, 241, 235, 0.32);
+      border-bottom: 2px solid transparent;
+      transition: color 0.2s, border-color 0.2s; white-space: nowrap;
+    }
+    .mb-brand-tab:hover { color: rgba(245, 241, 235, 0.65); }
+    .mb-brand-tab.active { color: #F5F1EB; border-bottom-color: #B5C9B0; }
+    .mb-brand-dot { width: 4px; height: 4px; border-radius: 50%; background: #B5C9B0; flex-shrink: 0; }
+    .mb-brand-tag { font-family: 'JetBrains Mono', monospace; font-size: 8.5px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(94, 87, 78, 0.6); }
+  </style>
+</head>
+<body>
+
+<!-- ── PARENT BRAND BAR ──────────────────────────────────── -->
+<div class="mb-brand-bar">
+  <div class="mb-brand-tabs">
+    <a href="../index.html" class="mb-brand-tab">MANBREW.</a>
+    <span class="mb-brand-tab active"><span class="mb-brand-dot"></span>BRIDGE</span>
+  </div>
+  <span class="mb-brand-tag">文字之間工作室</span>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-wordmark">MANBREW BRIDGE</a>
+  <ul class="nav-links">
+    <li><a href="index.html"><span class="t-en">Home</span><span class="t-zh">首頁</span></a></li>
+    <li><a href="works.html" class="active"><span class="t-en">Art Bazaar</span><span class="t-zh">藝術市集</span></a></li>
+    <li><a href="phase01-landing.html"><span class="t-en">Phase 01</span><span class="t-zh">第一階段</span></a></li>
+    <li><a href="creator-profile.html"><span class="t-en">Feature Artists</span><span class="t-zh">精選藝術家</span></a></li>
+    <li><a href="creator-guide.html"><span class="t-en">Creator Guide</span><span class="t-zh">創作者指南</span></a></li>
+  </ul>
+  <div class="lang-switch">
+    <button class="lang-btn active" data-lang="en" onclick="setLang('en')">EN</button>
+    <span class="lang-sep">·</span>
+    <button class="lang-btn" data-lang="zh" onclick="setLang('zh')">中文</button>
+  </div>
+</nav>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="masthead-top">
+    <h1 class="masthead-title">ART<br>BAZAAR</h1>
+    <div class="masthead-right">
+      <p class="masthead-sub t-en">Every work finds its true audience here.</p>
+      <p class="masthead-sub t-zh">每一件作品都在這裡找到它真正的觀眾。</p>
+    </div>
+  </div>
+
+  <div class="cat-tabs">
+    <button class="cat-tab active"><span class="t-en">All</span><span class="t-zh">全部</span></button>
+    <button class="cat-tab"><span class="t-en">Visual Art</span><span class="t-zh">視覺藝術</span></button>
+    <button class="cat-tab"><span class="t-en">Typography &amp; Calligraphy</span><span class="t-zh">字體與書法</span></button>
+    <button class="cat-tab"><span class="t-en">Music &amp; Sound</span><span class="t-zh">音樂與聲音</span></button>
+    <button class="cat-tab"><span class="t-en">Photography</span><span class="t-zh">攝影</span></button>
+  </div>
+</header>
+
+<!-- MAIN -->
+<main class="main">
+
+  <div class="issue-line">
+    <span class="issue-label"><span class="t-en">All Works — Phase 01 Sample</span><span class="t-zh">全部作品 — 第一階段樣本</span></span>
+    <span class="issue-count">2 <span class="t-en">works</span><span class="t-zh">件作品</span></span>
+  </div>
+
+  <!-- SPREAD: HERO + SIDE -->
+  <div class="spread-hero">
+
+    <!-- Work 01 — 時間之外 -->
+    <div class="work-card">
+      <a href="work-01.html" class="card-img card-img--hero" style="background:#111; padding:0; overflow:hidden; display:block;">
+        <img src="images/work-01.png" alt="時間之外 / Beyond Time" style="width:100%; height:100%; object-fit:cover; display:block; transition: transform 0.4s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
+      </a>
+      <div class="card-body">
+        <div class="card-kicker"><span class="t-zh">攝影 · Ann Chen</span><span class="t-en">Photography · Ann Chen</span></div>
+        <h2 class="card-title card-title--std"><a href="work-01.html" style="color:inherit; text-decoration:none;"><span class="t-zh">時間之外</span><span class="t-en">Beyond Time</span></a></h2>
+        <div class="card-creator">Ann Chen · <span class="t-zh">台北，台灣</span><span class="t-en">Taipei, Taiwan</span></div>
+        <p class="card-desc">
+          <span class="t-zh">這張作品拍攝於耶路撒冷老城。畫面中的人物彷彿停留在歷史與當下之間，時間不再是線性的流動，而是一種被信仰與記憶包覆的存在。</span>
+          <span class="t-en">Shot in the Old City of Jerusalem. The figure seems suspended between history and the present — time no longer linear, but held within faith and memory.</span>
+        </p>
+        <div class="card-tags">
+          <span class="tag"><span class="t-zh">個人授權</span><span class="t-en">Personal License</span></span>
+          <span class="tag"><span class="t-zh">商業授權</span><span class="t-en">Commercial License</span></span>
+        </div>
+        <div class="card-footer">
+          <div>
+            <span class="price-label"><span class="t-zh">起價</span><span class="t-en">Starting from</span></span>
+            <span class="price-amount">USD 50</span>
+            <span class="price-note"><span class="t-zh">/ 授權</span><span class="t-en">/ license</span></span>
+          </div>
+          <a href="https://forms.gle/M2ZVKGxLZhdj9wMn6" target="_blank" rel="noopener" class="btn-license"><span class="t-zh">詢問授權</span><span class="t-en">License Inquiry</span></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Work 02 — 信仰之吻 -->
+    <div class="work-card">
+      <a href="work-02.html" class="card-img card-img--tall" style="background:#111; padding:0; overflow:hidden; display:block;">
+        <img src="images/work-02.png" alt="信仰之吻 / Kiss of Faith" style="width:100%; height:100%; object-fit:cover; display:block; transition: transform 0.4s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
+      </a>
+      <div class="card-body">
+        <div class="card-kicker"><span class="t-zh">攝影 · Ann Chen</span><span class="t-en">Photography · Ann Chen</span></div>
+        <h2 class="card-title card-title--std"><a href="work-02.html" style="color:inherit; text-decoration:none;"><span class="t-zh">信仰之吻</span><span class="t-en">Kiss of Faith</span></a></h2>
+        <div class="card-creator">Ann Chen · <span class="t-zh">台北，台灣</span><span class="t-en">Taipei, Taiwan</span></div>
+        <p class="card-desc">
+          <span class="t-zh">這件作品記錄人與牆之間極為私密的瞬間。信仰不是宏大的口號，而是一種貼近、觸碰與低聲傾訴。</span>
+          <span class="t-en">An intimate moment between person and wall. Faith is not a grand declaration — it is a gesture of closeness, touch, and quiet prayer.</span>
+        </p>
+        <div class="card-tags">
+          <span class="tag"><span class="t-zh">個人授權</span><span class="t-en">Personal License</span></span>
+          <span class="tag"><span class="t-zh">商業授權</span><span class="t-en">Commercial License</span></span>
+        </div>
+        <div class="card-footer">
+          <div>
+            <span class="price-label"><span class="t-zh">起價</span><span class="t-en">Starting from</span></span>
+            <span class="price-amount">USD 50</span>
+            <span class="price-note"><span class="t-zh">/ 授權</span><span class="t-en">/ license</span></span>
+          </div>
+          <a href="https://forms.gle/M2ZVKGxLZhdj9wMn6" target="_blank" rel="noopener" class="btn-license"><span class="t-zh">詢問授權</span><span class="t-en">License Inquiry</span></a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!-- end spread-hero -->
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-left"><strong>Manbrew Bridge</strong> · <span class="t-en">Art Bazaar</span><span class="t-zh">藝術市集</span></div>
+  <div class="footer-left" style="color: var(--teal);">橋</div>
+  <div class="footer-left">Phase 01 · <span class="t-en">Manual Verification</span><span class="t-zh">人工審核</span></div>
+</footer>
+
+<script>
+  document.querySelectorAll('.cat-tab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.cat-tab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>

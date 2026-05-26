@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+<title>Studio — MANBREW. 文字之間工作室</title>
+<meta name="description" content="Manbrew Studio — 系列作品" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+TC:wght@300;400;500&family=Frank+Ruhl+Libre:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0A0A0A;
+    --cream: #F5F1EB;
+    --paper: #FAF7F1;
+    --teal-deep: #1B2826;
+    --teal: #1C3330;
+    --mint: #B5C9B0;
+    --brick: #B7705A;
+    --camel: #8E7456;
+    --slate: #5F574E;
+    --mist: #D8D2C8;
+    --mono: "JetBrains Mono", monospace;
+    --display: "Inter", "Helvetica Neue", sans-serif;
+    --sans: "Inter", "Noto Sans TC", sans-serif;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--ink); color: var(--cream); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+  a { text-decoration: none; color: inherit; }
+
+  /* NAV */
+  nav.top {
+    position: sticky; top: 0; z-index: 200;
+    background: var(--ink);
+    border-bottom: 1px solid rgba(245,241,235,0.08);
+    padding: 0 clamp(24px, 6vw, 80px);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-left { display: flex; align-items: center; }
+  .brand {
+    font-family: var(--display); font-weight: 900; font-size: 15px;
+    letter-spacing: 0.12em; color: var(--cream);
+    padding: 18px 24px 18px 0; margin-right: 20px;
+    border-right: 1px solid rgba(245,241,235,0.1); white-space: nowrap;
+  }
+  .brand .dot { color: var(--brick); }
+  nav.top ul { display: flex; margin: 0; padding: 0; list-style: none; }
+  nav.top ul li a {
+    display: flex; align-items: center; gap: 7px;
+    padding: 18px 20px;
+    font-family: var(--mono); font-size: 10px; font-weight: 500;
+    letter-spacing: 0.24em; text-transform: uppercase;
+    color: rgba(245,241,235,0.38);
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s; white-space: nowrap;
+  }
+  nav.top ul li a:hover { color: rgba(245,241,235,0.72); }
+  nav.top ul li a.active { color: var(--cream); border-bottom-color: var(--brick); }
+  .bridge-dot { display: inline-block; width: 5px; height: 5px; border-radius: 50%; background: var(--mint); flex-shrink: 0; }
+  .nav-tag { font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--camel); }
+
+  @media (max-width: 600px) {
+    nav.top ul li a { padding: 16px 12px; font-size: 9px; }
+    .brand { font-size: 13px; padding-right: 14px; margin-right: 10px; }
+    .nav-tag { display: none; }
+  }
+
+  /* PAGE HEADER */
+  .page-header {
+    padding: clamp(64px, 9vw, 120px) clamp(24px, 6vw, 80px) clamp(48px, 6vw, 72px);
+    max-width: 1280px; margin: 0 auto;
+  }
+  .page-label {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.28em;
+    text-transform: uppercase; color: var(--brick); margin-bottom: 20px;
+  }
+  .page-title {
+    font-family: var(--display); font-weight: 900;
+    font-size: clamp(44px, 7vw, 96px); letter-spacing: 0.04em;
+    text-transform: uppercase; line-height: 0.95; color: var(--cream);
+    margin-bottom: 24px;
+  }
+  .page-desc {
+    font-family: var(--sans); font-size: clamp(14px, 1.4vw, 17px);
+    color: rgba(245,241,235,0.6); line-height: 1.75; max-width: 640px;
+  }
+
+  /* SERIES GRID (placeholder) */
+  .series-section {
+    padding: 0 clamp(24px, 6vw, 80px) clamp(80px, 10vw, 120px);
+    max-width: 1280px; margin: 0 auto;
+  }
+
+  .series-item {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 0;
+    border-top: 1px solid rgba(245,241,235,0.1);
+    padding: 56px 0;
+    align-items: start;
+    transition: background 0.2s;
+  }
+  .series-item:last-child { border-bottom: 1px solid rgba(245,241,235,0.1); }
+
+  .series-num {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.24em;
+    text-transform: uppercase; color: var(--camel); padding-top: 4px;
+  }
+
+  .series-body {}
+  .series-name {
+    font-family: var(--display); font-weight: 900;
+    font-size: clamp(28px, 4vw, 52px); letter-spacing: 0.04em;
+    text-transform: uppercase; color: var(--cream);
+    margin-bottom: 8px; line-height: 1.05;
+  }
+  .series-zh {
+    font-family: var(--sans); font-size: clamp(14px, 1.4vw, 17px);
+    color: var(--mint); letter-spacing: 0.06em; margin-bottom: 20px;
+  }
+  .series-desc {
+    font-family: var(--sans); font-size: 14px;
+    color: rgba(245,241,235,0.55); line-height: 1.8; max-width: 560px;
+  }
+  .series-tags {
+    display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px;
+  }
+  .series-tag {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.2em;
+    text-transform: uppercase; padding: 5px 12px;
+    border: 1px solid rgba(245,241,235,0.2); color: rgba(245,241,235,0.45);
+  }
+  .series-tag.active { border-color: var(--brick); color: var(--brick); }
+
+  @media (max-width: 640px) {
+    .series-item { grid-template-columns: 1fr; gap: 12px; }
+  }
+
+  /* PLACEHOLDER STATE */
+  .placeholder-notice {
+    background: rgba(183,112,90,0.07);
+    border: 1px solid rgba(183,112,90,0.25);
+    padding: 24px 32px;
+    margin: 0 clamp(24px, 6vw, 80px) clamp(48px, 6vw, 72px);
+    max-width: calc(1280px - clamp(48px, 12vw, 160px));
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--brick);
+  }
+
+  /* FOOTER */
+  footer.site {
+    background: var(--teal-deep); color: var(--cream);
+    padding: 48px clamp(24px, 6vw, 80px) 32px;
+    border-top: 1px solid rgba(245,241,235,0.08);
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;
+  }
+  .footer-links { display: flex; gap: 24px; flex-wrap: wrap; }
+  .footer-links a {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em;
+    text-transform: uppercase; color: rgba(245,241,235,0.4);
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--cream); }
+  .footer-copy {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--camel);
+  }
+  .footer-copy b { color: var(--brick); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="top">
+  <div class="nav-left">
+    <a href="index.html" class="brand">MANBREW<span class="dot">.</span></a>
+    <ul>
+      <li><a href="studio.html" class="active">STUDIO</a></li>
+      <li><a href="https://www.gamvegam.com.tw/pages/manbrew" target="_blank" rel="noopener">SHOP</a></li>
+      <li><a href="bridge/index.html">BRIDGE</a></li>
+    </ul>
+  </div>
+  <span class="nav-tag">文字之間工作室</span>
+</nav>
+
+<!-- PAGE HEADER -->
+<header class="page-header">
+  <p class="page-label">— / Studio</p>
+  <h1 class="page-title">SERIES<br/>&amp; WORKS.</h1>
+  <p class="page-desc">每個系列以一個希伯來字／中文字為主軸，搭配一座城市做 cinematic 拍攝。文字是旅行的方式——讓字的視覺生活在它應該被讀到的地方。</p>
+</header>
+
+<!-- PLACEHOLDER NOTICE -->
+<div class="placeholder-notice">
+  — / Coming Soon — Series content will be added here
+</div>
+
+<!-- SERIES LIST (placeholder — fill in with actual series) -->
+<section class="series-section">
+
+  <div class="series-item">
+    <div class="series-num">Series 01</div>
+    <div class="series-body">
+      <h2 class="series-name">AHAVA</h2>
+      <p class="series-zh">אהבה / 愛 — London</p>
+      <p class="series-desc">Placeholder — Series description to be added.</p>
+      <div class="series-tags">
+        <span class="series-tag active">Available</span>
+        <span class="series-tag">London / TLV</span>
+        <span class="series-tag">Heavy Tee + Necklace</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="series-item">
+    <div class="series-num">Series 02</div>
+    <div class="series-body">
+      <h2 class="series-name">SHALOM</h2>
+      <p class="series-zh">שָׁלוֹם / 平和 — Jerusalem</p>
+      <p class="series-desc">Placeholder — Series description to be added.</p>
+      <div class="series-tags">
+        <span class="series-tag active">Available</span>
+        <span class="series-tag">Jerusalem</span>
+        <span class="series-tag">Heavy Tee + Necklace</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="series-item">
+    <div class="series-num">Series 03</div>
+    <div class="series-body">
+      <h2 class="series-name">—</h2>
+      <p class="series-zh">Coming Soon</p>
+      <p class="series-desc">Placeholder — Next series to be announced.</p>
+      <div class="series-tags">
+        <span class="series-tag">Coming Soon</span>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- FOOTER -->
+<footer class="site">
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="https://www.gamvegam.com.tw/pages/manbrew" target="_blank" rel="noopener">Shop</a>
+    <a href="bridge/index.html">Bridge</a>
+    <a href="https://instagram.com/manbrew.studio" target="_blank" rel="noopener">Instagram</a>
+  </div>
+  <p class="footer-copy">MANBREW<b>.</b> STUDIO / 文字之間工作室</p>
+</footer>
+
+</body>
+</html>

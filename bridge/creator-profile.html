@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feature Artists — Manbrew Bridge</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;500&family=Frank+Ruhl+Libre:wght@400;700&display=swap" rel="stylesheet">
+
+  <script>
+    /* lang.js — inline */
+    function setLang(lang) {
+      document.documentElement.setAttribute('data-lang', lang);
+      localStorage.setItem('mb-lang', lang);
+      document.querySelectorAll('.lang-btn').forEach(function(btn) {
+        btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+      });
+    }
+    (function() {
+      var saved = localStorage.getItem('mb-lang') || 'en';
+      document.documentElement.setAttribute('data-lang', saved);
+      document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.lang-btn').forEach(function(btn) {
+          btn.classList.toggle('active', btn.getAttribute('data-lang') === saved);
+        });
+      });
+    })();
+  </script>
+
+  <style>
+    [data-lang="en"] .t-zh { display: none !important; }
+    [data-lang="zh"] .t-en { display: none !important; }
+
+    :root {
+      --ink:   #0A0A0A;
+      --cream: #FAF7F1;
+      --brick: #B7705A;
+      --mint:  #B5C9B0;
+      --teal:  #2A3D3A;
+      --slate: #5F574E;
+      --mist:  #D8D2C8;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--ink);
+      color: var(--cream);
+      font-family: 'Inter', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      background: var(--ink);
+      border-bottom: 1px solid var(--teal);
+      padding: 1.5rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-wordmark {
+      font-weight: 900;
+      font-size: 0.95rem;
+      letter-spacing: 0.08em;
+      color: var(--cream);
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--slate);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--mint); }
+    .lang-switch { display: flex; align-items: center; gap: 0.35rem; }
+    .lang-btn {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      background: none;
+      border: none;
+      color: var(--slate);
+      cursor: pointer;
+      padding: 0.3rem 0.4rem;
+      transition: color 0.2s;
+    }
+    .lang-btn:hover { color: var(--cream); }
+    .lang-btn.active { color: var(--mint); }
+    .lang-sep { color: var(--teal); font-size: 0.6rem; }
+    .nav-cta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--brick);
+      text-decoration: none;
+      border: 1px solid var(--brick);
+      padding: 0.45rem 1.1rem;
+      transition: background 0.2s, color 0.2s;
+      white-space: nowrap;
+      margin-left: 1.25rem;
+    }
+    .nav-cta:hover { background: var(--brick); color: var(--ink); }
+
+    /* ─── PAGE HEADER ─── */
+    .page-header {
+      padding: 6rem 2rem 5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      border-bottom: 1px solid var(--teal);
+    }
+    .page-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--slate);
+      display: block;
+      margin-bottom: 1.25rem;
+    }
+    .page-title {
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      font-weight: 900;
+      letter-spacing: -0.025em;
+      line-height: 1.05;
+      margin-bottom: 1rem;
+    }
+    .page-title .accent { color: var(--brick); }
+    .page-sub {
+      font-size: 1rem;
+      color: var(--slate);
+      line-height: 1.85;
+      max-width: 480px;
+    }
+
+    /* ─── ARTIST GRID ─── */
+    .artist-section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 5rem 2rem 8rem;
+    }
+
+    .artist-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--teal);
+    }
+
+    @media (max-width: 860px) { .artist-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 480px) { .artist-grid { grid-template-columns: 1fr; } }
+
+    .artist-card {
+      background: var(--ink);
+      padding: 2.5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1.25rem;
+      cursor: default;
+    }
+
+    .artist-avatar {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: var(--teal);
+      border: 1.5px solid rgba(181,201,176,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+
+    .artist-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    .artist-avatar-glyph {
+      font-family: 'Frank Ruhl Libre', serif;
+      font-size: 1.6rem;
+      font-weight: 400;
+      color: var(--mint);
+      user-select: none;
+    }
+
+    .artist-info { flex: 1; }
+
+    .artist-name {
+      font-size: 1.05rem;
+      font-weight: 900;
+      margin-bottom: 0.2rem;
+      line-height: 1.2;
+    }
+
+    .artist-location {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--slate);
+      margin-bottom: 0.85rem;
+    }
+
+    .artist-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+    }
+
+    .artist-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--mint);
+      border: 1px solid rgba(181,201,176,0.25);
+      padding: 0.18rem 0.5rem;
+    }
+
+    .artist-bio {
+      font-size: 0.8rem;
+      color: var(--slate);
+      line-height: 1.75;
+      border-top: 1px solid rgba(42,61,58,0.6);
+      padding-top: 1rem;
+      margin-top: 0.25rem;
+    }
+
+    /* placeholder card */
+    .artist-card--pending {
+      opacity: 0.28;
+      cursor: default;
+    }
+
+    .artist-card--pending .artist-avatar {
+      background: var(--teal);
+      opacity: 0.4;
+    }
+
+    .artist-card--pending .artist-name {
+      color: var(--slate);
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      border-top: 1px solid var(--teal);
+      padding: 2.5rem 2rem;
+    }
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .footer-copy {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      color: var(--slate);
+    }
+
+    /* ─── PARENT BRAND BAR ──────────────────────────────── */
+    .mb-brand-bar {
+      background: #050505;
+      border-bottom: 1px solid rgba(42, 61, 58, 0.6);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .mb-brand-tabs { display: flex; align-items: stretch; }
+    .mb-brand-tab {
+      display: flex; align-items: center; gap: 7px;
+      padding: 13px 20px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9.5px; font-weight: 500;
+      letter-spacing: 0.22em; text-transform: uppercase; text-decoration: none;
+      color: rgba(245, 241, 235, 0.32);
+      border-bottom: 2px solid transparent;
+      transition: color 0.2s, border-color 0.2s; white-space: nowrap;
+    }
+    .mb-brand-tab:hover { color: rgba(245, 241, 235, 0.65); }
+    .mb-brand-tab.active { color: #F5F1EB; border-bottom-color: #B5C9B0; }
+    .mb-brand-dot { width: 4px; height: 4px; border-radius: 50%; background: #B5C9B0; flex-shrink: 0; }
+    .mb-brand-tag { font-family: 'JetBrains Mono', monospace; font-size: 8.5px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(94, 87, 78, 0.6); }
+  </style>
+</head>
+<body>
+
+<!-- ── PARENT BRAND BAR ──────────────────────────────────── -->
+<div class="mb-brand-bar">
+  <div class="mb-brand-tabs">
+    <a href="../index.html" class="mb-brand-tab">MANBREW.</a>
+    <span class="mb-brand-tab active"><span class="mb-brand-dot"></span>BRIDGE</span>
+  </div>
+  <span class="mb-brand-tag">文字之間工作室</span>
+</div>
+
+<!-- ── NAV ─── -->
+<nav>
+  <a href="index.html" class="nav-wordmark">MANBREW BRIDGE</a>
+  <ul class="nav-links">
+    <li><a href="index.html"><span class="t-en">Home</span><span class="t-zh">首頁</span></a></li>
+    <li><a href="works.html"><span class="t-en">Art Bazaar</span><span class="t-zh">藝術市集</span></a></li>
+    <li><a href="phase01-landing.html"><span class="t-en">Phase 01</span><span class="t-zh">第一階段</span></a></li>
+    <li><a href="creator-profile.html" class="active"><span class="t-en">Feature Artists</span><span class="t-zh">精選藝術家</span></a></li>
+    <li><a href="creator-guide.html"><span class="t-en">Creator Guide</span><span class="t-zh">創作者指南</span></a></li>
+  </ul>
+  <div class="lang-switch">
+    <button class="lang-btn active" data-lang="en" onclick="setLang('en')">EN</button>
+    <span class="lang-sep">·</span>
+    <button class="lang-btn" data-lang="zh" onclick="setLang('zh')">中文</button>
+  </div>
+  <a href="https://forms.gle/RkiV3JumnALHFcHL9" target="_blank" rel="noopener" class="nav-cta">
+    <span class="t-zh">申請加入</span><span class="t-en">Apply</span>
+  </a>
+</nav>
+
+
+<!-- ── PAGE HEADER ─── -->
+<div class="page-header">
+  <span class="page-label">
+    <span class="t-zh">創作者 / Artists</span>
+    <span class="t-en">Phase 01 — Founding Artists</span>
+  </span>
+  <h1 class="page-title">
+    <span class="t-zh">精選藝術家。<br><span class="accent">Feature Artists.</span></span>
+    <span class="t-en">Our <span class="accent">Artists.</span></span>
+  </h1>
+  <p class="page-sub">
+    <span class="t-zh">來自猶太世界與華人世界的創作者，在此相遇。每一位都是創始成員。</span>
+    <span class="t-en">Creators from the Jewish and Chinese worlds, meeting here. Each one a founding member.</span>
+  </p>
+</div>
+
+
+<!-- ── ARTIST GRID ─── -->
+<div class="artist-section">
+  <div class="artist-grid">
+
+    <!-- Ann — real artist -->
+    <div class="artist-card">
+      <div class="artist-avatar">
+        <img src="images/ann-avatar.png" alt="Ann Chen">
+      </div>
+      <div class="artist-info">
+        <h2 class="artist-name">Ann Chen</h2>
+        <p class="artist-location">
+          <span class="t-zh">台北，台灣</span>
+          <span class="t-en">Taipei, Taiwan</span>
+        </p>
+        <div class="artist-tags">
+          <span class="artist-tag"><span class="t-zh">視覺藝術</span><span class="t-en">Visual Art</span></span>
+          <span class="artist-tag"><span class="t-zh">字體與書法</span><span class="t-en">Typography & Calligraphy</span></span>
+          <span class="artist-tag"><span class="t-zh">攝影</span><span class="t-en">Photography</span></span>
+        </div>
+      </div>
+      <p class="artist-bio">
+        <span class="t-zh">以色列與台灣之間的文化移動，是我創作的起點。我以攝影與設計作為語言，關注文字、信仰、城市記憶與人之間的情感距離。作品常結合中文與希伯來文，透過影像、排版與敘事，探索身份、觀看方式與文化共存的可能。</span>
+        <span class="t-en">The cultural movement between Israel and Taiwan is the starting point of my work. Using photography and design as language, I explore the emotional distance between text, faith, urban memory, and people. My work often combines Chinese and Hebrew, using image, typography, and narrative to explore identity and cultural coexistence.</span>
+      </p>
+    </div>
+
+    <!-- placeholders × 19 -->
+    <div class="artist-card artist-card--pending">
+      <div class="artist-avatar"><span class="artist-avatar-glyph">?</span></div>
+      <div class="artist-info">
+        <h2 class="artist-name"><span class="t-zh">創始成員 02</span><span class="t-en">Founding Member 02</span></h2>
+        <p class="artist-location"><span class="t-zh">申請中</span><span class="t-en">Pending</span></p>
+        <div class="artist-tags"><span class="artist-tag"><span class="t-zh">徵集中</span><span class="t-en">Open</span></span></div>
+      </div>
+    </div>
+
+    <div class="artist-card artist-card--pending">
+      <div class="artist-avatar"><span class="artist-avatar-glyph">?</span></div>
+      <div class="artist-info">
+        <h2 class="artist-name"><span class="t-zh">創始成員 03</span><span class="t-en">Founding Member 03</span></h2>
+        <p class="artist-location"><span class="t-zh">申請中</span><span class="t-en">Pending</span></p>
+        <div class="artist-tags"><span class="artist-tag"><span class="t-zh">徵集中</span><span class="t-en">Open</span></span></div>
+      </div>
+    </div>
+
+    <div class="artist-card artist-card--pending">
+      <div class="artist-avatar"><span class="artist-avatar-glyph">?</span></div>
+      <div class="artist-info">
+        <h2 class="artist-name"><span class="t-zh">創始成員 04</span><span class="t-en">Founding Member 04</span></h2>
+        <p class="artist-location"><span class="t-zh">申請中</span><span class="t-en">Pending</span></p>
+        <div class="artist-tags"><span class="artist-tag"><span class="t-zh">徵集中</span><span class="t-en">Open</span></span></div>
+      </div>
+    </div>
+
+    <div class="artist-card artist-card--pending">
+      <div class="artist-avatar"><span class="artist-avatar-glyph">?</span></div>
+      <div class="artist-info">
+        <h2 class="artist-name"><span class="t-zh">創始成員 05</span><span class="t-en">Founding Member 05</span></h2>
+        <p class="artist-location"><span class="t-zh">申請中</span><span class="t-en">Pending</span></p>
+        <div class="artist-tags"><span class="artist-tag"><span class="t-zh">徵集中</span><span class="t-en">Open</span></span></div>
+      </div>
+    </div>
+
+    <div class="artist-card artist-card--pending">
+      <div class="artist-avatar"><span class="artist-avatar-glyph">?</span></div>
+      <div class="artist-info">
+        <h2 class="artist-name"><span class="t-zh">創始成員 06</span><span class="t-en">Founding Member 06</span></h2>
+        <p class="artist-location"><span class="t-zh">申請中</span><span class="t-en">Pending</span></p>
+        <div class="artist-tags"><span class="artist-tag"><span class="t-zh">徵集中</span><span class="t-en">Open</span></span></div>
+      </div>
+    </div>
+
+    <div class="artist-card artist-card--pending">
+      <div class="artist-avatar"><span class="artist-avatar-glyph">?</span></div>
+      <div class="artist-info">
+        <h2 class="artist-name"><span class="t-zh">創始成員 07</span><span class="t-en">Founding Member 07</span></h2>
+        <p class="artist-location"><span class="t-zh">申請中</span><span class="t-en">Pending</span></p>
+        <div class="artist-tags"><span class="artist-tag"><span class="t-zh">徵集中</span><span class="t-en">Open</span></span></div>
+      </div>
+    </div>
+
+    <div class="artist-card artist-card--pending">
+      <div class="artist-avatar"><span class="artist-avatar-glyph">?</span></div>
+      <div class="artist-info">
+        <h2 class="artist-name"><span class="t-zh">創始成員 08</span><span class="t-en">Founding Member 08</span></h2>
+        <p class="artist-location"><span class="t-zh">申請中</span><span class="t-en">Pending</span></p>
+        <div class="artist-tags"><span class="artist-tag"><span class="t-zh">徵集中</span><span class="t-en">Open</span></span></div>
+      </div>
+    </div>
+
+    <div class="artist-card artist-card--pending">
+      <div class="artist-avatar"><span class="artist-avatar-glyph">?</span></div>
+      <div class="artist-info">
+        <h2 class="artist-name"><span class="t-zh">創始成員 09</span><span class="t-en">Founding Member 09</span></h2>
+        <p class="artist-location"><span class="t-zh">申請中</span><span class="t-en">Pending</span></p>
+        <div class="artist-tags"><span class="artist-tag"><span class="t-zh">徵集中</span><span class="t-en">Open</span></span></div>
+      </div>
+    </div>
+
+    <div class="artist-card artist-card--pending">
+      <div class="artist-avatar"><span class="artist-avatar-glyph">?</span></div>
+      <div class="artist-info">
+        <h2 class="artist-name"><span class="t-zh">創始成員 10</span><span class="t-en">Founding Member 10</span></h2>
+        <p class="artist-location"><span class="t-zh">申請中</span><span class="t-en">Pending</span></p>
+        <div class="artist-tags"><span class="artist-tag"><span class="t-zh">徵集中</span><span class="t-en">Open</span></span></div>
+      </div>
+    </div>
+
+    <div class="artist-card artist-card--pending">
+      <div class="artist-avatar"><span class="artist-avatar-glyph">?</span></div>
+      <div class="artist-info">
+        <h2 class="artist-name"><span class="t-zh">創始成員 11</span><span class="t-en">Founding Member 11</span></h2>
+        <p class="artist-location"><span class="t-zh">申請中</span><span class="t-en">Pending</span></p>
+        <div class="artist-tags"><span class="artist-tag"><span class="t-zh">徵集中</span><span class="t-en">Open</span></span></div>
+      </div>
+    </div>
+
+    <div class="artist-card artist-card--pending">
+      <div class="artist-avatar"><span class="artist-avatar-glyph">?</span></div>
+      <div class="artist-info">
+        <h2 class="artist-name"><span class="t-zh">創始成員 12</span><span class="t-en">Founding Member 12</span></h2>
+        <p class="artist-location"><span class="t-zh">申請中</span><span class="t-en">Pending</span></p>
+        <div class="artist-tags"><span class="artist-tag"><span class="t-zh">徵集中</span><span class="t-en">Open</span></span></div>
+      </div>
+    </div>
+
+    <div class="artist-card artist-card--pending">
+      <div class="artist-avatar"><span class="artist-avatar-glyph">?</span></div>
+      <div class="artist-info">
+        <h2 class="artist-name"><span class="t-zh">創始成員 13</span><span class="t-en">Founding Member 13</span></h2>
+        <p class="artist-location"><span class="t-zh">申請中</span><span class="t-en">Pending</span></p>
+        <div class="artist-tags"><span class="artist-tag"><span class="t-zh">徵集中</span><span class="t-en">Open</span></span></div>
+      </div>
+    </div>
+
+    <div class="artist-card artist-card--pending">
+      <div class="artist-avatar"><span class="artist-avatar-glyph">?</span></div>
+      <div class="artist-info">
+        <h2 class="artist-name"><span class="t-zh">創始成員 14</span><span class="t-en">Founding Member 14</span></h2>
+        <p class="artist-location"><span class="t-zh">申請中</span><span class="t-en">Pending</span></p>
+        <div class="artist-tags"><span class="artist-tag"><span class="t-zh">徵集中</span><span class="t-en">Open</span></span></div>
+      </div>
+    </div>
+
+    <div class="artist-card artist-card--pending">
+      <div class="artist-avatar"><span class="artist-avatar-glyph">?</span></div>
+      <div class="artist-info">
+        <h2 class="artist-name"><span class="t-zh">創始成員 15</span><span class="t-en">Founding Member 15</span></h2>
+        <p class="artist-location"><span class="t-zh">申請中</span><span class="t-en">Pending</span></p>
+        <div class="artist-tags"><span class="artist-tag"><span class="t-zh">徵集中</span><span class="t-en">Open</span></span></div>
+      </div>
+    </div>
+
+    <div class="artist-card artist-card--pending">
+      <div class="artist-avatar"><span class="artist-avatar-glyph">?</span></div>
+      <div class="artist-info">
+        <h2 class="artist-name"><span class="t-zh">創始成員 16</span><span class="t-en">Founding Member 16</span></h2>
+        <p class="artist-location"><span class="t-zh">申請中</span><span class="t-en">Pending</span></p>
+        <div class="artist-tags"><span class="artist-tag"><span class="t-zh">徵集中</span><span class="t-en">Open</span></span></div>
+      </div>
+    </div>
+
+    <div class="artist-card artist-card--pending">
+      <div class="artist-avatar"><span class="artist-avatar-glyph">?</span></div>
+      <div class="artist-info">
+        <h2 class="artist-name"><span class="t-zh">創始成員 17</span><span class="t-en">Founding Member 17</span></h2>
+        <p class="artist-location"><span class="t-zh">申請中</span><span class="t-en">Pending</span></p>
+        <div class="artist-tags"><span class="artist-tag"><span class="t-zh">徵集中</span><span class="t-en">Open</span></span></div>
+      </div>
+    </div>
+
+    <div class="artist-card artist-card--pending">
+      <div class="artist-avatar"><span class="artist-avatar-glyph">?</span></div>
+      <div class="artist-info">
+        <h2 class="artist-name"><span class="t-zh">創始成員 18</span><span class="t-en">Founding Member 18</span></h2>
+        <p class="artist-location"><span class="t-zh">申請中</span><span class="t-en">Pending</span></p>
+        <div class="artist-tags"><span class="artist-tag"><span class="t-zh">徵集中</span><span class="t-en">Open</span></span></div>
+      </div>
+    </div>
+
+    <div class="artist-card artist-card--pending">
+      <div class="artist-avatar"><span class="artist-avatar-glyph">?</span></div>
+      <div class="artist-info">
+        <h2 class="artist-name"><span class="t-zh">創始成員 19</span><span class="t-en">Founding Member 19</span></h2>
+        <p class="artist-location"><span class="t-zh">申請中</span><span class="t-en">Pending</span></p>
+        <div class="artist-tags"><span class="artist-tag"><span class="t-zh">徵集中</span><span class="t-en">Open</span></span></div>
+      </div>
+    </div>
+
+    <div class="artist-card artist-card--pending">
+      <div class="artist-avatar"><span class="artist-avatar-glyph">?</span></div>
+      <div class="artist-info">
+        <h2 class="artist-name"><span class="t-zh">創始成員 20</span><span class="t-en">Founding Member 20</span></h2>
+        <p class="artist-location"><span class="t-zh">申請中</span><span class="t-en">Pending</span></p>
+        <div class="artist-tags"><span class="artist-tag"><span class="t-zh">徵集中</span><span class="t-en">Open</span></span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ── FOOTER ─── -->
+<footer>
+  <div class="footer-inner">
+    <p class="footer-copy">© 2026 Manbrew Bridge — All rights reserved</p>
+    <p class="footer-copy">WHERE JEWISH &amp; CHINESE WORLDS MEET</p>
+  </div>
+</footer>
+
+<script>
+  // lang.js handles language toggle
+</script>
+
+</body>
+</html>
