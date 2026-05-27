@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Become an Artist — Manbrew Bridge</title>
+  <meta name="description" content="Join Manbrew Bridge as a Chinese or Jewish artist. Upload your works for digital licensing and earn 80% royalties from every download.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script>
+    function setLang(lang) {
+      document.documentElement.setAttribute('data-lang', lang);
+      localStorage.setItem('mb-lang', lang);
+      document.querySelectorAll('.lang-btn').forEach(function(btn) {
+        btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+      });
+    }
+    (function() {
+      var saved = localStorage.getItem('mb-lang') || 'en';
+      document.documentElement.setAttribute('data-lang', saved);
+      document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.lang-btn').forEach(function(btn) {
+          btn.classList.toggle('active', btn.getAttribute('data-lang') === saved);
+        });
+      });
+    })();
+  </script>
+  <style>
+    :root {
+      --ink:#0A0A0A; --ink2:#111111; --ink3:#181818;
+      --cream:#FAF7F1; --brick:#B7705A; --mint:#B5C9B0;
+      --teal:#2A3D3A; --slate:#5F574E; --mist:#D8D2C8;
+      --gold:#C9A96E;
+    }
+    [data-lang="en"] .t-zh { display:none !important; }
+    [data-lang="zh"] .t-en { display:none !important; }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{background:var(--ink);color:var(--cream);font-family:'Inter',sans-serif;font-weight:400;line-height:1.6;-webkit-font-smoothing:antialiased;}
+    a{color:inherit;text-decoration:none;}
+    .mb-brand-bar{background:#050505;border-bottom:1px solid rgba(42,61,58,0.6);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;}
+    .mb-brand-tabs{display:flex;align-items:stretch;}
+    .mb-brand-tab{display:flex;align-items:center;gap:7px;padding:13px 20px;font-family:'JetBrains Mono',monospace;font-size:9.5px;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:rgba(245,241,235,0.32);border-bottom:2px solid transparent;transition:color 0.2s,border-color 0.2s;}
+    .mb-brand-tab.active{color:#F5F1EB;border-bottom-color:#B5C9B0;}
+    .mb-brand-dot{width:4px;height:4px;border-radius:50%;background:#B5C9B0;}
+    .mb-brand-tag{font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(94,87,78,0.6);}
+    nav{padding:1.25rem 2rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--teal);position:sticky;top:0;z-index:100;background:var(--ink);}
+    .nav-wordmark{font-weight:900;font-size:0.9rem;letter-spacing:0.08em;color:var(--cream);}
+    .nav-links{display:flex;gap:2rem;list-style:none;}
+    .nav-links a{font-family:'JetBrains Mono',monospace;font-size:0.62rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--slate);transition:color 0.2s;}
+    .nav-links a:hover,.nav-links a.active{color:var(--mint);}
+    .nav-right{display:flex;align-items:center;gap:1rem;}
+    .lang-switch{display:flex;align-items:center;gap:0.3rem;}
+    .lang-btn{font-family:'JetBrains Mono',monospace;font-size:0.58rem;letter-spacing:0.12em;text-transform:uppercase;background:none;border:none;color:var(--slate);cursor:pointer;padding:0.3rem 0.35rem;transition:color 0.2s;line-height:1;}
+    .lang-btn:hover{color:var(--cream);}
+    .lang-btn.active{color:var(--mint);}
+    .lang-sep{color:var(--teal);font-size:0.6rem;}
+    .nav-cta-primary{font-family:'JetBrains Mono',monospace;font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;background:var(--brick);color:var(--ink);padding:0.5rem 1.2rem;font-weight:500;transition:opacity 0.2s;white-space:nowrap;}
+    .nav-cta-primary:hover{opacity:0.85;}
+    @media(max-width:900px){.nav-links{display:none;}}
+    .container{max-width:1000px;margin:0 auto;padding:0 2rem;}
+    section{padding:5.5rem 0;}
+    .rule{border:none;border-top:1px solid var(--teal);}
+    .label{font-family:'JetBrains Mono',monospace;font-size:0.68rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--slate);}
+    .label--brick{color:var(--brick);}
+    .label--mint{color:var(--mint);}
+    .label--gold{color:var(--gold);}
+    .sec-label{display:block;margin-bottom:0.85rem;}
+    .sec-title{font-size:clamp(1.8rem,3.5vw,3rem);font-weight:900;line-height:1.1;margin-bottom:1.25rem;}
+    .accent{color:var(--brick);}
+    .accent-gold{color:var(--gold);}
+    .accent-mint{color:var(--mint);}
+    .btn-primary{display:inline-block;background:var(--brick);color:var(--ink);font-family:'JetBrains Mono',monospace;font-size:0.75rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;padding:0.95rem 2.5rem;transition:opacity 0.2s;line-height:1;}
+    .btn-primary:hover{opacity:0.82;}
+    .btn-primary--large{font-size:0.82rem;padding:1.15rem 3rem;}
+    .btn-secondary{display:inline-block;border:1px solid rgba(181,201,176,0.5);color:var(--mint);font-family:'JetBrains Mono',monospace;font-size:0.75rem;letter-spacing:0.12em;text-transform:uppercase;padding:0.95rem 2.5rem;transition:border-color 0.2s,color 0.2s;}
+    .btn-secondary:hover{border-color:var(--mint);color:var(--cream);}
+    .badge{display:inline-flex;align-items:center;gap:5px;font-family:'JetBrains Mono',monospace;font-size:0.58rem;letter-spacing:0.12em;text-transform:uppercase;padding:4px 10px;border-radius:2px;}
+    .badge--mint{background:rgba(181,201,176,0.12);color:var(--mint);border:1px solid rgba(181,201,176,0.25);}
+    .badge--gold{background:rgba(201,169,110,0.12);color:var(--gold);border:1px solid rgba(201,169,110,0.25);}
+    .badge--brick{background:rgba(183,112,90,0.12);color:var(--brick);border:1px solid rgba(183,112,90,0.25);}
+    .badge-dot{width:5px;height:5px;border-radius:50%;background:currentColor;}
+    .reveal{opacity:0;transform:translateY(18px);transition:opacity 0.6s ease,transform 0.6s ease;}
+    .reveal.is-visible{opacity:1;transform:none;}
+    .reveal-d1{transition-delay:0.07s;}
+    .reveal-d2{transition-delay:0.14s;}
+    .reveal-d3{transition-delay:0.21s;}
+    @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none;}}
+
+    /* ── PAGE HERO ── */
+    #page-hero{padding:6rem 0 5rem;border-bottom:1px solid var(--teal);}
+    .page-hero-eyebrow{display:flex;align-items:center;gap:0.85rem;margin-bottom:1.75rem;}
+    .page-hero-line{width:2rem;height:1px;background:var(--brick);}
+    .page-hero-headline{font-size:clamp(2.2rem,5vw,4rem);font-weight:900;line-height:1.05;letter-spacing:-0.02em;margin-bottom:1.25rem;}
+    .page-hero-sub{font-size:1rem;color:var(--mist);max-width:580px;line-height:1.85;margin-bottom:2.5rem;}
+    .page-hero-badges{display:flex;flex-wrap:wrap;gap:0.6rem;margin-bottom:2.5rem;}
+
+    /* ── PROCESS STEPS ── */
+    .process-steps{margin-top:3rem;}
+    .process-step{display:grid;grid-template-columns:3.5rem 1fr;gap:2rem;padding:2.5rem 0;border-bottom:1px solid rgba(42,61,58,0.6);}
+    .process-step:first-child{border-top:1px solid rgba(42,61,58,0.6);}
+    .process-step-num{font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.2em;color:var(--brick);padding-top:4px;}
+    .process-step-title{font-size:1rem;font-weight:700;margin-bottom:0.5rem;}
+    .process-step-body{font-size:0.88rem;color:var(--slate);line-height:1.8;}
+    .process-step-body p+p{margin-top:0.65em;}
+
+    /* ── TWO-COL ── */
+    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;}
+    @media(max-width:680px){.two-col{grid-template-columns:1fr;gap:2.5rem;}}
+
+    /* ── SPEC TABLE ── */
+    .spec-table{width:100%;border-collapse:collapse;margin-top:1.5rem;}
+    .spec-table th,.spec-table td{text-align:left;padding:0.75rem 1rem;border-bottom:1px solid rgba(42,61,58,0.5);font-size:0.83rem;}
+    .spec-table th{font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--slate);background:var(--ink2);font-weight:500;}
+    .spec-table td:first-child{color:var(--mist);width:40%;}
+    .spec-table td:last-child{color:var(--slate);}
+
+    /* ── MEDIUM GRID ── */
+    .medium-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--teal);margin-top:1.5rem;}
+    @media(max-width:600px){.medium-grid{grid-template-columns:repeat(2,1fr);}}
+    .medium-item{background:var(--ink2);padding:1.5rem 1.25rem;}
+    .medium-icon{font-size:1.4rem;color:var(--mint);display:block;margin-bottom:0.6rem;}
+    .medium-title{font-size:0.88rem;font-weight:700;margin-bottom:0.25rem;}
+    .medium-desc{font-size:0.75rem;color:var(--slate);line-height:1.65;}
+
+    /* ── ROYALTY BOX ── */
+    .royalty-box{background:var(--ink3);border:1px solid var(--teal);padding:2.5rem;}
+    .royalty-big{font-size:4rem;font-weight:900;color:var(--gold);line-height:1;display:block;margin-bottom:0.5rem;}
+    .royalty-sub{font-family:'JetBrains Mono',monospace;font-size:0.65rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--slate);display:block;margin-bottom:1.5rem;}
+    .royalty-ex{font-size:0.82rem;color:var(--mist);line-height:1.85;}
+    .royalty-ex strong{color:var(--gold);}
+
+    /* ── FAQ ── */
+    .faq-item{padding:1.5rem 0;border-bottom:1px solid rgba(42,61,58,0.6);}
+    .faq-item:first-child{border-top:1px solid rgba(42,61,58,0.6);}
+    .faq-q{font-size:0.95rem;font-weight:700;margin-bottom:0.5rem;cursor:pointer;}
+    .faq-a{font-size:0.85rem;color:var(--slate);line-height:1.8;}
+
+    /* ── CTA BOX ── */
+    .cta-box{background:var(--ink2);border:1px solid var(--teal);padding:3rem;text-align:center;}
+    .cta-box-headline{font-size:clamp(1.5rem,3vw,2.2rem);font-weight:900;line-height:1.15;margin-bottom:1rem;}
+    .cta-box-sub{font-size:0.9rem;color:var(--mist);line-height:1.85;margin-bottom:2rem;max-width:480px;margin-left:auto;margin-right:auto;}
+    .cta-box-btns{display:flex;flex-direction:column;align-items:center;gap:0.85rem;}
+    .cta-box-note{margin-top:1.5rem;font-family:'JetBrains Mono',monospace;font-size:0.62rem;letter-spacing:0.1em;color:var(--slate);line-height:1.9;}
+
+    footer{border-top:1px solid var(--teal);padding:2.5rem 0;}
+    .footer-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+    .footer-copy{font-family:'JetBrains Mono',monospace;font-size:0.65rem;letter-spacing:0.08em;color:var(--slate);}
+    .footer-links{display:flex;gap:1.5rem;}
+    .footer-links a{font-family:'JetBrains Mono',monospace;font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--slate);transition:color 0.2s;}
+    .footer-links a:hover{color:var(--mint);}
+  </style>
+</head>
+<body>
+
+<!-- ── BRAND BAR ── -->
+<div class="mb-brand-bar">
+  <div class="mb-brand-tabs">
+    <a href="https://manbrew-studio.com" class="mb-brand-tab">MANBREW.</a>
+    <span class="mb-brand-tab active"><span class="mb-brand-dot"></span>BRIDGE</span>
+  </div>
+  <span class="mb-brand-tag">文字之間工作室</span>
+</div>
+
+<!-- ── NAV ── -->
+<nav>
+  <a href="index.html" class="nav-wordmark">MANBREW BRIDGE</a>
+  <ul class="nav-links">
+    <li><a href="works.html"><span class="t-en">Browse Works</span><span class="t-zh">瀏覽作品</span></a></li>
+    <li><a href="index.html#categories"><span class="t-en">Categories</span><span class="t-zh">類別</span></a></li>
+    <li><a href="become-an-artist.html" class="active"><span class="t-en">Become an Artist</span><span class="t-zh">加入藝術家</span></a></li>
+    <li><a href="licensing.html"><span class="t-en">Licensing</span><span class="t-zh">授權說明</span></a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="lang-switch">
+      <button class="lang-btn active" data-lang="en" onclick="setLang('en')">EN</button>
+      <span class="lang-sep">·</span>
+      <button class="lang-btn" data-lang="zh" onclick="setLang('zh')">中文</button>
+    </div>
+    <a href="https://forms.gle/RkiV3JumnALHFcHL9" target="_blank" rel="noopener" class="nav-cta-primary">
+      <span class="t-zh">立即申請</span><span class="t-en">Apply Now</span>
+    </a>
+  </div>
+</nav>
+
+
+<!-- ── PAGE HERO ── -->
+<section id="page-hero">
+  <div class="container">
+    <div class="page-hero-eyebrow">
+      <div class="page-hero-line"></div>
+      <span class="label label--brick">
+        <span class="t-zh">加入藝術家</span><span class="t-en">Become an Artist</span>
+      </span>
+    </div>
+    <h1 class="page-hero-headline">
+      <span class="t-zh">讓你的作品，<br><span class="accent">為你賺取收入。</span></span>
+      <span class="t-en">Let your artwork<br><span class="accent">earn for you.</span></span>
+    </h1>
+    <p class="page-hero-sub t-zh">
+      在 Manbrew Bridge 上架你的數位藝術作品，每次授權購買你獲得 80% 的收益。版權永遠屬於你，你可以隨時下架。
+    </p>
+    <p class="page-hero-sub t-en">
+      List your digital artworks on Manbrew Bridge and earn 80% from every license purchase. You keep full copyright and can withdraw your work at any time.
+    </p>
+    <div class="page-hero-badges">
+      <span class="badge badge--gold"><span class="badge-dot"></span>
+        <span class="t-zh">80% 分潤</span><span class="t-en">80% Royalty</span>
+      </span>
+      <span class="badge badge--mint"><span class="badge-dot"></span>
+        <span class="t-zh">版權歸藝術家</span><span class="t-en">You Keep Copyright</span>
+      </span>
+      <span class="badge badge--brick"><span class="badge-dot"></span>
+        <span class="t-zh">7–14 天審核</span><span class="t-en">7–14 Day Review</span>
+      </span>
+      <span class="badge badge--mint">
+        <span class="t-zh">可隨時下架</span><span class="t-en">Withdraw Anytime</span>
+      </span>
+    </div>
+    <a href="https://forms.gle/RkiV3JumnALHFcHL9" target="_blank" rel="noopener" class="btn-primary btn-primary--large">
+      <span class="t-zh">立即申請加入 →</span><span class="t-en">Apply to Join Now →</span>
+    </a>
+  </div>
+</section>
+
+
+<!-- ── PLATFORM MISSION ── -->
+<section id="mission" style="padding:5rem 0; background:var(--ink2); border-bottom:1px solid var(--teal);">
+  <div class="container">
+    <div class="two-col reveal">
+      <div>
+        <span class="label sec-label">
+          <span class="t-zh">平台使命</span><span class="t-en">Platform Mission</span>
+        </span>
+        <h2 class="sec-title">
+          <span class="t-zh">為什麼是猶太與華人藝術家？</span>
+          <span class="t-en">Why Chinese &amp;<br><span class="accent">Jewish artists?</span></span>
+        </h2>
+        <div style="font-size:0.95rem;color:var(--mist);line-height:1.9;">
+          <p class="t-zh">猶太文化與華人文化擁有世界上最深厚的文字、書法與視覺藝術傳統。這兩種文明的相遇，創造出無法在任何一般素材庫找到的視覺語言。</p>
+          <p class="t-zh" style="margin-top:1em;">Manbrew Bridge 不是大眾市集，而是一個高度策展的授權平台。我們只接受具有文化深度的創作者，因此每一件作品都有其不可取代的獨特性。</p>
+          <p class="t-en">Jewish and Chinese cultures carry two of the world's deepest traditions in script, calligraphy, and visual art. The intersection of these two civilizations creates a visual language that cannot be found in any generic stock library.</p>
+          <p class="t-en" style="margin-top:1em;">Manbrew Bridge is not a mass marketplace — it is a highly curated licensing platform. We only accept creators with genuine cultural depth, which is why every work here is irreplaceable.</p>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:1px;background:var(--teal);">
+        <div style="background:var(--ink3);padding:1.75rem 1.5rem;">
+          <div style="font-size:1.5rem;font-weight:900;color:var(--mint);margin-bottom:0.5rem;">稀缺性</div>
+          <p style="font-size:0.82rem;color:var(--slate);line-height:1.75;">
+            <span class="t-zh">這裡的作品無法被 AI 完整複製，無法在 Getty 找到。文化深度就是護城河。</span>
+            <span class="t-en">These works cannot be fully replicated by AI or found on Getty. Cultural depth is the moat.</span>
+          </p>
+        </div>
+        <div style="background:var(--ink3);padding:1.75rem 1.5rem;">
+          <div style="font-size:1.5rem;font-weight:900;color:var(--gold);margin-bottom:0.5rem;">策展</div>
+          <p style="font-size:0.82rem;color:var(--slate);line-height:1.75;">
+            <span class="t-zh">每位藝術家都經過人工審核。我們對作品質量負責，而非靠演算法決定曝光。</span>
+            <span class="t-en">Every artist is reviewed by a human. We are editorially responsible for quality, not algorithmically driven.</span>
+          </p>
+        </div>
+        <div style="background:var(--ink3);padding:1.75rem 1.5rem;">
+          <div style="font-size:1.5rem;font-weight:900;color:var(--brick);margin-bottom:0.5rem;">連結</div>
+          <p style="font-size:0.82rem;color:var(--slate);line-height:1.75;">
+            <span class="t-zh">第一批 20 位創始藝術家將共同塑造平台的文化方向與策展標準。</span>
+            <span class="t-en">The first 20 founding artists will co-shape the platform's cultural direction and curatorial standards.</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ── ACCEPTED MEDIUMS ── -->
+<section id="mediums" style="background:var(--ink);">
+  <div class="container">
+    <div class="reveal">
+      <span class="label sec-label">
+        <span class="t-zh">接受的作品類型</span><span class="t-en">Accepted Mediums</span>
+      </span>
+      <h2 class="sec-title">
+        <span class="t-zh">我們接受哪些作品？</span>
+        <span class="t-en">What kinds of work<br>do we <span class="accent">accept?</span></span>
+      </h2>
+    </div>
+    <div class="medium-grid">
+      <div class="medium-item reveal reveal-d1">
+        <span class="medium-icon">◈</span>
+        <div class="medium-title">
+          <span class="t-zh">視覺藝術</span><span class="t-en">Visual Art</span>
+        </div>
+        <p class="medium-desc">
+          <span class="t-zh">繪畫、插畫、平面設計、印刷藝術、混合媒材。數位或實體均可。</span>
+          <span class="t-en">Painting, illustration, graphic art, print design, mixed media. Digital or physical origin.</span>
+        </p>
+      </div>
+      <div class="medium-item reveal reveal-d1">
+        <span class="medium-icon">文</span>
+        <div class="medium-title">
+          <span class="t-zh">字體與書法</span><span class="t-en">Typography &amp; Calligraphy</span>
+        </div>
+        <p class="medium-desc">
+          <span class="t-zh">漢字書法、希伯來字體設計、中英雙語版面設計、字形實驗。</span>
+          <span class="t-en">Chinese calligraphy, Hebrew type design, bilingual layout, letterform experiments.</span>
+        </p>
+      </div>
+      <div class="medium-item reveal reveal-d2">
+        <span class="medium-icon">◎</span>
+        <div class="medium-title">
+          <span class="t-zh">攝影</span><span class="t-en">Photography</span>
+        </div>
+        <p class="medium-desc">
+          <span class="t-zh">紀實攝影、街頭攝影、肖像、宗教儀式、節慶與文化現場。</span>
+          <span class="t-en">Documentary, street, portrait, ritual, festival, and cultural scene photography.</span>
+        </p>
+      </div>
+      <div class="medium-item reveal reveal-d2">
+        <span class="medium-icon">♩</span>
+        <div class="medium-title">
+          <span class="t-zh">音樂與聲音</span><span class="t-en">Music &amp; Sound</span>
+        </div>
+        <p class="medium-desc">
+          <span class="t-zh">具文化脈絡的原創音樂、傳統旋律當代演繹、聲音藝術。</span>
+          <span class="t-en">Original music with cultural context, contemporary reinterpretations of traditional melody, sound art.</span>
+        </p>
+      </div>
+      <div class="medium-item reveal reveal-d3">
+        <span class="medium-icon">✦</span>
+        <div class="medium-title">
+          <span class="t-zh">數位插畫</span><span class="t-en">Digital Illustration</span>
+        </div>
+        <p class="medium-desc">
+          <span class="t-zh">帶有文化主題的數位插畫、圖像故事、符號系統設計。</span>
+          <span class="t-en">Digital illustration with cultural themes, visual storytelling, iconographic systems.</span>
+        </p>
+      </div>
+      <div class="medium-item reveal reveal-d3">
+        <span class="medium-icon">⬡</span>
+        <div class="medium-title">
+          <span class="t-zh">視覺實驗</span><span class="t-en">Visual Experiments</span>
+        </div>
+        <p class="medium-desc">
+          <span class="t-zh">跨媒材、跨文化的視覺探索，形式不設限，文化深度為評審標準。</span>
+          <span class="t-en">Cross-medium, cross-cultural visual exploration. No format restrictions — cultural depth is the criterion.</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+
+<!-- ── SUBMISSION REQUIREMENTS ── -->
+<section id="requirements" style="background:var(--ink2);">
+  <div class="container">
+    <div class="two-col">
+      <div class="reveal">
+        <span class="label sec-label">
+          <span class="t-zh">提交規格</span><span class="t-en">Submission Requirements</span>
+        </span>
+        <h2 class="sec-title">
+          <span class="t-zh">申請時需要準備什麼？</span>
+          <span class="t-en">What do you need<br>to <span class="accent">submit?</span></span>
+        </h2>
+        <div style="font-size:0.88rem;color:var(--mist);line-height:1.85;">
+          <p class="t-zh">我們的審核以文化深度和作品質量為主要標準。以下是技術規格要求：</p>
+          <p class="t-en">Our review focuses on cultural depth and work quality. Below are the technical specifications:</p>
+        </div>
+        <table class="spec-table" style="margin-top:1.5rem;">
+          <thead>
+            <tr>
+              <th><span class="t-zh">項目</span><span class="t-en">Item</span></th>
+              <th><span class="t-zh">規格</span><span class="t-en">Spec</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="t-zh">作品數量</span><span class="t-en">Works</span></td>
+              <td style="color:var(--mist);">
+                <span class="t-zh">3–10 件（申請用），上架後可新增</span>
+                <span class="t-en">3–10 works (for application), more can be added after joining</span>
+              </td>
+            </tr>
+            <tr>
+              <td><span class="t-zh">檔案格式</span><span class="t-en">File Format</span></td>
+              <td style="color:var(--mist);">PNG / JPG / TIFF / PDF / MP3 / WAV</td>
+            </tr>
+            <tr>
+              <td><span class="t-zh">影像解析度</span><span class="t-en">Resolution</span></td>
+              <td style="color:var(--mist);">
+                <span class="t-zh">最小 3000px（長邊），300 DPI</span>
+                <span class="t-en">Min 3000px (long side), 300 DPI</span>
+              </td>
+            </tr>
+            <tr>
+              <td><span class="t-zh">預覽圖</span><span class="t-en">Preview Image</span></td>
+              <td style="color:var(--mist);">
+                <span class="t-zh">每件作品附上低解析度預覽圖</span>
+                <span class="t-en">Low-res preview image for each work</span>
+              </td>
+            </tr>
+            <tr>
+              <td><span class="t-zh">藝術家自述</span><span class="t-en">Artist Statement</span></td>
+              <td style="color:var(--mist);">
+                <span class="t-zh">100–300 字，說明你的文化背景與創作方向</span>
+                <span class="t-en">100–300 words describing your cultural background and creative direction</span>
+              </td>
+            </tr>
+            <tr>
+              <td><span class="t-zh">作品說明</span><span class="t-en">Work Description</span></td>
+              <td style="color:var(--mist);">
+                <span class="t-zh">每件作品 50–150 字的說明文字</span>
+                <span class="t-en">50–150 word description per work</span>
+              </td>
+            </tr>
+            <tr>
+              <td><span class="t-zh">語言</span><span class="t-en">Language</span></td>
+              <td style="color:var(--mist);">
+                <span class="t-zh">中文或英文皆可，雙語更佳</span>
+                <span class="t-en">Chinese or English accepted; bilingual preferred</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="reveal reveal-d2">
+        <span class="label sec-label" style="margin-top:0;">
+          <span class="t-zh">收益模式</span><span class="t-en">Revenue Model</span>
+        </span>
+        <div class="royalty-box">
+          <span class="royalty-big">80%</span>
+          <span class="royalty-sub">
+            <span class="t-zh">每次授權你所得</span><span class="t-en">Your royalty per license</span>
+          </span>
+          <p class="royalty-ex">
+            <span class="t-zh">
+              一張<strong>個人授權</strong>售出 USD 50，你獲得 <strong>USD 40</strong>。<br><br>
+              一張<strong>商業授權</strong>售出 USD 350，你獲得 <strong>USD 280</strong>。<br><br>
+              同一件作品可被無限次授權。每賣一次，你就獲得收入，<strong>不需要額外付出任何工作</strong>。
+            </span>
+            <span class="t-en">
+              A <strong>personal license</strong> sold at USD 50 — you receive <strong>USD 40</strong>.<br><br>
+              A <strong>commercial license</strong> sold at USD 350 — you receive <strong>USD 280</strong>.<br><br>
+              The same work can be licensed unlimited times. Every sale earns you income with <strong>no additional work required</strong>.
+            </span>
+          </p>
+        </div>
+
+        <div style="margin-top:2rem;background:var(--ink3);border:1px solid var(--teal);padding:1.5rem 1.75rem;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--slate);margin-bottom:1rem;">
+            <span class="t-zh">版權條款</span><span class="t-en">Copyright Terms</span>
+          </div>
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:0.75rem;">
+            <li style="font-size:0.82rem;color:var(--mist);padding-left:1.2rem;position:relative;">
+              <span style="position:absolute;left:0;color:var(--mint);">✦</span>
+              <span class="t-zh">作品版權永遠歸屬於你，平台僅取得數位分發授權</span>
+              <span class="t-en">You retain full copyright — the platform holds digital distribution rights only</span>
+            </li>
+            <li style="font-size:0.82rem;color:var(--mist);padding-left:1.2rem;position:relative;">
+              <span style="position:absolute;left:0;color:var(--mint);">✦</span>
+              <span class="t-zh">你可以在任何其他平台同時販售或展示同一件作品</span>
+              <span class="t-en">You can sell or display the same work on any other platform simultaneously</span>
+            </li>
+            <li style="font-size:0.82rem;color:var(--mist);padding-left:1.2rem;position:relative;">
+              <span style="position:absolute;left:0;color:var(--mint);">✦</span>
+              <span class="t-zh">你可以隨時要求下架作品，無需理由</span>
+              <span class="t-en">You can withdraw any work at any time, no reason required</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ── PROCESS ── -->
+<section id="process" style="background:var(--ink);border-top:1px solid var(--teal);">
+  <div class="container">
+    <div class="reveal">
+      <span class="label sec-label">
+        <span class="t-zh">申請流程</span><span class="t-en">How It Works</span>
+      </span>
+      <h2 class="sec-title">
+        <span class="t-zh">從申請到上架，<span class="accent">四個步驟。</span></span>
+        <span class="t-en">From application to<br><span class="accent">live listing — 4 steps.</span></span>
+      </h2>
+    </div>
+    <div class="process-steps reveal">
+      <div class="process-step">
+        <div class="process-step-num">STEP 01</div>
+        <div>
+          <div class="process-step-title">
+            <span class="t-zh">填寫申請表</span><span class="t-en">Submit your application</span>
+          </div>
+          <div class="process-step-body">
+            <p class="t-zh">透過 Google 表單提交申請，附上你的藝術家自述、文化背景說明，以及 3–10 件代表作的預覽圖或連結。</p>
+            <p class="t-en">Submit via Google Form with your artist statement, cultural background, and preview images or links to 3–10 representative works.</p>
+          </div>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="process-step-num">STEP 02</div>
+        <div>
+          <div class="process-step-title">
+            <span class="t-zh">人工審核（7–14 個工作天）</span>
+            <span class="t-en">Human review (7–14 business days)</span>
+          </div>
+          <div class="process-step-body">
+            <p class="t-zh">我們親自閱讀每一份申請，以文化深度和作品質量為主要審核標準。審核結果將透過 email 通知。</p>
+            <p class="t-en">We personally review every application, with cultural depth and work quality as the primary criteria. You'll receive the result by email.</p>
+          </div>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="process-step-num">STEP 03</div>
+        <div>
+          <div class="process-step-title">
+            <span class="t-zh">上傳高解析度作品與說明文字</span>
+            <span class="t-en">Upload high-res files and descriptions</span>
+          </div>
+          <div class="process-step-body">
+            <p class="t-zh">通過審核後，提交高解析度作品檔案與每件作品的說明文字。平台團隊將為作品加上浮水印預覽圖後上架。</p>
+            <p class="t-en">After approval, submit your high-resolution files and work descriptions. The platform team will add watermarked previews and list the works.</p>
+          </div>
+        </div>
+      </div>
+      <div class="process-step" style="border-bottom:none;">
+        <div class="process-step-num">STEP 04</div>
+        <div>
+          <div class="process-step-title">
+            <span class="t-zh">作品上架，開始收益</span>
+            <span class="t-en">Works go live — you start earning</span>
+          </div>
+          <div class="process-step-body">
+            <p class="t-zh">作品上架後即開放授權購買。每次授權成功，你獲得 80% 的收益，無需進一步操作。</p>
+            <p class="t-en">Once live, your works are available for licensing. Every successful license earns you 80% — no further action required on your end.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ── FAQ ── -->
+<section id="faq" style="background:var(--ink2);border-top:1px solid var(--teal);">
+  <div class="container">
+    <div class="reveal">
+      <span class="label sec-label">
+        <span class="t-zh">藝術家常見問題</span><span class="t-en">Artist FAQ</span>
+      </span>
+      <h2 class="sec-title" style="margin-bottom:0;">
+        <span class="t-zh">你可能想知道的。</span>
+        <span class="t-en">Questions you might have.</span>
+      </h2>
+    </div>
+    <div style="max-width:720px;margin-top:2rem;">
+      <div class="faq-item reveal">
+        <div class="faq-q">
+          <span class="t-zh">我沒有猶太或華人文化背景，可以申請嗎？</span>
+          <span class="t-en">I don't have a Jewish or Chinese background — can I still apply?</span>
+        </div>
+        <p class="faq-a">
+          <span class="t-zh">目前平台限定猶太或華人文化背景的創作者。如果你的作品深度受到這兩種文化影響，歡迎在申請表中說明，我們將個案評估。</span>
+          <span class="t-en">Currently the platform is limited to creators with Jewish or Chinese cultural backgrounds. If your work is deeply influenced by either culture, please explain in the application — we evaluate on a case-by-case basis.</span>
+        </p>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">
+          <span class="t-zh">上架後多久才會有買家？</span>
+          <span class="t-en">How long until buyers find my work?</span>
+        </div>
+        <p class="faq-a">
+          <span class="t-zh">平台目前處於初期建設階段。我們會在買家推廣上持續努力，但無法保證特定時間內有銷售。建議把這個平台看作長期的被動收入來源，而非即時收益。</span>
+          <span class="t-en">The platform is currently in early development. We'll invest in buyer outreach, but cannot guarantee sales within a specific timeframe. We recommend treating this as a long-term passive income channel rather than an immediate revenue source.</span>
+        </p>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">
+          <span class="t-zh">我可以同時在其他平台販售同一件作品嗎？</span>
+          <span class="t-en">Can I sell the same work on other platforms?</span>
+        </div>
+        <p class="faq-a">
+          <span class="t-zh">可以。平台只取得非獨家的數位分發授權，你可以在任何其他平台同時販售或展示同一件作品。</span>
+          <span class="t-en">Yes. We hold non-exclusive digital distribution rights only. You are free to sell or display the same work on any other platform simultaneously.</span>
+        </p>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">
+          <span class="t-zh">作品被購買後，買家能做什麼？</span>
+          <span class="t-en">What can buyers do with the work after purchase?</span>
+        </div>
+        <p class="faq-a">
+          <span class="t-zh">授權範圍視購買類型而定。個人授權允許個人列印、螢幕顯示與家庭用途；商業授權允許品牌、出版物與行銷材料使用。買家不可再次出售或轉讓授權。詳細說明請參考<a href="licensing.html" style="color:var(--mint);border-bottom:1px solid rgba(181,201,176,0.3);">授權說明頁面</a>。</span>
+          <span class="t-en">The scope depends on the license type. Personal licenses allow personal printing, screen display, and home use. Commercial licenses allow use in branding, publications, and marketing materials. Buyers may not resell or transfer the license. See the <a href="licensing.html" style="color:var(--mint);border-bottom:1px solid rgba(181,201,176,0.3);">Licensing page</a> for full details.</span>
+        </p>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">
+          <span class="t-zh">平台對作品格式和解析度有什麼要求？</span>
+          <span class="t-en">What are the format and resolution requirements?</span>
+        </div>
+        <p class="faq-a">
+          <span class="t-zh">影像類作品要求長邊最小 3000px，300 DPI，接受 PNG / JPG / TIFF / PDF。音樂類接受 MP3 / WAV（192kbps 以上）。每件作品須附低解析度預覽圖供網站顯示。</span>
+          <span class="t-en">Image works require a minimum 3000px long side at 300 DPI, in PNG / JPG / TIFF / PDF format. Music accepts MP3 / WAV (192kbps or higher). Each work must include a low-res preview for website display.</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ── FINAL CTA ── -->
+<section id="apply-cta" style="background:var(--ink);border-top:1px solid var(--teal);padding:7rem 0;">
+  <div class="container">
+    <div class="cta-box reveal">
+      <span class="label label--brick" style="display:block;margin-bottom:1.25rem;">
+        Phase 01 — <span class="t-zh">創始席次，名額 20</span><span class="t-en">20 Founding Seats Available</span>
+      </span>
+      <h2 class="cta-box-headline">
+        <span class="t-zh">準備好了嗎？</span>
+        <span class="t-en">Ready to apply?</span>
+      </h2>
+      <p class="cta-box-sub">
+        <span class="t-zh">第一批 20 位創始藝術家正在招募中。現在申請，7–14 個工作天內我們將親自回覆你。</span>
+        <span class="t-en">The first 20 founding artists are being recruited now. Apply today — we'll personally respond within 7–14 business days.</span>
+      </p>
+      <div class="cta-box-btns">
+        <a href="https://forms.gle/RkiV3JumnALHFcHL9" target="_blank" rel="noopener" class="btn-primary btn-primary--large">
+          <span class="t-zh">立即申請加入 →</span><span class="t-en">Apply to Join Now →</span>
+        </a>
+        <a href="licensing.html" class="btn-secondary">
+          <span class="t-zh">先了解授權說明</span><span class="t-en">Read the licensing guide first</span>
+        </a>
+      </div>
+      <p class="cta-box-note">
+        <span class="t-zh">有問題？寫信給我們：<a href="mailto:hello@manbrew-studio.com" style="color:var(--mint);">hello@manbrew-studio.com</a></span>
+        <span class="t-en">Have questions? Email us: <a href="mailto:hello@manbrew-studio.com" style="color:var(--mint);">hello@manbrew-studio.com</a></span>
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <p class="footer-copy">© 2026 Manbrew Bridge — All rights reserved</p>
+      <div class="footer-links">
+        <a href="index.html"><span class="t-zh">首頁</span><span class="t-en">Home</span></a>
+        <a href="works.html"><span class="t-zh">作品</span><span class="t-en">Works</span></a>
+        <a href="licensing.html"><span class="t-zh">授權說明</span><span class="t-en">Licensing</span></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver(
+    (entries) => { entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('is-visible'); observer.unobserve(e.target); } }); },
+    { threshold: 0.08 }
+  );
+  document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+</script>
+</body>
+</html>

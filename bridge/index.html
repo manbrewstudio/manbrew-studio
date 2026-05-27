@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Manbrew Bridge — WHERE JEWISH & CHINESE WORLDS MEET</title>
+  <title>Manbrew Bridge — Licensed Digital Art by Chinese & Jewish Artists</title>
+  <meta name="description" content="A curated digital art licensing marketplace connecting Chinese and Jewish artists with collectors, designers, and brands worldwide.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;500&family=Frank+Ruhl+Libre:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
   <script>
-    /* lang.js — inline */
     function setLang(lang) {
       document.documentElement.setAttribute('data-lang', lang);
       localStorage.setItem('mb-lang', lang);
@@ -29,373 +29,579 @@
   </script>
 
   <style>
-    /* ─── DESIGN TOKENS ─────────────────────────────────── */
+    /* ─── TOKENS ───────────────────────────────────────────── */
     :root {
       --ink:    #0A0A0A;
+      --ink2:   #111111;
+      --ink3:   #181818;
       --cream:  #FAF7F1;
       --brick:  #B7705A;
+      --brick2: #C97E68;
       --mint:   #B5C9B0;
       --teal:   #2A3D3A;
       --slate:  #5F574E;
       --mist:   #D8D2C8;
       --hay:    #C9B68C;
+      --gold:   #C9A96E;
     }
 
-    /* ─── LANGUAGE TOGGLE ───────────────────────────────── */
+    /* ─── LANG ─────────────────────────────────────────────── */
     [data-lang="en"] .t-zh { display: none !important; }
     [data-lang="zh"] .t-en { display: none !important; }
 
-    /* ─── RESET ─────────────────────────────────────────── */
+    /* ─── RESET ─────────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
-      background-color: var(--ink);
+      background: var(--ink);
       color: var(--cream);
       font-family: 'Inter', sans-serif;
       font-weight: 400;
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
     }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; width: 100%; }
 
-    /* ─── PARENT BRAND BAR ──────────────────────────────── */
+    /* ─── BRAND BAR ─────────────────────────────────────────── */
     .mb-brand-bar {
       background: #050505;
-      border-bottom: 1px solid rgba(42, 61, 58, 0.6);
+      border-bottom: 1px solid rgba(42,61,58,0.6);
       padding: 0 2rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
-    .mb-brand-tabs {
-      display: flex;
-      align-items: stretch;
-    }
+    .mb-brand-tabs { display: flex; align-items: stretch; }
     .mb-brand-tab {
-      display: flex;
-      align-items: center;
-      gap: 7px;
+      display: flex; align-items: center; gap: 7px;
       padding: 13px 20px;
       font-family: 'JetBrains Mono', monospace;
-      font-size: 9.5px;
-      font-weight: 500;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      text-decoration: none;
-      color: rgba(245, 241, 235, 0.32);
+      font-size: 9.5px; font-weight: 500;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: rgba(245,241,235,0.32);
       border-bottom: 2px solid transparent;
       transition: color 0.2s, border-color 0.2s;
-      white-space: nowrap;
     }
-    .mb-brand-tab:hover { color: rgba(245, 241, 235, 0.65); }
+    .mb-brand-tab:hover { color: rgba(245,241,235,0.65); }
     .mb-brand-tab.active { color: #F5F1EB; border-bottom-color: #B5C9B0; }
-    .mb-brand-dot {
-      width: 4px; height: 4px; border-radius: 50%;
-      background: #B5C9B0; flex-shrink: 0;
-    }
+    .mb-brand-dot { width: 4px; height: 4px; border-radius: 50%; background: #B5C9B0; }
     .mb-brand-tag {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 8.5px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: rgba(94, 87, 78, 0.6);
+      font-size: 8.5px; letter-spacing: 0.14em;
+      text-transform: uppercase; color: rgba(94,87,78,0.6);
     }
 
-    /* ─── SHARED TYPOGRAPHY ──────────────────────────────── */
-    .label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.72rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--slate);
-    }
-    .label--brick { color: var(--brick); }
-    .label--mint  { color: var(--mint);  }
-
-    /* ─── LAYOUT ─────────────────────────────────────────── */
-    .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
-    section { padding: 7rem 0; }
-    .rule { border: none; border-top: 1px solid var(--teal); }
-
-    /* ─── NAV ────────────────────────────────────────────── */
+    /* ─── NAV ───────────────────────────────────────────────── */
     nav {
-      padding: 1.5rem 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      padding: 1.25rem 2rem;
+      display: flex; align-items: center; justify-content: space-between;
       border-bottom: 1px solid var(--teal);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background-color: var(--ink);
+      position: sticky; top: 0; z-index: 100;
+      background: var(--ink);
     }
     .nav-wordmark {
-      font-weight: 900;
-      font-size: 0.95rem;
-      letter-spacing: 0.08em;
-      color: var(--cream);
-      text-decoration: none;
+      font-weight: 900; font-size: 0.9rem;
+      letter-spacing: 0.08em; color: var(--cream);
     }
-    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
     .nav-links a {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--slate);
-      text-decoration: none;
+      font-size: 0.62rem; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--slate);
       transition: color 0.2s;
     }
     .nav-links a:hover, .nav-links a.active { color: var(--mint); }
-    .lang-switch { display: flex; align-items: center; gap: 0.35rem; }
+    .nav-right { display: flex; align-items: center; gap: 1rem; }
+    .lang-switch { display: flex; align-items: center; gap: 0.3rem; }
     .lang-btn {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.6rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      background: none;
-      border: none;
-      color: var(--slate);
-      cursor: pointer;
-      padding: 0.3rem 0.4rem;
-      transition: color 0.2s;
-      line-height: 1;
+      font-size: 0.58rem; letter-spacing: 0.12em; text-transform: uppercase;
+      background: none; border: none; color: var(--slate);
+      cursor: pointer; padding: 0.3rem 0.35rem; transition: color 0.2s; line-height: 1;
     }
     .lang-btn:hover { color: var(--cream); }
     .lang-btn.active { color: var(--mint); }
-    .lang-sep { color: var(--teal); font-size: 0.6rem; line-height: 1; }
-    .nav-cta {
+    .lang-sep { color: var(--teal); font-size: 0.6rem; }
+    .nav-cta-primary {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--brick);
-      text-decoration: none;
-      border: 1px solid var(--brick);
-      padding: 0.45rem 1.1rem;
-      transition: background 0.2s, color 0.2s;
-      white-space: nowrap;
-      margin-left: 1.25rem;
+      font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase;
+      background: var(--brick); color: var(--ink);
+      padding: 0.5rem 1.2rem; font-weight: 500;
+      transition: opacity 0.2s; white-space: nowrap;
     }
-    .nav-cta:hover { background: var(--brick); color: var(--ink); }
+    .nav-cta-primary:hover { opacity: 0.85; }
+    @media (max-width: 900px) { .nav-links { display: none; } }
 
-    /* Hide nav links on mobile */
-    @media (max-width: 860px) {
-      .nav-links { display: none; }
-    }
+    /* ─── LAYOUT ────────────────────────────────────────────── */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+    section { padding: 6rem 0; }
+    .rule { border: none; border-top: 1px solid var(--teal); }
 
-    /* ─── HERO ───────────────────────────────────────────── */
-    #hero { padding: 10rem 0 8rem; position: relative; overflow: hidden; }
-    .hero-eyebrow {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin-bottom: 3rem;
-    }
-    .hero-eyebrow-line {
-      width: 2.5rem; height: 1px;
-      background: var(--brick); flex-shrink: 0;
-    }
-    .hero-headline {
-      font-size: clamp(3rem, 8vw, 7rem);
-      font-weight: 900;
-      line-height: 1.0;
-      letter-spacing: -0.02em;
-      max-width: 880px;
-      margin-bottom: 1.75rem;
-    }
-    .hero-headline .accent { color: var(--brick); }
-    .hero-tagline {
+    /* ─── TYPOGRAPHY SYSTEM ─────────────────────────────────── */
+    .label {
       font-family: 'JetBrains Mono', monospace;
-      font-size: clamp(0.7rem, 1.4vw, 0.85rem);
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--mint);
-      margin-bottom: 3rem;
+      font-size: 0.68rem; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--slate);
     }
-    .hero-sub {
-      font-size: 1.05rem;
-      color: var(--mist);
-      max-width: 520px;
-      line-height: 1.85;
-      margin-bottom: 3.5rem;
-    }
-    .hero-cta-group {
-      display: flex;
-      align-items: center;
-      gap: 2rem;
-      flex-wrap: wrap;
-    }
-    .btn-primary {
-      display: inline-block;
-      background: var(--brick);
-      color: var(--ink);
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.78rem;
-      font-weight: 500;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      text-decoration: none;
-      padding: 1rem 2.5rem;
-      transition: opacity 0.2s;
-      line-height: 1.7;
-    }
-    .btn-primary:hover { opacity: 0.82; }
-    .btn-ghost {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.72rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--slate);
-      text-decoration: none;
-      border-bottom: 1px solid var(--teal);
-      padding-bottom: 2px;
-      transition: color 0.2s, border-color 0.2s;
-    }
-    .btn-ghost:hover { color: var(--cream); border-color: var(--cream); }
-
-    /* ─── SECTION HEADERS ────────────────────────────────── */
-    .sec-label { display: block; margin-bottom: 1rem; }
+    .label--brick { color: var(--brick); }
+    .label--mint  { color: var(--mint);  }
+    .label--gold  { color: var(--gold);  }
+    .sec-label { display: block; margin-bottom: 0.85rem; }
     .sec-title {
-      font-size: clamp(2rem, 4vw, 3.5rem);
-      font-weight: 900;
-      line-height: 1.1;
-      margin-bottom: 1.5rem;
+      font-size: clamp(1.8rem, 3.5vw, 3rem);
+      font-weight: 900; line-height: 1.1; margin-bottom: 1.25rem;
     }
     .sec-title .accent      { color: var(--brick); }
     .sec-title .accent-mint { color: var(--mint); }
+    .sec-title .accent-gold { color: var(--gold); }
 
-    /* ─── WHAT ───────────────────────────────────────────── */
-    #what .header-grid {
+    /* ─── BUTTONS ───────────────────────────────────────────── */
+    .btn-primary {
+      display: inline-block;
+      background: var(--brick); color: var(--ink);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem; font-weight: 500;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      padding: 0.95rem 2.5rem; transition: opacity 0.2s; line-height: 1;
+    }
+    .btn-primary:hover { opacity: 0.82; }
+    .btn-primary--large { font-size: 0.82rem; padding: 1.15rem 3rem; }
+    .btn-secondary {
+      display: inline-block;
+      border: 1px solid rgba(181,201,176,0.5); color: var(--mint);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 0.95rem 2.5rem; transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-secondary:hover { border-color: var(--mint); color: var(--cream); }
+    .btn-ghost {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--slate); border-bottom: 1px solid var(--teal);
+      padding-bottom: 2px; transition: color 0.2s, border-color 0.2s;
+    }
+    .btn-ghost:hover { color: var(--cream); border-color: var(--cream); }
+
+    /* ─── TRUST BADGES ──────────────────────────────────────── */
+    .badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.58rem; letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 4px 10px; border-radius: 2px;
+    }
+    .badge--mint   { background: rgba(181,201,176,0.12); color: var(--mint); border: 1px solid rgba(181,201,176,0.25); }
+    .badge--brick  { background: rgba(183,112,90,0.12);  color: var(--brick); border: 1px solid rgba(183,112,90,0.25); }
+    .badge--gold   { background: rgba(201,169,110,0.12); color: var(--gold);  border: 1px solid rgba(201,169,110,0.25); }
+    .badge--slate  { background: rgba(95,87,78,0.15);    color: var(--mist);  border: 1px solid rgba(95,87,78,0.3); }
+    .badge-dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
+
+    /* ─── HERO ──────────────────────────────────────────────── */
+    #hero {
+      padding: 7rem 0 6rem;
+      border-bottom: 1px solid var(--teal);
+      position: relative; overflow: hidden;
+    }
+    .hero-grid {
       display: grid;
-      grid-template-columns: 1fr 2fr;
-      gap: 4rem;
-      align-items: start;
-      margin-bottom: 5rem;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
     }
-    @media (max-width: 680px) { #what .header-grid { grid-template-columns: 1fr; gap: 1.5rem; } }
-    .what-body {
-      font-size: 1.02rem;
-      color: var(--mist);
-      line-height: 1.95;
-      max-width: 580px;
+    @media (max-width: 800px) { .hero-grid { grid-template-columns: 1fr; gap: 3rem; } }
+    .hero-eyebrow {
+      display: flex; align-items: center; gap: 0.85rem;
+      margin-bottom: 2rem;
     }
-    .pillars {
+    .hero-eyebrow-line { width: 2rem; height: 1px; background: var(--brick); }
+    .hero-headline {
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-weight: 900; line-height: 1.05;
+      letter-spacing: -0.02em; margin-bottom: 1.5rem;
+    }
+    .hero-headline .accent { color: var(--brick); }
+    .hero-sub {
+      font-size: 1rem; color: var(--mist);
+      max-width: 480px; line-height: 1.85; margin-bottom: 2.5rem;
+    }
+    .hero-cta-group {
+      display: flex; align-items: center;
+      gap: 1rem; flex-wrap: wrap; margin-bottom: 2.5rem;
+    }
+    .hero-stats {
+      display: flex; gap: 2.5rem; flex-wrap: wrap;
+    }
+    .hero-stat-num {
+      font-size: 1.5rem; font-weight: 900;
+      color: var(--cream); line-height: 1; display: block;
+    }
+    .hero-stat-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6rem; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--slate);
+      display: block; margin-top: 4px;
+    }
+    .hero-visual {
+      position: relative;
+    }
+    .hero-artwork-card {
+      background: var(--ink2);
+      border: 1px solid var(--teal);
+      overflow: hidden;
+    }
+    .hero-artwork-img {
+      width: 100%; aspect-ratio: 4/3;
+      background: var(--ink3);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 6rem; color: rgba(181,201,176,0.15);
+      position: relative; overflow: hidden;
+    }
+    .hero-artwork-img-text {
+      position: absolute; bottom: 1rem; right: 1.25rem;
+      font-size: 4.5rem; font-weight: 900;
+      color: rgba(181,201,176,0.08); line-height: 1; user-select: none;
+    }
+    .hero-artwork-info {
+      padding: 1.25rem 1.5rem;
+      display: flex; align-items: flex-end; justify-content: space-between;
+    }
+    .hero-artwork-meta { flex: 1; }
+    .hero-artwork-title { font-size: 0.95rem; font-weight: 700; margin-bottom: 4px; }
+    .hero-artwork-artist {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.62rem; letter-spacing: 0.1em; color: var(--slate);
+    }
+    .hero-artwork-price { text-align: right; }
+    .hero-artwork-from {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.58rem; letter-spacing: 0.1em;
+      color: var(--slate); display: block; margin-bottom: 2px;
+    }
+    .hero-artwork-amount { font-size: 1.1rem; font-weight: 900; color: var(--gold); }
+    .hero-badge-row {
+      padding: 0.75rem 1.5rem;
+      background: rgba(42,61,58,0.3);
+      border-top: 1px solid var(--teal);
+      display: flex; gap: 0.6rem; flex-wrap: wrap;
+    }
+    .hero-second-card {
+      position: absolute; bottom: -1.5rem; right: -1.5rem;
+      width: 55%; background: var(--ink3);
+      border: 1px solid var(--teal);
+      padding: 1rem 1.25rem;
+      display: flex; align-items: center; gap: 1rem;
+    }
+    @media (max-width: 800px) { .hero-second-card { display: none; } }
+    .hero-second-thumb {
+      width: 48px; height: 48px; flex-shrink: 0;
+      background: var(--ink2); border: 1px solid var(--teal);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; color: rgba(201,169,110,0.4);
+    }
+
+    /* ─── FEATURED WORKS ────────────────────────────────────── */
+    #featured { background: var(--ink); }
+    .featured-header {
+      display: flex; align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 3rem; flex-wrap: wrap; gap: 1.5rem;
+    }
+    .works-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      background: var(--teal);
-    }
-    @media (max-width: 640px) { .pillars { grid-template-columns: 1fr; } }
-    .pillar { background: var(--ink); padding: 2.5rem 2rem; }
-    .pillar-char {
-      display: block;
-      margin-bottom: 1.25rem;
-      line-height: 1;
-      font-size: 2rem;
-      font-weight: 900;
-      color: var(--mint);
-    }
-    .pillar-title { font-size: 1.05rem; font-weight: 900; margin-bottom: 0.5rem; line-height: 1.3; }
-    .pillar-desc { font-size: 0.875rem; color: var(--slate); line-height: 1.75; }
-
-    /* ─── CATEGORIES ─────────────────────────────────────── */
-    .category-list {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1px;
-      background: var(--teal);
+      gap: 1px; background: var(--teal);
       margin-bottom: 3rem;
     }
-    @media (max-width: 720px) { .category-list { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 420px) { .category-list { grid-template-columns: 1fr; } }
-    .cat-item { background: var(--ink); padding: 2rem 1.75rem; }
-    .cat-num {
-      display: block;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.62rem;
-      letter-spacing: 0.16em;
-      color: var(--teal);
-      margin-bottom: 1.25rem;
+    @media (max-width: 800px) { .works-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 480px) { .works-grid { grid-template-columns: 1fr; } }
+    .work-card {
+      background: var(--ink);
+      display: flex; flex-direction: column;
+      transition: background 0.3s;
+      cursor: pointer;
     }
-    .cat-name { font-size: 1.15rem; font-weight: 900; line-height: 1.2; margin-bottom: 0.6rem; }
-    .cat-name .en-sub { display: block; font-size: 0.72em; font-weight: 400; opacity: 0.5; margin-top: 0.2em; }
-    .cat-desc { font-size: 0.8rem; color: var(--slate); line-height: 1.75; }
-    .cat-cta { text-align: center; }
-
-    #creators .header-row {
-      display: flex;
-      align-items: flex-end;
+    .work-card:hover { background: var(--ink3); }
+    .work-card-thumb {
+      aspect-ratio: 1;
+      background: var(--ink2);
+      position: relative; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .work-card-thumb img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.5s;
+    }
+    .work-card:hover .work-card-thumb img { transform: scale(1.04); }
+    .work-thumb-placeholder {
+      font-size: 4rem; font-weight: 900;
+      color: rgba(181,201,176,0.1); user-select: none;
+    }
+    .work-card-overlay {
+      position: absolute; inset: 0;
+      background: rgba(10,10,10,0.0);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; transition: opacity 0.3s, background 0.3s;
+    }
+    .work-card:hover .work-card-overlay { opacity: 1; background: rgba(10,10,10,0.45); }
+    .work-card-overlay-btn {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase;
+      background: var(--brick); color: var(--ink);
+      padding: 0.6rem 1.5rem; font-weight: 500;
+    }
+    .work-card-body { padding: 1.25rem 1.5rem 1.5rem; flex: 1; display: flex; flex-direction: column; }
+    .work-card-category {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.58rem; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--slate);
+      margin-bottom: 0.5rem;
+    }
+    .work-card-title { font-size: 0.95rem; font-weight: 700; line-height: 1.3; margin-bottom: 0.4rem; }
+    .work-card-artist {
+      font-size: 0.8rem; color: var(--slate); margin-bottom: auto; padding-bottom: 1rem;
+    }
+    .work-card-footer {
+      display: flex; align-items: center;
       justify-content: space-between;
-      margin-bottom: 4rem;
-      flex-wrap: wrap;
-      gap: 2rem;
+      padding-top: 1rem; border-top: 1px solid var(--teal);
     }
-
-    /* ─── CTA ────────────────────────────────────────────── */
-    #cta { padding: 10rem 0; text-align: center; position: relative; overflow: hidden; }
-    .cta-inner { position: relative; z-index: 1; max-width: 620px; margin: 0 auto; }
-    .cta-headline {
-      font-size: clamp(2.5rem, 5vw, 4rem);
-      font-weight: 900;
-      line-height: 1.1;
-      margin-bottom: 1.5rem;
-    }
-    .cta-sub { font-size: 1rem; color: var(--mist); margin-bottom: 3rem; line-height: 1.85; }
-    .cta-note {
-      margin-top: 1.75rem;
+    .work-card-price-from {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.68rem;
-      letter-spacing: 0.1em;
-      color: var(--slate);
-      line-height: 1.9;
+      font-size: 0.55rem; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--slate);
+      display: block; margin-bottom: 1px;
+    }
+    .work-card-price { font-size: 1rem; font-weight: 900; color: var(--gold); }
+    .work-card-badges { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+    .featured-cta { text-align: center; }
+
+    /* ─── PLATFORM CONCEPT ──────────────────────────────────── */
+    #concept {
+      background: var(--ink2);
+      border-top: 1px solid var(--teal);
+      border-bottom: 1px solid var(--teal);
+    }
+    .concept-grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 5rem; align-items: start;
+    }
+    @media (max-width: 700px) { .concept-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+    .concept-body { font-size: 1rem; color: var(--mist); line-height: 1.95; }
+    .concept-body p + p { margin-top: 1.1em; }
+    .concept-pillars {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px; background: var(--teal); margin-top: 3.5rem;
+    }
+    @media (max-width: 600px) { .concept-pillars { grid-template-columns: 1fr; } }
+    .concept-pillar { background: var(--ink2); padding: 2rem 1.75rem; }
+    .concept-pillar-char {
+      display: block; font-size: 1.75rem; font-weight: 900;
+      color: var(--mint); margin-bottom: 1rem; line-height: 1;
+    }
+    .concept-pillar-title { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.4rem; line-height: 1.3; }
+    .concept-pillar-desc { font-size: 0.8rem; color: var(--slate); line-height: 1.75; }
+
+    /* ─── CATEGORIES ────────────────────────────────────────── */
+    #categories { background: var(--ink); }
+    .cat-cloud {
+      display: flex; flex-wrap: wrap; gap: 0.75rem;
+      margin-top: 2.5rem; margin-bottom: 3rem;
+    }
+    .cat-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.6rem 1.1rem;
+      border: 1px solid var(--teal); color: var(--slate);
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+      cursor: pointer;
+    }
+    .cat-tag:hover { background: rgba(42,61,58,0.5); color: var(--mint); border-color: var(--mint); }
+    .cat-tag--active { background: var(--teal); color: var(--mint); border-color: var(--mint); }
+
+    /* ─── ARTIST BENEFITS ───────────────────────────────────── */
+    #benefits { background: var(--ink2); border-top: 1px solid var(--teal); }
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem; align-items: center;
+    }
+    @media (max-width: 700px) { .benefits-grid { grid-template-columns: 1fr; gap: 3rem; } }
+    .benefit-list { list-style: none; margin-top: 2rem; }
+    .benefit-item {
+      display: flex; gap: 1.25rem;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid rgba(42,61,58,0.6);
+    }
+    .benefit-item:first-child { border-top: 1px solid rgba(42,61,58,0.6); }
+    .benefit-icon {
+      font-size: 1.2rem; color: var(--mint);
+      flex-shrink: 0; width: 2rem; text-align: center;
+      margin-top: 2px;
+    }
+    .benefit-title { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.25rem; }
+    .benefit-desc { font-size: 0.82rem; color: var(--slate); line-height: 1.75; }
+    .royalty-display {
+      background: var(--ink3); border: 1px solid var(--teal);
+      padding: 3rem 2.5rem; text-align: center;
+    }
+    .royalty-num {
+      font-size: 5rem; font-weight: 900;
+      color: var(--gold); line-height: 1; display: block;
+    }
+    .royalty-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--slate);
+      display: block; margin-top: 0.75rem; margin-bottom: 2rem;
+    }
+    .royalty-breakdown {
+      display: flex; gap: 1px; background: var(--teal);
+      margin-bottom: 2rem;
+    }
+    .royalty-share {
+      flex: 1; padding: 1rem; text-align: center; background: var(--ink2);
+    }
+    .royalty-share-pct {
+      font-size: 1.5rem; font-weight: 900;
+      display: block; line-height: 1; margin-bottom: 4px;
+    }
+    .royalty-share-pct--artist { color: var(--mint); }
+    .royalty-share-pct--platform { color: var(--slate); }
+    .royalty-share-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.58rem; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--slate);
+    }
+    .royalty-note {
+      font-size: 0.78rem; color: var(--slate); line-height: 1.75;
     }
 
-    /* ─── ANIMATIONS ─────────────────────────────────────── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
+    /* ─── NEW ARTISTS ───────────────────────────────────────── */
+    #new-artists { background: var(--ink); }
+    .new-artists-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px; background: var(--teal);
+      margin-top: 2.5rem; margin-bottom: 3rem;
     }
-    .hero-eyebrow  { animation: fadeUp 0.6s ease both; animation-delay: 0.05s; }
-    .hero-headline { animation: fadeUp 0.75s ease both; animation-delay: 0.2s; }
-    .hero-tagline  { animation: fadeUp 0.6s ease both; animation-delay: 0.42s; }
-    .hero-sub      { animation: fadeUp 0.6s ease both; animation-delay: 0.58s; }
-    .hero-cta-group { animation: fadeUp 0.6s ease both; animation-delay: 0.78s; }
-    .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.7s ease, transform 0.7s ease; }
-    .reveal.is-visible { opacity: 1; transform: none; }
-    .reveal-d1 { transition-delay: 0.08s; }
-    .reveal-d2 { transition-delay: 0.18s; }
-    .reveal-d3 { transition-delay: 0.28s; }
-    .reveal-d4 { transition-delay: 0.38s; }
-    @media (prefers-reduced-motion: reduce) {
-      .hero-eyebrow, .hero-headline, .hero-tagline, .hero-sub, .hero-cta-group {
-        animation: none; opacity: 1; transform: none;
-      }
-      .reveal { opacity: 1; transform: none; transition: none; }
+    @media (max-width: 700px) { .new-artists-grid { grid-template-columns: repeat(2, 1fr); } }
+    .artist-card {
+      background: var(--ink); padding: 1.75rem 1.5rem;
+      transition: background 0.3s;
+    }
+    .artist-card:hover { background: var(--ink3); }
+    .artist-avatar {
+      width: 52px; height: 52px; border-radius: 50%;
+      background: var(--teal);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.25rem; font-weight: 900; color: var(--mint);
+      margin-bottom: 1rem; overflow: hidden;
+    }
+    .artist-avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .artist-name { font-size: 0.95rem; font-weight: 700; margin-bottom: 3px; }
+    .artist-location {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6rem; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--slate); margin-bottom: 0.75rem;
+    }
+    .artist-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .artist-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.55rem; letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 3px 8px; background: rgba(42,61,58,0.5);
+      color: var(--slate); border-radius: 1px;
     }
 
-    /* ─── FOOTER ─────────────────────────────────────────── */
+    /* ─── FINAL CTA ─────────────────────────────────────────── */
+    #join {
+      background: var(--ink2); border-top: 1px solid var(--teal);
+      text-align: center; padding: 9rem 0;
+    }
+    .join-inner { max-width: 680px; margin: 0 auto; }
+    .join-headline {
+      font-size: clamp(2.2rem, 4.5vw, 3.5rem);
+      font-weight: 900; line-height: 1.1; margin-bottom: 1.5rem;
+    }
+    .join-sub {
+      font-size: 1rem; color: var(--mist);
+      line-height: 1.85; margin-bottom: 2.5rem; max-width: 500px; margin-left: auto; margin-right: auto;
+    }
+    .join-checklist {
+      list-style: none; margin-bottom: 3rem;
+      display: inline-block; text-align: left;
+    }
+    .join-checklist li {
+      font-size: 0.88rem; color: var(--mist);
+      line-height: 2; padding-left: 1.5rem; position: relative;
+    }
+    .join-checklist li::before {
+      content: '→'; position: absolute; left: 0;
+      color: var(--mint); font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem; top: 0.38rem;
+    }
+    .join-btn-group {
+      display: flex; flex-direction: column; align-items: center; gap: 1rem;
+    }
+    .join-note {
+      margin-top: 2rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem; letter-spacing: 0.1em;
+      color: var(--slate); line-height: 1.9;
+    }
+    .join-note a { color: var(--mint); border-bottom: 1px solid rgba(181,201,176,0.3); }
+
+    /* ─── FOOTER ────────────────────────────────────────────── */
     footer { border-top: 1px solid var(--teal); padding: 2.5rem 0; }
     .footer-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 1rem;
+      display: flex; align-items: center;
+      justify-content: space-between; flex-wrap: wrap; gap: 1rem;
     }
     .footer-copy {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.68rem;
-      letter-spacing: 0.08em;
-      color: var(--slate);
+      font-size: 0.65rem; letter-spacing: 0.08em; color: var(--slate);
+    }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.62rem; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--slate);
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--mint); }
+
+    /* ─── ANIMATIONS ────────────────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero-eyebrow  { animation: fadeUp 0.55s ease both; animation-delay: 0.05s; }
+    .hero-headline { animation: fadeUp 0.65s ease both; animation-delay: 0.18s; }
+    .hero-sub      { animation: fadeUp 0.55s ease both; animation-delay: 0.35s; }
+    .hero-cta-group { animation: fadeUp 0.55s ease both; animation-delay: 0.5s; }
+    .hero-stats    { animation: fadeUp 0.55s ease both; animation-delay: 0.65s; }
+    .hero-visual   { animation: fadeUp 0.7s ease both;  animation-delay: 0.3s; }
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .reveal.is-visible { opacity: 1; transform: none; }
+    .reveal-d1 { transition-delay: 0.07s; }
+    .reveal-d2 { transition-delay: 0.15s; }
+    .reveal-d3 { transition-delay: 0.23s; }
+    .reveal-d4 { transition-delay: 0.31s; }
+    @media (prefers-reduced-motion: reduce) {
+      .hero-eyebrow, .hero-headline, .hero-sub, .hero-cta-group, .hero-stats, .hero-visual {
+        animation: none; opacity: 1; transform: none;
+      }
+      .reveal { opacity: 1; transform: none; transition: none; }
     }
   </style>
 </head>
 <body>
 
-<!-- ── PARENT BRAND BAR ──────────────────────────────────── -->
+<!-- ── BRAND BAR ──────────────────────────────────────────── -->
 <div class="mb-brand-bar">
   <div class="mb-brand-tabs">
-    <a href="../index.html" class="mb-brand-tab">MANBREW.</a>
+    <a href="https://manbrew-studio.com" class="mb-brand-tab">MANBREW.</a>
     <span class="mb-brand-tab active">
       <span class="mb-brand-dot"></span>BRIDGE
     </span>
@@ -403,208 +609,260 @@
   <span class="mb-brand-tag">文字之間工作室</span>
 </div>
 
-<!-- ── NAV ─────────────────────────────────────────────── -->
+<!-- ── NAV ───────────────────────────────────────────────── -->
 <nav>
   <a href="index.html" class="nav-wordmark">MANBREW BRIDGE</a>
   <ul class="nav-links">
-    <li><a href="index.html" class="active"><span class="t-en">Home</span><span class="t-zh">首頁</span></a></li>
-    <li><a href="works.html"><span class="t-en">Art Bazaar</span><span class="t-zh">藝術市集</span></a></li>
-    <li><a href="phase01-landing.html"><span class="t-en">Phase 01</span><span class="t-zh">第一階段</span></a></li>
-    <li><a href="creator-profile.html"><span class="t-en">Feature Artists</span><span class="t-zh">精選藝術家</span></a></li>
-    <li><a href="creator-guide.html"><span class="t-en">Creator Guide</span><span class="t-zh">創作者指南</span></a></li>
+    <li><a href="works.html"><span class="t-en">Browse Works</span><span class="t-zh">瀏覽作品</span></a></li>
+    <li><a href="index.html#categories"><span class="t-en">Categories</span><span class="t-zh">類別</span></a></li>
+    <li><a href="become-an-artist.html"><span class="t-en">Become an Artist</span><span class="t-zh">加入藝術家</span></a></li>
+    <li><a href="licensing.html"><span class="t-en">Licensing</span><span class="t-zh">授權說明</span></a></li>
+    <li><a href="creator-profile.html"><span class="t-en">Artists</span><span class="t-zh">藝術家</span></a></li>
   </ul>
-  <div class="lang-switch">
-    <button class="lang-btn active" data-lang="en" onclick="setLang('en')">EN</button>
-    <span class="lang-sep">·</span>
-    <button class="lang-btn" data-lang="zh" onclick="setLang('zh')">中文</button>
+  <div class="nav-right">
+    <div class="lang-switch">
+      <button class="lang-btn active" data-lang="en" onclick="setLang('en')">EN</button>
+      <span class="lang-sep">·</span>
+      <button class="lang-btn" data-lang="zh" onclick="setLang('zh')">中文</button>
+    </div>
+    <a href="works.html" class="nav-cta-primary">
+      <span class="t-zh">瀏覽作品</span><span class="t-en">Browse Works</span>
+    </a>
   </div>
-  <a href="https://forms.gle/RkiV3JumnALHFcHL9" target="_blank" rel="noopener" class="nav-cta">
-    <span class="t-zh">申請加入</span><span class="t-en">Apply</span>
-  </a>
 </nav>
 
 
-<!-- ── HERO ────────────────────────────────────────────── -->
+<!-- ── HERO ──────────────────────────────────────────────── -->
 <section id="hero">
   <div class="container">
-    <div class="hero-eyebrow">
-      <div class="hero-eyebrow-line"></div>
-      <span class="label label--brick"><span class="t-zh">猶太世界 × 華人世界</span><span class="t-en">Jewish World × Chinese World</span></span>
-    </div>
-    <h1 class="hero-headline">
-      Where Jewish<br>
-      &amp; Chinese<br>
-      <span class="accent">Worlds Meet.</span>
-    </h1>
-    <p class="hero-tagline t-zh">藝術授權平台，連結兩個文明的創作者</p>
-    <p class="hero-tagline t-en">An art licensing platform connecting creators across two civilizations</p>
-    <p class="hero-sub t-zh">
-      在 Manbrew Bridge，來自猶太世界與華人世界的創作者上架作品、建立連結。
-      透過藝術授權，讓文化真正流動。
-    </p>
-    <p class="hero-sub t-en">
-      On Manbrew Bridge, creators from Jewish and Chinese worlds list their works and build connections.
-      Art licensing as a form of genuine cultural exchange.
-    </p>
-    <div class="hero-cta-group">
-      <a href="works.html" class="btn-primary">
-        <span class="t-zh">逛逛藝術市集 →</span>
-        <span class="t-en">Explore the Art Bazaar →</span>
-      </a>
-      <a href="phase01-landing.html" class="btn-ghost">
-        <span class="t-zh">了解第一階段</span>
-        <span class="t-en">Phase 01 Open Call</span>
-      </a>
+    <div class="hero-grid">
+      <div>
+        <div class="hero-eyebrow">
+          <div class="hero-eyebrow-line"></div>
+          <span class="label label--brick">
+            <span class="t-zh">數位藝術授權市集</span>
+            <span class="t-en">Digital Art Licensing Marketplace</span>
+          </span>
+        </div>
+        <h1 class="hero-headline">
+          <span class="t-zh">
+            猶太與華人藝術家的<br>
+            <span class="accent">授權數位藝術作品</span>
+          </span>
+          <span class="t-en">
+            Licensed Digital Art by<br>
+            <span class="accent">Chinese &amp; Jewish Artists</span>
+          </span>
+        </h1>
+        <p class="hero-sub t-zh">
+          Manbrew Bridge 是一個策展型數位藝術授權平台。
+          收藏者、設計師與品牌可購買可下載的授權藝術作品，藝術家則從每次授權中獲得被動收入。
+        </p>
+        <p class="hero-sub t-en">
+          Manbrew Bridge connects Chinese and Jewish artists with collectors, designers, and brands through digital licensing.
+          Browse curated works, download licensed files, and support artists who earn royalties from every purchase.
+        </p>
+        <div class="hero-cta-group">
+          <a href="works.html" class="btn-primary btn-primary--large">
+            <span class="t-zh">瀏覽所有作品 →</span>
+            <span class="t-en">Browse Artworks →</span>
+          </a>
+          <a href="become-an-artist.html" class="btn-secondary">
+            <span class="t-zh">成為藝術家</span>
+            <span class="t-en">Become an Artist</span>
+          </a>
+        </div>
+        <div class="hero-stats">
+          <div>
+            <span class="hero-stat-num">2</span>
+            <span class="hero-stat-label">
+              <span class="t-zh">文明交匯</span>
+              <span class="t-en">Civilizations</span>
+            </span>
+          </div>
+          <div>
+            <span class="hero-stat-num">80%</span>
+            <span class="hero-stat-label">
+              <span class="t-zh">藝術家分潤</span>
+              <span class="t-en">Artist Royalty</span>
+            </span>
+          </div>
+          <div>
+            <span class="hero-stat-num">4</span>
+            <span class="hero-stat-label">
+              <span class="t-zh">作品類別</span>
+              <span class="t-en">Categories</span>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <a href="works.html" class="hero-artwork-card" style="display:block;">
+          <div class="hero-artwork-img">
+            <img src="images/work-01.png" alt="時間之外 / Beyond Time" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none'">
+            <span class="hero-artwork-img-text" aria-hidden="true">時</span>
+          </div>
+          <div class="hero-artwork-info">
+            <div class="hero-artwork-meta">
+              <div class="hero-artwork-title">
+                <span class="t-zh">時間之外</span>
+                <span class="t-en">Beyond Time</span>
+              </div>
+              <div class="hero-artwork-artist">Ann Chen · Taipei</div>
+            </div>
+            <div class="hero-artwork-price">
+              <span class="hero-artwork-from">
+                <span class="t-zh">授權起</span>
+                <span class="t-en">From</span>
+              </span>
+              <span class="hero-artwork-amount">USD 50</span>
+            </div>
+          </div>
+          <div class="hero-badge-row">
+            <span class="badge badge--mint"><span class="badge-dot"></span>
+              <span class="t-zh">個人授權</span><span class="t-en">Personal License</span>
+            </span>
+            <span class="badge badge--gold"><span class="badge-dot"></span>
+              <span class="t-zh">商業授權</span><span class="t-en">Commercial License</span>
+            </span>
+            <span class="badge badge--slate">
+              <span class="t-zh">PNG / PDF</span><span class="t-en">PNG / PDF</span>
+            </span>
+          </div>
+        </a>
+      </div>
     </div>
   </div>
 </section>
 
-<hr class="rule">
 
-
-<!-- ── WHAT ────────────────────────────────────────────── -->
-<section id="what">
+<!-- ── FEATURED WORKS ─────────────────────────────────────── -->
+<section id="featured">
   <div class="container">
-    <div class="header-grid reveal">
+    <div class="featured-header reveal">
       <div>
-        <span class="label sec-label">
-          <span class="t-zh">01 — 平台是什麼</span>
-          <span class="t-en">01 — About</span>
+        <span class="label label--brick sec-label">
+          <span class="t-zh">精選作品</span>
+          <span class="t-en">Featured Works</span>
         </span>
-      </div>
-      <div>
         <h2 class="sec-title">
-          <span class="t-zh">兩個古老文明，<br><span class="accent">一個信任空間。</span></span>
-          <span class="t-en">Two ancient cultures.<br><span class="accent">One trusted space.</span></span>
+          <span class="t-zh">可授權下載的數位藝術。</span>
+          <span class="t-en">Licensable digital <span class="accent">artworks.</span></span>
         </h2>
-        <div class="what-body">
-          <div class="t-zh">
-            <p>Manbrew Bridge 是一個藝術授權平台，專為來自猶太世界與華人世界的創作者而建。</p>
-            <p style="margin-top:1em;">創作者在這裡上架攝影、視覺藝術、字體書法、音樂等作品，
-            透過授權機制讓作品流通。我們為創作者提供一個有文化語境的展示窗口，讓作品不只是被看見，而是被理解。</p>
+      </div>
+      <a href="works.html" class="btn-ghost">
+        <span class="t-zh">查看全部作品 →</span>
+        <span class="t-en">View all works →</span>
+      </a>
+    </div>
+
+    <div class="works-grid">
+      <!-- Work 01 -->
+      <a href="work-01.html" class="work-card reveal reveal-d1" style="text-decoration:none;">
+        <div class="work-card-thumb">
+          <img src="images/work-01.png" alt="時間之外" onerror="this.style.display='none'">
+          <span class="work-thumb-placeholder" aria-hidden="true">時</span>
+          <div class="work-card-overlay">
+            <span class="work-card-overlay-btn">
+              <span class="t-zh">查看授權</span><span class="t-en">View License</span>
+            </span>
           </div>
-          <div class="t-en">
-            <p>Manbrew Bridge is an art licensing platform built for creators from the Jewish and Chinese worlds.</p>
-            <p style="margin-top:1em;">Creators list their photography, visual art, typography, calligraphy,
-            and music for licensing. Not a streaming platform, not social media —
-            every work carries a genuine cultural perspective.</p>
+        </div>
+        <div class="work-card-body">
+          <span class="work-card-category">
+            <span class="t-zh">視覺藝術</span><span class="t-en">Visual Art</span>
+          </span>
+          <div class="work-card-title">
+            <span class="t-zh">時間之外</span><span class="t-en">Beyond Time</span>
+          </div>
+          <div class="work-card-artist">Ann Chen</div>
+          <div class="work-card-footer">
+            <div>
+              <span class="work-card-price-from">
+                <span class="t-zh">授權起</span><span class="t-en">From</span>
+              </span>
+              <span class="work-card-price">USD 50</span>
+            </div>
+            <div class="work-card-badges">
+              <span class="badge badge--mint" style="font-size:0.52rem; padding:3px 7px;">
+                <span class="t-zh">個人</span><span class="t-en">Personal</span>
+              </span>
+              <span class="badge badge--gold" style="font-size:0.52rem; padding:3px 7px;">
+                <span class="t-zh">商業</span><span class="t-en">Comm.</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </a>
+
+      <!-- Work 02 -->
+      <a href="work-02.html" class="work-card reveal reveal-d2" style="text-decoration:none;">
+        <div class="work-card-thumb">
+          <img src="images/work-02.png" alt="信仰之吻" onerror="this.style.display='none'">
+          <span class="work-thumb-placeholder" aria-hidden="true">信</span>
+          <div class="work-card-overlay">
+            <span class="work-card-overlay-btn">
+              <span class="t-zh">查看授權</span><span class="t-en">View License</span>
+            </span>
+          </div>
+        </div>
+        <div class="work-card-body">
+          <span class="work-card-category">
+            <span class="t-zh">視覺藝術</span><span class="t-en">Visual Art</span>
+          </span>
+          <div class="work-card-title">
+            <span class="t-zh">信仰之吻</span><span class="t-en">Kiss of Faith</span>
+          </div>
+          <div class="work-card-artist">Ann Chen</div>
+          <div class="work-card-footer">
+            <div>
+              <span class="work-card-price-from">
+                <span class="t-zh">授權起</span><span class="t-en">From</span>
+              </span>
+              <span class="work-card-price">USD 50</span>
+            </div>
+            <div class="work-card-badges">
+              <span class="badge badge--mint" style="font-size:0.52rem; padding:3px 7px;">
+                <span class="t-zh">個人</span><span class="t-en">Personal</span>
+              </span>
+              <span class="badge badge--gold" style="font-size:0.52rem; padding:3px 7px;">
+                <span class="t-zh">商業</span><span class="t-en">Comm.</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </a>
+
+      <!-- Placeholder 03 — coming soon -->
+      <div class="work-card reveal reveal-d3" style="opacity:0.45; pointer-events:none;">
+        <div class="work-card-thumb" style="background: var(--ink3);">
+          <span class="work-thumb-placeholder" aria-hidden="true">א</span>
+        </div>
+        <div class="work-card-body">
+          <span class="work-card-category">Typography &amp; Calligraphy</span>
+          <div class="work-card-title" style="color: var(--slate);">
+            <span class="t-zh">即將上架</span><span class="t-en">Coming Soon</span>
+          </div>
+          <div class="work-card-artist" style="color: var(--teal);">—</div>
+          <div class="work-card-footer">
+            <div>
+              <span class="work-card-price-from">
+                <span class="t-zh">作品徵集中</span><span class="t-en">Open Call</span>
+              </span>
+            </div>
+            <span class="badge badge--slate" style="font-size:0.52rem;">
+              <span class="t-zh">申請加入</span><span class="t-en">Apply Now</span>
+            </span>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="pillars">
-      <div class="pillar reveal reveal-d1">
-        <span class="pillar-char" aria-hidden="true">信</span>
-        <h3 class="pillar-title">
-          <span class="t-zh">信任優先</span>
-          <span class="t-en">Trust First</span>
-        </h3>
-        <p class="pillar-desc">
-          <span class="t-zh">每位成員都經過策展式邀請或申請審核。沒有演算法，沒有流量邏輯，只有真實連結。</span>
-          <span class="t-en">Every member is curated through invitation or application review. No algorithms, no follower logic — only genuine connection.</span>
-        </p>
-      </div>
-      <div class="pillar reveal reveal-d2">
-        <span class="pillar-char" aria-hidden="true">創</span>
-        <h3 class="pillar-title">
-          <span class="t-zh">創作驅動</span>
-          <span class="t-en">Creation-Driven</span>
-        </h3>
-        <p class="pillar-desc">
-          <span class="t-zh">共同策展、展覽、出版與合作計畫——文化交流必須有可見的成果留下來。</span>
-          <span class="t-en">Co-curation, exhibitions, publishing, and collaboration — cultural exchange must leave visible traces.</span>
-        </p>
-      </div>
-      <div class="pillar reveal reveal-d3">
-        <span class="pillar-char" aria-hidden="true">橋</span>
-        <h3 class="pillar-title">
-          <span class="t-zh">雙向流動</span>
-          <span class="t-en">Two-Way Exchange</span>
-        </h3>
-        <p class="pillar-desc">
-          <span class="t-zh">不是單向輸出，也不是文化消費。猶太視角遇見華人視角，兩邊都在學習，兩邊都在被改變。</span>
-          <span class="t-en">Not one-way output, not cultural consumption. Jewish perspectives meet Chinese perspectives — both sides learning, both sides changed.</span>
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<hr class="rule" style="border-color: var(--ink);">
-
-
-<!-- ── CATEGORIES ─────────────────────────────────────────── -->
-<section id="creators">
-  <div class="container">
-    <div class="header-row reveal">
-      <div>
-        <span class="label sec-label">
-          <span class="t-zh">02 — 作品類別</span>
-          <span class="t-en">02 — Categories</span>
-        </span>
-        <h2 class="sec-title">
-          <span class="t-zh">正在徵集四大類作品。</span>
-          <span class="t-en">Open call — <span class="accent">four categories.</span></span>
-        </h2>
-      </div>
-      <p style="max-width: 300px; font-size: 0.875rem; color: var(--slate); line-height: 1.85;">
-        <span class="t-zh">我們的藝術市集正在向猶太與華人創作者開放徵件。</span>
-        <span class="t-en">Our art market is open to Jewish and Chinese creators across all four categories.</span>
-      </p>
-    </div>
-
-    <div class="category-list">
-      <div class="cat-item reveal reveal-d1">
-        <span class="cat-num">01</span>
-        <h3 class="cat-name">
-          <span class="t-zh">視覺藝術<span class="en-sub">Visual Art</span></span>
-          <span class="t-en">Visual Art<span class="en-sub">繪畫・插畫・平面視覺藝術</span></span>
-        </h3>
-        <p class="cat-desc">
-          <span class="t-zh">繪畫、插畫、裝置——讓眼睛成為橋。</span>
-          <span class="t-en">Painting, illustration, installation — let the eye be the bridge.</span>
-        </p>
-      </div>
-      <div class="cat-item reveal reveal-d2">
-        <span class="cat-num">02</span>
-        <h3 class="cat-name">
-          <span class="t-zh">字體與書法<span class="en-sub">Typography &amp; Calligraphy</span></span>
-          <span class="t-en">Typography &amp; Calligraphy<span class="en-sub">字體・書法</span></span>
-        </h3>
-        <p class="cat-desc">
-          <span class="t-zh">希伯來字母與漢字的筆畫，共享一種對文字的崇敬。</span>
-          <span class="t-en">Hebrew letters and Chinese characters — a shared reverence for the written word.</span>
-        </p>
-      </div>
-      <div class="cat-item reveal reveal-d3">
-        <span class="cat-num">03</span>
-        <h3 class="cat-name">
-          <span class="t-zh">音樂與聲音<span class="en-sub">Music &amp; Sound</span></span>
-          <span class="t-en">Music &amp; Sound<span class="en-sub">旋律・音效</span></span>
-        </h3>
-        <p class="cat-desc">
-          <span class="t-zh">旋律、節奏、沉默——聲音也能成為文化的橋。</span>
-          <span class="t-en">Melody, rhythm, silence — sound as a bridge between cultures.</span>
-        </p>
-      </div>
-      <div class="cat-item reveal reveal-d4">
-        <span class="cat-num">04</span>
-        <h3 class="cat-name">
-          <span class="t-zh">攝影<span class="en-sub">Photography</span></span>
-          <span class="t-en">Photography<span class="en-sub">紀實・肖像・街頭</span></span>
-        </h3>
-        <p class="cat-desc">
-          <span class="t-zh">凝視的瞬間，跨越邊界的光影。</span>
-          <span class="t-en">A moment of gaze — light and shadow across borders.</span>
-        </p>
-      </div>
-    </div>
-
-    <div class="cat-cta reveal">
+    <div class="featured-cta reveal">
       <a href="works.html" class="btn-primary">
-        <span class="t-zh">逛逛藝術市集 →</span>
-        <span class="t-en">Explore the Art Market →</span>
+        <span class="t-zh">瀏覽全部作品 →</span>
+        <span class="t-en">Browse All Artworks →</span>
       </a>
     </div>
   </div>
@@ -613,38 +871,377 @@
 <hr class="rule">
 
 
-<!-- ── CTA ──────────────────────────────────────────────── -->
-<section id="cta">
-  <div class="cta-inner reveal">
-    <span class="label label--mint" style="display:block; margin-bottom: 1.75rem;">
-      Phase 01 — <span class="t-zh">現正開放申請</span><span class="t-en">Now Open</span>
+<!-- ── PLATFORM CONCEPT ───────────────────────────────────── -->
+<section id="concept">
+  <div class="container">
+    <div class="concept-grid reveal">
+      <div>
+        <span class="label sec-label">
+          <span class="t-zh">02 — 平台理念</span>
+          <span class="t-en">02 — Why Bridge</span>
+        </span>
+        <h2 class="sec-title">
+          <span class="t-zh">兩個古老文明，<br><span class="accent">一個授權平台。</span></span>
+          <span class="t-en">Two ancient cultures.<br><span class="accent">One licensing platform.</span></span>
+        </h2>
+      </div>
+      <div>
+        <div class="concept-body">
+          <div class="t-zh">
+            <p>猶太文化與華人文化都擁有深厚的視覺語言傳統——從希伯來書法到漢字書寫，從流散美學到身份敘事。這兩種文明的相遇，不只是文化交流，更是商業機會。</p>
+            <p>Manbrew Bridge 是一個策展型數位藝術授權平台。我們篩選來自這兩個文化脈絡的藝術家，讓設計師、品牌、出版商與收藏者能夠授權使用真正具有文化深度的數位藝術作品。</p>
+            <p>每一件作品都帶著故事。授權之後，這個故事延伸到你的創作裡。</p>
+          </div>
+          <div class="t-en">
+            <p>Jewish and Chinese cultures share a deep tradition of visual language — from Hebrew calligraphy to Chinese characters, from diaspora aesthetics to narratives of faith and identity. The intersection of these two civilizations creates a unique creative and commercial opportunity.</p>
+            <p>Manbrew Bridge is a curated digital art licensing platform. We select artists from both cultural contexts so designers, brands, publishers, and collectors can license works with genuine cultural depth.</p>
+            <p>Every artwork carries a story. When licensed, that story becomes part of your creative work.</p>
+          </div>
+        </div>
+        <div class="concept-pillars">
+          <div class="concept-pillar reveal reveal-d1">
+            <span class="concept-pillar-char" aria-hidden="true">信</span>
+            <div class="concept-pillar-title">
+              <span class="t-zh">策展式品質</span>
+              <span class="t-en">Curated Quality</span>
+            </div>
+            <p class="concept-pillar-desc">
+              <span class="t-zh">每位藝術家都經過申請審核。作品量少但精。</span>
+              <span class="t-en">Every artist is reviewed. Small but intentional.</span>
+            </p>
+          </div>
+          <div class="concept-pillar reveal reveal-d2">
+            <span class="concept-pillar-char" aria-hidden="true">創</span>
+            <div class="concept-pillar-title">
+              <span class="t-zh">版權歸屬藝術家</span>
+              <span class="t-en">Artist Keeps Copyright</span>
+            </div>
+            <p class="concept-pillar-desc">
+              <span class="t-zh">授權不等於出售版權。藝術家永遠保有作品所有權。</span>
+              <span class="t-en">Licensing ≠ selling copyright. Artists retain full ownership.</span>
+            </p>
+          </div>
+          <div class="concept-pillar reveal reveal-d3">
+            <span class="concept-pillar-char" aria-hidden="true">橋</span>
+            <div class="concept-pillar-title">
+              <span class="t-zh">跨文化稀缺性</span>
+              <span class="t-en">Cross-Cultural Rarity</span>
+            </div>
+            <p class="concept-pillar-desc">
+              <span class="t-zh">這裡的作品無法在一般素材庫找到。這是 Bridge 的護城河。</span>
+              <span class="t-en">These works can't be found in generic stock libraries. That's our moat.</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ── CATEGORIES ─────────────────────────────────────────── -->
+<section id="categories">
+  <div class="container">
+    <div class="reveal">
+      <span class="label label--mint sec-label">
+        <span class="t-zh">03 — 作品類別</span>
+        <span class="t-en">03 — Categories</span>
+      </span>
+      <h2 class="sec-title">
+        <span class="t-zh">按主題探索。</span>
+        <span class="t-en">Explore by <span class="accent-mint">theme.</span></span>
+      </h2>
+    </div>
+    <div class="cat-cloud reveal">
+      <a href="works.html" class="cat-tag cat-tag--active">
+        <span class="t-zh">全部</span><span class="t-en">All</span>
+      </a>
+      <a href="works.html?cat=typography" class="cat-tag">
+        <span class="t-zh">字體與書法</span><span class="t-en">Typography</span>
+      </a>
+      <a href="works.html?cat=photography" class="cat-tag">
+        <span class="t-zh">攝影</span><span class="t-en">Photography</span>
+      </a>
+      <a href="works.html?cat=faith" class="cat-tag">
+        <span class="t-zh">信仰</span><span class="t-en">Faith</span>
+      </a>
+      <a href="works.html?cat=identity" class="cat-tag">
+        <span class="t-zh">身份認同</span><span class="t-en">Identity</span>
+      </a>
+      <a href="works.html?cat=calligraphy" class="cat-tag">
+        <span class="t-zh">書法</span><span class="t-en">Calligraphy</span>
+      </a>
+      <a href="works.html?cat=migration" class="cat-tag">
+        <span class="t-zh">移居與流散</span><span class="t-en">Migration</span>
+      </a>
+      <a href="works.html?cat=memory" class="cat-tag">
+        <span class="t-zh">記憶</span><span class="t-en">Memory</span>
+      </a>
+      <a href="works.html?cat=bilingual" class="cat-tag">
+        <span class="t-zh">雙語設計</span><span class="t-en">Bilingual Design</span>
+      </a>
+      <a href="works.html?cat=abstract" class="cat-tag">
+        <span class="t-zh">抽象</span><span class="t-en">Abstract</span>
+      </a>
+      <a href="works.html?cat=print" class="cat-tag">
+        <span class="t-zh">印刷藝術</span><span class="t-en">Print Art</span>
+      </a>
+      <a href="works.html?cat=jerusalem" class="cat-tag">Jerusalem</a>
+    </div>
+    <div class="reveal" style="text-align:center;">
+      <a href="works.html" class="btn-primary">
+        <span class="t-zh">瀏覽所有類別 →</span>
+        <span class="t-en">Browse All Categories →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+
+<!-- ── ARTIST BENEFITS ────────────────────────────────────── -->
+<section id="benefits">
+  <div class="container">
+    <div class="benefits-grid">
+      <div class="reveal">
+        <span class="label label--gold sec-label">
+          <span class="t-zh">04 — 藝術家分潤</span>
+          <span class="t-en">04 — For Artists</span>
+        </span>
+        <h2 class="sec-title">
+          <span class="t-zh">上架作品，<span class="accent-gold">賺取被動收入。</span></span>
+          <span class="t-en">List your work.<br><span class="accent-gold">Earn passive income.</span></span>
+        </h2>
+        <ul class="benefit-list">
+          <li class="benefit-item">
+            <span class="benefit-icon">◈</span>
+            <div>
+              <div class="benefit-title">
+                <span class="t-zh">80% 授權收益歸你</span>
+                <span class="t-en">80% of every license goes to you</span>
+              </div>
+              <p class="benefit-desc">
+                <span class="t-zh">每次授權購買，你獲得 80%。平台只收取 20% 作為維運費用。</span>
+                <span class="t-en">Every time your work is licensed, you receive 80%. We keep 20% to run the platform.</span>
+              </p>
+            </div>
+          </li>
+          <li class="benefit-item">
+            <span class="benefit-icon">✦</span>
+            <div>
+              <div class="benefit-title">
+                <span class="t-zh">版權永遠歸屬於你</span>
+                <span class="t-en">You keep full copyright</span>
+              </div>
+              <p class="benefit-desc">
+                <span class="t-zh">授權不等於賣斷。你的作品永遠屬於你，你可以隨時下架或修改。</span>
+                <span class="t-en">Licensing is not a sale. Your artwork remains yours — you can remove or update it at any time.</span>
+              </p>
+            </div>
+          </li>
+          <li class="benefit-item">
+            <span class="benefit-icon">⬡</span>
+            <div>
+              <div class="benefit-title">
+                <span class="t-zh">全球受眾，文化精準</span>
+                <span class="t-en">Global audience, cultural precision</span>
+              </div>
+              <p class="benefit-desc">
+                <span class="t-zh">我們的收藏者與買家來自設計、出版、品牌等領域，他們正在尋找具有文化深度的作品。</span>
+                <span class="t-en">Our buyers are designers, publishers, and brands actively looking for culturally rooted artworks they can't find elsewhere.</span>
+              </p>
+            </div>
+          </li>
+          <li class="benefit-item">
+            <span class="benefit-icon">▸</span>
+            <div>
+              <div class="benefit-title">
+                <span class="t-zh">策展式曝光，不是演算法</span>
+                <span class="t-en">Curated exposure, not algorithm-driven</span>
+              </div>
+              <p class="benefit-desc">
+                <span class="t-zh">你的作品以完整品質呈現，而非在無盡滾動中消失。每件作品都被認真對待。</span>
+                <span class="t-en">Your work is presented with full context, not lost in an infinite scroll. Every piece is treated with intention.</span>
+              </p>
+            </div>
+          </li>
+        </ul>
+        <div style="margin-top: 2rem;">
+          <a href="become-an-artist.html" class="btn-primary">
+            <span class="t-zh">申請成為藝術家 →</span>
+            <span class="t-en">Apply to Join as an Artist →</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="reveal reveal-d2">
+        <div class="royalty-display">
+          <span class="royalty-num">80%</span>
+          <span class="royalty-label">
+            <span class="t-zh">藝術家授權分潤</span>
+            <span class="t-en">Artist Royalty Rate</span>
+          </span>
+          <div class="royalty-breakdown">
+            <div class="royalty-share">
+              <span class="royalty-share-pct royalty-share-pct--artist">80%</span>
+              <span class="royalty-share-label">
+                <span class="t-zh">藝術家</span><span class="t-en">Artist</span>
+              </span>
+            </div>
+            <div class="royalty-share">
+              <span class="royalty-share-pct royalty-share-pct--platform">20%</span>
+              <span class="royalty-share-label">
+                <span class="t-zh">平台</span><span class="t-en">Platform</span>
+              </span>
+            </div>
+          </div>
+          <p class="royalty-note">
+            <span class="t-zh">
+              例如：一張商業授權售出 USD 350，你獲得 USD 280。
+              作品無限次被授權，你持續獲得收入，不需要額外付出。
+            </span>
+            <span class="t-en">
+              Example: a commercial license sold at USD 350 — you receive USD 280.
+              Your work can be licensed unlimited times. Passive income, no extra effort required.
+            </span>
+          </p>
+        </div>
+        <div style="margin-top: 1px; background: var(--ink3); border: 1px solid var(--teal); border-top: none; padding: 1.25rem 1.5rem;">
+          <p style="font-family:'JetBrains Mono',monospace; font-size:0.65rem; letter-spacing:0.1em; color: var(--slate); line-height:1.9;">
+            <span class="t-zh">✦ 版權歸藝術家所有 &nbsp;·&nbsp; ✦ 可隨時下架 &nbsp;·&nbsp; ✦ 7–14 天審核回覆</span>
+            <span class="t-en">✦ Copyright stays with artist &nbsp;·&nbsp; ✦ Withdraw anytime &nbsp;·&nbsp; ✦ 7–14 day review</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ── ARTISTS ────────────────────────────────────────────── -->
+<section id="new-artists">
+  <div class="container">
+    <div class="reveal" style="display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:2rem; flex-wrap:wrap; gap:1rem;">
+      <div>
+        <span class="label label--mint sec-label">
+          <span class="t-zh">05 — 精選藝術家</span>
+          <span class="t-en">05 — Featured Artists</span>
+        </span>
+        <h2 class="sec-title">
+          <span class="t-zh">認識創作者。</span>
+          <span class="t-en">Meet the <span class="accent-mint">creators.</span></span>
+        </h2>
+      </div>
+      <a href="creator-profile.html" class="btn-ghost">
+        <span class="t-zh">查看所有藝術家 →</span>
+        <span class="t-en">View all artists →</span>
+      </a>
+    </div>
+
+    <div class="new-artists-grid">
+      <a href="creator-profile.html" class="artist-card reveal reveal-d1" style="text-decoration:none;">
+        <div class="artist-avatar">
+          <img src="images/ann-avatar.png" alt="Ann Chen" onerror="this.style.display='none'; this.parentElement.textContent='陳'">
+        </div>
+        <div class="artist-name">Ann Chen</div>
+        <div class="artist-location">Taipei, Taiwan</div>
+        <div class="artist-tags">
+          <span class="artist-tag">Visual Art</span>
+          <span class="artist-tag">Photography</span>
+          <span class="artist-tag">Typography</span>
+        </div>
+      </a>
+      <div class="artist-card reveal reveal-d2" style="opacity:0.35; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; gap:0.75rem;">
+        <div style="font-size:1.75rem; color: rgba(42,61,58,0.8);">+</div>
+        <p style="font-family:'JetBrains Mono',monospace; font-size:0.62rem; letter-spacing:0.12em; text-transform:uppercase; color: var(--teal);">
+          <span class="t-zh">第一批席次開放中</span><span class="t-en">Founding seats open</span>
+        </p>
+        <a href="become-an-artist.html" class="badge badge--mint" style="text-decoration:none; cursor:pointer; pointer-events:all; opacity:1;">
+          <span class="t-zh">申請</span><span class="t-en">Apply</span>
+        </a>
+      </div>
+      <div class="artist-card reveal reveal-d3" style="opacity:0.35; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; gap:0.75rem;">
+        <div style="font-size:1.75rem; color: rgba(42,61,58,0.8);">+</div>
+        <p style="font-family:'JetBrains Mono',monospace; font-size:0.62rem; letter-spacing:0.12em; text-transform:uppercase; color: var(--teal);">
+          <span class="t-zh">猶太藝術家邀請中</span><span class="t-en">Seeking Jewish artists</span>
+        </p>
+      </div>
+      <div class="artist-card reveal reveal-d4" style="opacity:0.35; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; gap:0.75rem;">
+        <div style="font-size:1.75rem; color: rgba(42,61,58,0.8);">+</div>
+        <p style="font-family:'JetBrains Mono',monospace; font-size:0.62rem; letter-spacing:0.12em; text-transform:uppercase; color: var(--teal);">
+          <span class="t-zh">第一階段共 20 席</span><span class="t-en">20 founding seats total</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+
+<!-- ── FINAL CTA ──────────────────────────────────────────── -->
+<section id="join">
+  <div class="join-inner reveal">
+    <span class="label label--brick" style="display:block; margin-bottom:1.5rem;">
+      Phase 01 — <span class="t-zh">創始席次開放申請</span><span class="t-en">Founding Seats Now Open</span>
     </span>
-    <h2 class="cta-headline">
-      <span class="t-zh">創作者，歡迎加入。</span>
-      <span class="t-en">Creators, come join us.</span>
+    <h2 class="join-headline">
+      <span class="t-zh">創作者，<br>這個平台為你而建。</span>
+      <span class="t-en">This platform was<br>built for <span style="color:var(--brick);">creators like you.</span></span>
     </h2>
-    <p class="cta-sub">
-      <span class="t-zh">第一階段正在招募來自猶太與華人世界的創作者。<br>名額有限，20 席。</span>
-      <span class="t-en">Phase 01 is recruiting creators from the Jewish and Chinese worlds.<br>20 founding seats available.</span>
+    <p class="join-sub">
+      <span class="t-zh">第一批 20 席正在招募猶太與華人背景的創作者。加入，讓你的作品被全球授權使用，並賺取持續收益。</span>
+      <span class="t-en">The first 20 founding seats are open to Jewish and Chinese creators. Join, get your work licensed globally, and earn ongoing royalties.</span>
     </p>
-    <a href="phase01-landing.html" class="btn-primary">
-      <span class="t-zh">了解第一階段 →</span>
-      <span class="t-en">Explore Phase 01 →</span>
-    </a>
-    <p class="cta-note">
-      <span class="t-zh">也可以先逛逛 <a href="works.html" style="color: var(--mint);">藝術市集</a> 或認識 <a href="creator-profile.html" style="color: var(--mint);">精選藝術家</a></span>
-      <span class="t-en">Or browse the <a href="works.html" style="color: var(--mint);">Art Bazaar</a> and meet our <a href="creator-profile.html" style="color: var(--mint);">Feature Artists</a></span>
+    <ul class="join-checklist">
+      <li>
+        <span class="t-zh">你的作品帶有猶太或華人文化的根源與觀點</span>
+        <span class="t-en">Your work carries a Jewish or Chinese cultural root or perspective</span>
+      </li>
+      <li>
+        <span class="t-zh">你希望作品被授權使用，而不只是被「按讚」</span>
+        <span class="t-en">You want your work licensed and used, not just liked</span>
+      </li>
+      <li>
+        <span class="t-zh">你對數位藝術授權與被動收入有興趣</span>
+        <span class="t-en">You're interested in digital art licensing and passive income</span>
+      </li>
+    </ul>
+    <div class="join-btn-group">
+      <a href="https://forms.gle/RkiV3JumnALHFcHL9" target="_blank" rel="noopener" class="btn-primary btn-primary--large">
+        <span class="t-zh">申請創始席次 →</span>
+        <span class="t-en">Apply for a Founding Seat →</span>
+      </a>
+      <a href="become-an-artist.html" class="btn-secondary">
+        <span class="t-zh">先了解藝術家申請流程</span>
+        <span class="t-en">Learn about the artist process first</span>
+      </a>
+    </div>
+    <p class="join-note">
+      <span class="t-zh">也可以先 <a href="works.html">瀏覽作品</a> 或 <a href="licensing.html">了解授權方式</a></span>
+      <span class="t-en">Or <a href="works.html">browse artworks</a> and <a href="licensing.html">learn how licensing works</a></span>
     </p>
   </div>
 </section>
 
 
-<!-- ── FOOTER ────────────────────────────────────────────── -->
+<!-- ── FOOTER ─────────────────────────────────────────────── -->
 <footer>
   <div class="container">
     <div class="footer-inner">
       <p class="footer-copy">© 2026 Manbrew Bridge — All rights reserved</p>
-      <p class="footer-copy">WHERE JEWISH &amp; CHINESE WORLDS MEET</p>
+      <div class="footer-links">
+        <a href="licensing.html">
+          <span class="t-zh">授權說明</span><span class="t-en">Licensing</span>
+        </a>
+        <a href="become-an-artist.html">
+          <span class="t-zh">加入藝術家</span><span class="t-en">For Artists</span>
+        </a>
+        <a href="creator-guide.html">
+          <span class="t-zh">創作者指南</span><span class="t-en">Guide</span>
+        </a>
+      </div>
     </div>
   </div>
 </footer>
@@ -659,7 +1256,7 @@
         }
       });
     },
-    { threshold: 0.1 }
+    { threshold: 0.08 }
   );
   document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
 </script>

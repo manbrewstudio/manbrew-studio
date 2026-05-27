@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Licensing Guide — Manbrew Bridge</title>
+  <meta name="description" content="Understand how digital art licensing works on Manbrew Bridge. Personal and commercial license types, usage rights, FAQ, and refund policy.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script>
+    function setLang(lang) {
+      document.documentElement.setAttribute('data-lang', lang);
+      localStorage.setItem('mb-lang', lang);
+      document.querySelectorAll('.lang-btn').forEach(function(btn) {
+        btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+      });
+    }
+    (function() {
+      var saved = localStorage.getItem('mb-lang') || 'en';
+      document.documentElement.setAttribute('data-lang', saved);
+      document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.lang-btn').forEach(function(btn) {
+          btn.classList.toggle('active', btn.getAttribute('data-lang') === saved);
+        });
+      });
+    })();
+  </script>
+  <style>
+    :root{--ink:#0A0A0A;--ink2:#111111;--ink3:#181818;--cream:#FAF7F1;--brick:#B7705A;--mint:#B5C9B0;--teal:#2A3D3A;--slate:#5F574E;--mist:#D8D2C8;--gold:#C9A96E;}
+    [data-lang="en"] .t-zh{display:none !important;}
+    [data-lang="zh"] .t-en{display:none !important;}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{background:var(--ink);color:var(--cream);font-family:'Inter',sans-serif;font-weight:400;line-height:1.6;-webkit-font-smoothing:antialiased;}
+    a{color:inherit;text-decoration:none;}
+    .mb-brand-bar{background:#050505;border-bottom:1px solid rgba(42,61,58,0.6);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;}
+    .mb-brand-tabs{display:flex;align-items:stretch;}
+    .mb-brand-tab{display:flex;align-items:center;gap:7px;padding:13px 20px;font-family:'JetBrains Mono',monospace;font-size:9.5px;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:rgba(245,241,235,0.32);border-bottom:2px solid transparent;transition:color 0.2s,border-color 0.2s;}
+    .mb-brand-tab.active{color:#F5F1EB;border-bottom-color:#B5C9B0;}
+    .mb-brand-dot{width:4px;height:4px;border-radius:50%;background:#B5C9B0;}
+    .mb-brand-tag{font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(94,87,78,0.6);}
+    nav{padding:1.25rem 2rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--teal);position:sticky;top:0;z-index:100;background:var(--ink);}
+    .nav-wordmark{font-weight:900;font-size:0.9rem;letter-spacing:0.08em;color:var(--cream);}
+    .nav-links{display:flex;gap:2rem;list-style:none;}
+    .nav-links a{font-family:'JetBrains Mono',monospace;font-size:0.62rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--slate);transition:color 0.2s;}
+    .nav-links a:hover,.nav-links a.active{color:var(--mint);}
+    .nav-right{display:flex;align-items:center;gap:1rem;}
+    .lang-switch{display:flex;align-items:center;gap:0.3rem;}
+    .lang-btn{font-family:'JetBrains Mono',monospace;font-size:0.58rem;letter-spacing:0.12em;text-transform:uppercase;background:none;border:none;color:var(--slate);cursor:pointer;padding:0.3rem 0.35rem;transition:color 0.2s;line-height:1;}
+    .lang-btn:hover{color:var(--cream);}
+    .lang-btn.active{color:var(--mint);}
+    .lang-sep{color:var(--teal);font-size:0.6rem;}
+    .nav-cta-primary{font-family:'JetBrains Mono',monospace;font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;background:var(--brick);color:var(--ink);padding:0.5rem 1.2rem;font-weight:500;transition:opacity 0.2s;white-space:nowrap;}
+    .nav-cta-primary:hover{opacity:0.85;}
+    @media(max-width:900px){.nav-links{display:none;}}
+    .container{max-width:1000px;margin:0 auto;padding:0 2rem;}
+    section{padding:5.5rem 0;}
+    .rule{border:none;border-top:1px solid var(--teal);}
+    .label{font-family:'JetBrains Mono',monospace;font-size:0.68rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--slate);}
+    .label--brick{color:var(--brick);}
+    .label--mint{color:var(--mint);}
+    .label--gold{color:var(--gold);}
+    .sec-label{display:block;margin-bottom:0.85rem;}
+    .sec-title{font-size:clamp(1.8rem,3.5vw,3rem);font-weight:900;line-height:1.1;margin-bottom:1.25rem;}
+    .accent{color:var(--brick);}
+    .accent-gold{color:var(--gold);}
+    .btn-primary{display:inline-block;background:var(--brick);color:var(--ink);font-family:'JetBrains Mono',monospace;font-size:0.75rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;padding:0.95rem 2.5rem;transition:opacity 0.2s;line-height:1;}
+    .btn-primary:hover{opacity:0.82;}
+    .reveal{opacity:0;transform:translateY(18px);transition:opacity 0.6s ease,transform 0.6s ease;}
+    .reveal.is-visible{opacity:1;transform:none;}
+    .reveal-d1{transition-delay:0.07s;}
+    .reveal-d2{transition-delay:0.14s;}
+    @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none;}}
+
+    /* PAGE HERO */
+    #page-hero{padding:6rem 0 5rem;border-bottom:1px solid var(--teal);}
+    .page-hero-eyebrow{display:flex;align-items:center;gap:0.85rem;margin-bottom:1.75rem;}
+    .page-hero-line{width:2rem;height:1px;background:var(--brick);}
+    .page-hero-headline{font-size:clamp(2.2rem,5vw,4rem);font-weight:900;line-height:1.05;letter-spacing:-0.02em;margin-bottom:1.25rem;}
+    .page-hero-sub{font-size:1rem;color:var(--mist);max-width:580px;line-height:1.85;}
+
+    /* LICENSE TYPE CARDS */
+    .license-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--teal);margin-top:2.5rem;}
+    @media(max-width:640px){.license-grid{grid-template-columns:1fr;}}
+    .license-card{background:var(--ink2);padding:2.5rem 2rem;}
+    .license-card--highlight{background:var(--ink3);}
+    .license-card-type{font-family:'JetBrains Mono',monospace;font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;margin-bottom:0.75rem;}
+    .license-card-type--personal{color:var(--mint);}
+    .license-card-type--commercial{color:var(--gold);}
+    .license-card-price{font-size:2rem;font-weight:900;line-height:1;margin-bottom:0.5rem;}
+    .license-card-price-note{font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;color:var(--slate);display:block;margin-bottom:1.5rem;}
+    .license-card-uses{list-style:none;display:flex;flex-direction:column;gap:0.5rem;margin-bottom:1.75rem;}
+    .license-card-uses li{font-size:0.83rem;color:var(--mist);padding-left:1.25rem;position:relative;line-height:1.6;}
+    .license-card-uses li::before{content:'✓';position:absolute;left:0;color:var(--mint);font-family:'JetBrains Mono',monospace;font-size:0.7rem;}
+    .license-card-restricts{list-style:none;display:flex;flex-direction:column;gap:0.5rem;padding-top:1.25rem;border-top:1px solid rgba(42,61,58,0.6);}
+    .license-card-restricts li{font-size:0.8rem;color:var(--slate);padding-left:1.25rem;position:relative;line-height:1.6;}
+    .license-card-restricts li::before{content:'✕';position:absolute;left:0;color:var(--brick);font-family:'JetBrains Mono',monospace;font-size:0.65rem;}
+
+    /* COMPARISON TABLE */
+    .comparison-table{width:100%;border-collapse:collapse;margin-top:2rem;}
+    .comparison-table th,.comparison-table td{padding:0.85rem 1rem;border-bottom:1px solid rgba(42,61,58,0.5);font-size:0.83rem;text-align:left;vertical-align:top;}
+    .comparison-table thead th{font-family:'JetBrains Mono',monospace;font-size:0.62rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--slate);background:var(--ink2);}
+    .comparison-table thead th:first-child{width:40%;}
+    .comparison-table td:first-child{color:var(--mist);}
+    .comparison-table td.yes{color:var(--mint);}
+    .comparison-table td.no{color:var(--slate);}
+    .comparison-table td.partial{color:var(--gold);}
+
+    /* FAQ */
+    .faq-list{margin-top:2rem;}
+    .faq-item{padding:1.5rem 0;border-bottom:1px solid rgba(42,61,58,0.6);}
+    .faq-item:first-child{border-top:1px solid rgba(42,61,58,0.6);}
+    .faq-q{font-size:0.95rem;font-weight:700;margin-bottom:0.6rem;}
+    .faq-a{font-size:0.85rem;color:var(--slate);line-height:1.85;}
+    .faq-a a{color:var(--mint);border-bottom:1px solid rgba(181,201,176,0.3);}
+
+    footer{border-top:1px solid var(--teal);padding:2.5rem 0;}
+    .footer-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+    .footer-copy{font-family:'JetBrains Mono',monospace;font-size:0.65rem;letter-spacing:0.08em;color:var(--slate);}
+    .footer-links{display:flex;gap:1.5rem;}
+    .footer-links a{font-family:'JetBrains Mono',monospace;font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--slate);transition:color 0.2s;}
+    .footer-links a:hover{color:var(--mint);}
+  </style>
+</head>
+<body>
+
+<!-- ── BRAND BAR ── -->
+<div class="mb-brand-bar">
+  <div class="mb-brand-tabs">
+    <a href="https://manbrew-studio.com" class="mb-brand-tab">MANBREW.</a>
+    <span class="mb-brand-tab active"><span class="mb-brand-dot"></span>BRIDGE</span>
+  </div>
+  <span class="mb-brand-tag">文字之間工作室</span>
+</div>
+
+<!-- ── NAV ── -->
+<nav>
+  <a href="index.html" class="nav-wordmark">MANBREW BRIDGE</a>
+  <ul class="nav-links">
+    <li><a href="works.html"><span class="t-en">Browse Works</span><span class="t-zh">瀏覽作品</span></a></li>
+    <li><a href="index.html#categories"><span class="t-en">Categories</span><span class="t-zh">類別</span></a></li>
+    <li><a href="become-an-artist.html"><span class="t-en">Become an Artist</span><span class="t-zh">加入藝術家</span></a></li>
+    <li><a href="licensing.html" class="active"><span class="t-en">Licensing</span><span class="t-zh">授權說明</span></a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="lang-switch">
+      <button class="lang-btn active" data-lang="en" onclick="setLang('en')">EN</button>
+      <span class="lang-sep">·</span>
+      <button class="lang-btn" data-lang="zh" onclick="setLang('zh')">中文</button>
+    </div>
+    <a href="works.html" class="nav-cta-primary">
+      <span class="t-zh">瀏覽作品</span><span class="t-en">Browse Works</span>
+    </a>
+  </div>
+</nav>
+
+
+<!-- ── PAGE HERO ── -->
+<section id="page-hero">
+  <div class="container">
+    <div class="page-hero-eyebrow">
+      <div class="page-hero-line"></div>
+      <span class="label label--brick">
+        <span class="t-zh">授權說明</span><span class="t-en">Licensing Guide</span>
+      </span>
+    </div>
+    <h1 class="page-hero-headline">
+      <span class="t-zh">你購買的是什麼？<br><span class="accent">授權，不是版權。</span></span>
+      <span class="t-en">What you're buying.<br><span class="accent">A license, not ownership.</span></span>
+    </h1>
+    <p class="page-hero-sub t-zh">
+      在 Manbrew Bridge 購買藝術作品，你取得的是數位檔案的使用授權——用於特定用途的合法使用權。藝術家的版權始終由其本人持有。
+    </p>
+    <p class="page-hero-sub t-en">
+      When you purchase artwork on Manbrew Bridge, you're acquiring a license — the legal right to use a digital file for specific purposes. The artist's copyright always remains with them.
+    </p>
+  </div>
+</section>
+
+
+<!-- ── LICENSE TYPES ── -->
+<section id="license-types" style="background:var(--ink);">
+  <div class="container">
+    <div class="reveal">
+      <span class="label sec-label">
+        <span class="t-zh">授權類型</span><span class="t-en">License Types</span>
+      </span>
+      <h2 class="sec-title">
+        <span class="t-zh">兩種授權，對應不同用途。</span>
+        <span class="t-en">Two license types.<br><span class="accent">Choose by use case.</span></span>
+      </h2>
+    </div>
+
+    <div class="license-grid reveal">
+      <!-- Personal -->
+      <div class="license-card">
+        <div class="license-card-type license-card-type--personal">
+          <span class="t-zh">個人授權</span><span class="t-en">Personal License</span>
+        </div>
+        <div class="license-card-price">USD 50</div>
+        <span class="license-card-price-note">
+          <span class="t-zh">起始定價，依作品而異</span><span class="t-en">Starting price, varies by work</span>
+        </span>
+        <ul class="license-card-uses">
+          <li><span class="t-zh">個人列印與家庭展示（不超過 5 份）</span><span class="t-en">Personal printing and home display (up to 5 copies)</span></li>
+          <li><span class="t-zh">個人裝置螢幕桌布、鎖屏</span><span class="t-en">Personal device wallpapers and lock screens</span></li>
+          <li><span class="t-zh">個人非商業社群媒體貼文（需標註藝術家）</span><span class="t-en">Personal non-commercial social media posts (artist credit required)</span></li>
+          <li><span class="t-zh">個人作品集、教學用途展示</span><span class="t-en">Personal portfolio and educational display</span></li>
+          <li><span class="t-zh">禮物用途（不得轉售）</span><span class="t-en">Gift use (no resale)</span></li>
+        </ul>
+        <ul class="license-card-restricts">
+          <li><span class="t-zh">不可用於商業目的、廣告或品牌</span><span class="t-en">Not for commercial use, advertising, or branding</span></li>
+          <li><span class="t-zh">不可大量印製或轉售</span><span class="t-en">No mass printing or resale</span></li>
+          <li><span class="t-zh">不可用於商品製造</span><span class="t-en">No merchandise production</span></li>
+        </ul>
+      </div>
+
+      <!-- Commercial -->
+      <div class="license-card license-card--highlight">
+        <div class="license-card-type license-card-type--commercial">
+          <span class="t-zh">商業授權</span><span class="t-en">Commercial License</span>
+        </div>
+        <div class="license-card-price" style="color:var(--gold);">USD 350</div>
+        <span class="license-card-price-note">
+          <span class="t-zh">起始定價，依作品而異</span><span class="t-en">Starting price, varies by work</span>
+        </span>
+        <ul class="license-card-uses">
+          <li><span class="t-zh">品牌識別、企業形象材料</span><span class="t-en">Brand identity and corporate materials</span></li>
+          <li><span class="t-zh">出版物（書籍、雜誌、報紙）</span><span class="t-en">Publishing (books, magazines, newspapers)</span></li>
+          <li><span class="t-zh">廣告與行銷活動（含數位與印刷）</span><span class="t-en">Advertising and marketing campaigns (digital and print)</span></li>
+          <li><span class="t-zh">商品製造（T恤、海報、商品等，限 500 件以內）</span><span class="t-en">Merchandise production (apparel, posters, goods — up to 500 units)</span></li>
+          <li><span class="t-zh">網站、App、UI 介面設計使用</span><span class="t-en">Website, app, and UI design use</span></li>
+          <li><span class="t-zh">展覽與活動現場展示</span><span class="t-en">Exhibition and event display</span></li>
+        </ul>
+        <ul class="license-card-restricts">
+          <li><span class="t-zh">不可轉讓授權予第三方</span><span class="t-en">License is non-transferable to third parties</span></li>
+          <li><span class="t-zh">商品超過 500 件需聯繫洽談擴展授權</span><span class="t-en">Merchandise over 500 units requires extended license negotiation</span></li>
+          <li><span class="t-zh">不可聲稱為自己的原創作品</span><span class="t-en">Cannot claim the work as your own original creation</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+
+<!-- ── COMPARISON TABLE ── -->
+<section id="comparison" style="background:var(--ink2);">
+  <div class="container">
+    <div class="reveal">
+      <span class="label sec-label">
+        <span class="t-zh">授權範圍對照</span><span class="t-en">License Comparison</span>
+      </span>
+      <h2 class="sec-title">
+        <span class="t-zh">哪種授權適合你的用途？</span>
+        <span class="t-en">Which license fits<br>your <span class="accent">use case?</span></span>
+      </h2>
+    </div>
+    <div style="overflow-x:auto;" class="reveal">
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th><span class="t-zh">用途</span><span class="t-en">Use Case</span></th>
+            <th><span class="t-zh">個人授權</span><span class="t-en">Personal</span></th>
+            <th><span class="t-zh">商業授權</span><span class="t-en">Commercial</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="t-zh">個人列印、家庭展示</span><span class="t-en">Personal printing, home display</span></td>
+            <td class="yes">✓</td>
+            <td class="yes">✓</td>
+          </tr>
+          <tr>
+            <td><span class="t-zh">螢幕桌布、個人裝置</span><span class="t-en">Wallpaper, personal devices</span></td>
+            <td class="yes">✓</td>
+            <td class="yes">✓</td>
+          </tr>
+          <tr>
+            <td><span class="t-zh">個人社群媒體（非商業）</span><span class="t-en">Personal social media (non-commercial)</span></td>
+            <td class="yes">✓ <span style="font-size:0.75em;color:var(--slate);">(需標註)</span></td>
+            <td class="yes">✓</td>
+          </tr>
+          <tr>
+            <td><span class="t-zh">品牌識別、企業形象</span><span class="t-en">Branding, corporate identity</span></td>
+            <td class="no">✕</td>
+            <td class="yes">✓</td>
+          </tr>
+          <tr>
+            <td><span class="t-zh">廣告、行銷活動</span><span class="t-en">Advertising, marketing campaigns</span></td>
+            <td class="no">✕</td>
+            <td class="yes">✓</td>
+          </tr>
+          <tr>
+            <td><span class="t-zh">出版物（書籍、雜誌）</span><span class="t-en">Publication (books, magazines)</span></td>
+            <td class="no">✕</td>
+            <td class="yes">✓</td>
+          </tr>
+          <tr>
+            <td><span class="t-zh">網站、App 介面</span><span class="t-en">Website, app UI</span></td>
+            <td class="no">✕</td>
+            <td class="yes">✓</td>
+          </tr>
+          <tr>
+            <td><span class="t-zh">商品製造（T恤、海報等）</span><span class="t-en">Merchandise (apparel, posters, etc.)</span></td>
+            <td class="no">✕</td>
+            <td class="partial">✓ <span style="font-size:0.75em;">(≤500 件)</span></td>
+          </tr>
+          <tr>
+            <td><span class="t-zh">轉讓授權予第三方</span><span class="t-en">Transfer license to third parties</span></td>
+            <td class="no">✕</td>
+            <td class="no">✕</td>
+          </tr>
+          <tr>
+            <td><span class="t-zh">宣稱作品版權歸屬於自己</span><span class="t-en">Claim copyright ownership</span></td>
+            <td class="no">✕</td>
+            <td class="no">✕</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="margin-top:1.25rem;font-size:0.78rem;color:var(--slate);line-height:1.8;">
+      <span class="t-zh">如需大量印製（超過 500 件）或特殊商業用途，請聯繫我們洽談擴展授權：<a href="mailto:hello@manbrew-studio.com" style="color:var(--mint);">hello@manbrew-studio.com</a></span>
+      <span class="t-en">For large-scale production (over 500 units) or special commercial use, contact us for an extended license: <a href="mailto:hello@manbrew-studio.com" style="color:var(--mint);">hello@manbrew-studio.com</a></span>
+    </p>
+  </div>
+</section>
+
+
+<!-- ── FAQ ── -->
+<section id="faq" style="background:var(--ink);border-top:1px solid var(--teal);">
+  <div class="container">
+    <div class="reveal">
+      <span class="label sec-label">
+        <span class="t-zh">常見問題</span><span class="t-en">Frequently Asked Questions</span>
+      </span>
+      <h2 class="sec-title" style="margin-bottom:0;">
+        <span class="t-zh">授權購買前，先看這裡。</span>
+        <span class="t-en">Read this before you buy.</span>
+      </h2>
+    </div>
+
+    <div class="faq-list" style="max-width:720px;">
+      <div class="faq-item reveal">
+        <div class="faq-q">
+          <span class="t-zh">我購買的是什麼？</span>
+          <span class="t-en">What exactly am I purchasing?</span>
+        </div>
+        <p class="faq-a">
+          <span class="t-zh">你購買的是高解析度數位檔案的使用授權，用於你所選擇的授權類型允許的用途。你不持有作品版權，也不能聲稱此作品為你的創作。</span>
+          <span class="t-en">You're purchasing a license to use a high-resolution digital file for the purposes permitted under your chosen license type. You do not own the copyright and cannot claim the work as your own creation.</span>
+        </p>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">
+          <span class="t-zh">購買後如何取得檔案？</span>
+          <span class="t-en">How do I receive the file after purchase?</span>
+        </div>
+        <p class="faq-a">
+          <span class="t-zh">目前平台採人工授權流程：購買後，我們將在 1–2 個工作天內透過 email 發送高解析度數位檔案及授權確認書。</span>
+          <span class="t-en">Currently the platform uses a manual licensing process. After purchase, we'll send you the high-resolution digital file and license confirmation via email within 1–2 business days.</span>
+        </p>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">
+          <span class="t-zh">我可以列印這件作品嗎？</span>
+          <span class="t-en">Can I print the artwork?</span>
+        </div>
+        <p class="faq-a">
+          <span class="t-zh">個人授權允許列印最多 5 份，用於家庭展示或個人用途。商業授權允許用於出版、廣告及商品（最多 500 件）。</span>
+          <span class="t-en">Personal license permits printing up to 5 copies for home display or personal use. Commercial license permits use in publications, advertising, and merchandise (up to 500 units).</span>
+        </p>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">
+          <span class="t-zh">可以用於商業品牌或廣告嗎？</span>
+          <span class="t-en">Can I use this for commercial branding or advertising?</span>
+        </div>
+        <p class="faq-a">
+          <span class="t-zh">需要購買商業授權。個人授權不涵蓋任何商業用途。</span>
+          <span class="t-en">You need to purchase a Commercial License. Personal License does not cover any commercial use.</span>
+        </p>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">
+          <span class="t-zh">藝術家保有作品版權嗎？</span>
+          <span class="t-en">Does the artist keep copyright?</span>
+        </div>
+        <p class="faq-a">
+          <span class="t-zh">是的。所有作品版權歸屬於藝術家本人。平台取得的是數位分發授權，購買者取得的是使用授權。沒有任何一方取得版權所有權。</span>
+          <span class="t-en">Yes. All artwork copyright remains with the artist. The platform holds digital distribution rights; buyers hold usage rights. Neither party holds copyright ownership.</span>
+        </p>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">
+          <span class="t-zh">如果我不滿意，可以退款嗎？</span>
+          <span class="t-en">Can I get a refund if I'm not satisfied?</span>
+        </div>
+        <p class="faq-a">
+          <span class="t-zh">由於數位授權的性質，一旦數位檔案已交付，原則上無法退款。如果你在收到檔案前取消購買，或收到的檔案有技術問題（如損毀、解析度不符），請聯繫我們，我們將個案處理。</span>
+          <span class="t-en">Due to the nature of digital licensing, refunds are generally not available once the digital file has been delivered. If you cancel before receiving the file, or if the file has technical issues (corruption, resolution mismatch), please contact us and we'll handle it on a case-by-case basis.</span>
+        </p>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">
+          <span class="t-zh">我可以將授權轉讓給客戶嗎？</span>
+          <span class="t-en">Can I transfer the license to my client?</span>
+        </div>
+        <p class="faq-a">
+          <span class="t-zh">不可以。授權是個人或企業不可轉讓的使用權。如果你是設計師或代理商，希望為客戶取得授權，請以客戶名義購買，或聯繫我們洽談代理授權方案。</span>
+          <span class="t-en">No. Licenses are non-transferable personal or business use rights. If you're a designer or agency purchasing on behalf of a client, purchase in the client's name, or contact us to discuss agency licensing arrangements.</span>
+        </p>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">
+          <span class="t-zh">有沒有辦法取得獨家授權？</span>
+          <span class="t-en">Is exclusive licensing available?</span>
+        </div>
+        <p class="faq-a">
+          <span class="t-zh">標準授權均為非獨家授權。如需獨家授權（即同一時期只有你可以使用此作品），請聯繫我們：<a href="mailto:hello@manbrew-studio.com">hello@manbrew-studio.com</a>。獨家授權將與藝術家直接協商，費用依需求而定。</span>
+          <span class="t-en">Standard licenses are all non-exclusive. If you need exclusive rights (meaning only you can use the work during a given period), contact us at <a href="mailto:hello@manbrew-studio.com">hello@manbrew-studio.com</a>. Exclusive licensing is negotiated directly with the artist and priced accordingly.</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ── STILL HAVE QUESTIONS ── -->
+<section id="contact" style="background:var(--ink2);border-top:1px solid var(--teal);padding:5rem 0;">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;" class="reveal">
+      <div>
+        <span class="label label--mint sec-label">
+          <span class="t-zh">仍有疑問？</span><span class="t-en">Still have questions?</span>
+        </span>
+        <h2 class="sec-title">
+          <span class="t-zh">我們親自回覆<br>每一封信。</span>
+          <span class="t-en">We personally reply<br>to every email.</span>
+        </h2>
+        <p style="font-size:0.9rem;color:var(--mist);line-height:1.85;margin-bottom:1.75rem;">
+          <span class="t-zh">關於授權範圍、特殊用途洽談或任何問題，請直接寫信給我們，我們在 1–2 個工作天內回覆。</span>
+          <span class="t-en">For licensing scope questions, special use negotiations, or anything else — write to us directly. We respond within 1–2 business days.</span>
+        </p>
+        <a href="mailto:hello@manbrew-studio.com" class="btn-primary">
+          <span class="t-zh">寫信給我們 →</span><span class="t-en">Email Us →</span>
+        </a>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:1px;background:var(--teal);">
+        <div style="background:var(--ink3);padding:1.5rem 1.75rem;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:0.62rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--brick);margin-bottom:0.5rem;">
+            <span class="t-zh">想購買作品</span><span class="t-en">For Buyers</span>
+          </div>
+          <a href="works.html" style="font-size:0.88rem;color:var(--mist);">
+            <span class="t-zh">→ 瀏覽藝術市集</span><span class="t-en">→ Browse the Art Bazaar</span>
+          </a>
+        </div>
+        <div style="background:var(--ink3);padding:1.5rem 1.75rem;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:0.62rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);margin-bottom:0.5rem;">
+            <span class="t-zh">想上架作品</span><span class="t-en">For Artists</span>
+          </div>
+          <a href="become-an-artist.html" style="font-size:0.88rem;color:var(--mist);">
+            <span class="t-zh">→ 了解藝術家申請流程</span><span class="t-en">→ Read the artist application guide</span>
+          </a>
+        </div>
+        <div style="background:var(--ink3);padding:1.5rem 1.75rem;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:0.62rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--mint);margin-bottom:0.5rem;">
+            <span class="t-zh">直接聯繫</span><span class="t-en">Direct Contact</span>
+          </div>
+          <a href="mailto:hello@manbrew-studio.com" style="font-size:0.88rem;color:var(--mint);">hello@manbrew-studio.com</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <p class="footer-copy">© 2026 Manbrew Bridge — All rights reserved</p>
+      <div class="footer-links">
+        <a href="index.html"><span class="t-zh">首頁</span><span class="t-en">Home</span></a>
+        <a href="works.html"><span class="t-zh">作品</span><span class="t-en">Works</span></a>
+        <a href="become-an-artist.html"><span class="t-zh">加入藝術家</span><span class="t-en">For Artists</span></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver(
+    (entries) => { entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('is-visible'); observer.unobserve(e.target); } }); },
+    { threshold: 0.08 }
+  );
+  document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+</script>
+</body>
+</html>

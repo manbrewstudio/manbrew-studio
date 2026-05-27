@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500&family=Frank+Ruhl+Libre:wght@300;400;700&display=swap" rel="stylesheet">
+  <script src="https://app.lemonsqueezy.com/js/lemon.js" defer></script>
 
   <script>
     /* lang.js — inline */
@@ -385,6 +386,25 @@
       flex-shrink: 0;
     }
     .btn-license:hover { opacity: 0.8; }
+    .btn-license-ghost {
+      display: inline-block;
+      background: transparent;
+      color: var(--brick);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.5rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 0.6rem 0.85rem;
+      border: 1px solid var(--brick);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.2s, color 0.2s;
+      flex-shrink: 0;
+    }
+    .btn-license-ghost:hover { background: var(--brick); color: var(--cream); }
+    .card-btns { display: flex; gap: 8px; flex-shrink: 0; }
 
     /* ─── DIVIDER RULE ─── */
     .section-rule {
@@ -461,7 +481,7 @@
 <!-- ── PARENT BRAND BAR ──────────────────────────────────── -->
 <div class="mb-brand-bar">
   <div class="mb-brand-tabs">
-    <a href="../index.html" class="mb-brand-tab">MANBREW.</a>
+    <a href="https://manbrew-studio.com" class="mb-brand-tab">MANBREW.</a>
     <span class="mb-brand-tab active"><span class="mb-brand-dot"></span>BRIDGE</span>
   </div>
   <span class="mb-brand-tag">文字之間工作室</span>
@@ -472,10 +492,10 @@
   <a href="index.html" class="nav-wordmark">MANBREW BRIDGE</a>
   <ul class="nav-links">
     <li><a href="index.html"><span class="t-en">Home</span><span class="t-zh">首頁</span></a></li>
-    <li><a href="works.html" class="active"><span class="t-en">Art Bazaar</span><span class="t-zh">藝術市集</span></a></li>
-    <li><a href="phase01-landing.html"><span class="t-en">Phase 01</span><span class="t-zh">第一階段</span></a></li>
-    <li><a href="creator-profile.html"><span class="t-en">Feature Artists</span><span class="t-zh">精選藝術家</span></a></li>
-    <li><a href="creator-guide.html"><span class="t-en">Creator Guide</span><span class="t-zh">創作者指南</span></a></li>
+    <li><a href="works.html" class="active"><span class="t-en">Browse Works</span><span class="t-zh">瀏覽作品</span></a></li>
+    <li><a href="become-an-artist.html"><span class="t-en">Become an Artist</span><span class="t-zh">加入藝術家</span></a></li>
+    <li><a href="licensing.html"><span class="t-en">Licensing</span><span class="t-zh">授權說明</span></a></li>
+    <li><a href="creator-profile.html"><span class="t-en">Artists</span><span class="t-zh">藝術家</span></a></li>
   </ul>
   <div class="lang-switch">
     <button class="lang-btn active" data-lang="en" onclick="setLang('en')">EN</button>
@@ -506,6 +526,29 @@
 <!-- MAIN -->
 <main class="main">
 
+  <!-- Licensing info strip -->
+  <div style="display:flex; align-items:center; gap:2rem; padding:1rem 0; border-bottom:1px solid var(--mist); flex-wrap:wrap;">
+    <span style="font-family:'JetBrains Mono',monospace; font-size:0.58rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--slate);">
+      <span style="color:#2A8C6A; margin-right:4px;">✓</span>
+      <span class="t-zh">即時授權，下載高解析度數位檔案</span>
+      <span class="t-en">License instantly — receive high-res digital files</span>
+    </span>
+    <span style="font-family:'JetBrains Mono',monospace; font-size:0.58rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--slate);">
+      <span style="color:#2A8C6A; margin-right:4px;">✓</span>
+      <span class="t-zh">藝術家永遠保有版權</span>
+      <span class="t-en">Artist retains full copyright</span>
+    </span>
+    <span style="font-family:'JetBrains Mono',monospace; font-size:0.58rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--slate);">
+      <span style="color:#2A8C6A; margin-right:4px;">✓</span>
+      <span class="t-zh">個人授權 USD 25 起 · 商業授權 USD 150 起</span>
+      <span class="t-en">Personal from USD 25 · Commercial from USD 150</span>
+    </span>
+    <a href="licensing.html" style="font-family:'JetBrains Mono',monospace; font-size:0.58rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--brick); border-bottom:1px solid rgba(183,112,90,0.4);">
+      <span class="t-zh">了解授權說明 →</span>
+      <span class="t-en">Learn about licensing →</span>
+    </a>
+  </div>
+
   <div class="issue-line">
     <span class="issue-label"><span class="t-en">All Works — Phase 01 Sample</span><span class="t-zh">全部作品 — 第一階段樣本</span></span>
     <span class="issue-count">2 <span class="t-en">works</span><span class="t-zh">件作品</span></span>
@@ -534,10 +577,13 @@
         <div class="card-footer">
           <div>
             <span class="price-label"><span class="t-zh">起價</span><span class="t-en">Starting from</span></span>
-            <span class="price-amount">USD 150</span>
+            <span class="price-amount">USD 25</span>
             <span class="price-note"><span class="t-zh">/ 授權</span><span class="t-en">/ license</span></span>
           </div>
-          <a href="https://forms.gle/M2ZVKGxLZhdj9wMn6" target="_blank" rel="noopener" class="btn-license"><span class="t-zh">詢問授權</span><span class="t-en">License Inquiry</span></a>
+          <div class="card-btns">
+            <a href="https://manbrewstudio.lemonsqueezy.com/checkout/buy/22c642e2-3136-4eba-8518-fe35e7f4a25f?enabled=1712824" class="btn-license-ghost lemonsqueezy-button"><span class="t-zh">個人授權</span><span class="t-en">Personal</span></a>
+            <a href="https://manbrewstudio.lemonsqueezy.com/checkout/buy/40626138-5869-4232-8edc-1a7d9976a07c?enabled=1712844" class="btn-license lemonsqueezy-button"><span class="t-zh">商業授權</span><span class="t-en">Commercial</span></a>
+          </div>
         </div>
       </div>
     </div>
@@ -562,10 +608,13 @@
         <div class="card-footer">
           <div>
             <span class="price-label"><span class="t-zh">起價</span><span class="t-en">Starting from</span></span>
-            <span class="price-amount">USD 150</span>
+            <span class="price-amount">USD 25</span>
             <span class="price-note"><span class="t-zh">/ 授權</span><span class="t-en">/ license</span></span>
           </div>
-          <a href="https://forms.gle/M2ZVKGxLZhdj9wMn6" target="_blank" rel="noopener" class="btn-license"><span class="t-zh">詢問授權</span><span class="t-en">License Inquiry</span></a>
+          <div class="card-btns">
+            <a href="https://manbrewstudio.lemonsqueezy.com/checkout/buy/84104ff5-63a0-4ca9-8c32-bb87229e93e3?enabled=1712857" class="btn-license-ghost lemonsqueezy-button"><span class="t-zh">個人授權</span><span class="t-en">Personal</span></a>
+            <a href="https://manbrewstudio.lemonsqueezy.com/checkout/buy/7659894d-4694-4f66-8a09-1a99c8f41876?enabled=1712858" class="btn-license lemonsqueezy-button"><span class="t-zh">商業授權</span><span class="t-en">Commercial</span></a>
+          </div>
         </div>
       </div>
     </div>
